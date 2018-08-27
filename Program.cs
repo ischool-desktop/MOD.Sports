@@ -19,6 +19,8 @@ namespace ischool.Sports
         /// </summary>
         public static string _roleName = "體育競賽管理員";
 
+        public static string _roleID;
+
         [MainMethod("體育競賽模組")]
         static public void Main()
         {
@@ -59,6 +61,11 @@ namespace ischool.Sports
             }
             #endregion
 
+            #region 體育競賽
+
+            MotherForm.AddPanel(SportsPanel.Instance);
+
+#endregion
         }
     }
 }

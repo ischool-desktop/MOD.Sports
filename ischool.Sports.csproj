@@ -187,6 +187,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -195,8 +197,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\Actor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ribbon\Events\frmEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\Events\frmEvents.Designer.cs">
+      <DependentUpon>frmEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\EventTemplates\frmEventTemplates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\EventTemplates\frmEventTemplates.Designer.cs">
+      <DependentUpon>frmEventTemplates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\GameTypes\frmGameTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\GameTypes\frmGameTypes.Designer.cs">
+      <DependentUpon>frmGameTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\GroupTypes\frmGroupTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\GroupTypes\frmGroupTypes.Designer.cs">
+      <DependentUpon>frmGroupTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\ScoreTypes\frmScoreTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\ScoreTypes\frmScoreTypes.Designer.cs">
+      <DependentUpon>frmScoreTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SportsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UDT\Admin.cs" />
     <Compile Include="UDT\Events.cs" />
     <Compile Include="UDT\EventTemplates.cs" />
@@ -284,9 +320,14 @@
   <ItemGroup>
     <None Include="Library\FISCA.dll.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DAO\" />
-    <Folder Include="Ribbon\" />
+    <EmbeddedResource Include="Ribbon\GroupTypes\frmGroupTypes.resx">
+      <DependentUpon>frmGroupTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SportsPanel.resx">
+      <DependentUpon>SportsPanel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
