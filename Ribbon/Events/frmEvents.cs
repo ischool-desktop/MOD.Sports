@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using FISCA.Presentation.Controls;
 using FISCA.UDT;
 
-namespace ischool.Sports.Ribbon.Events
+namespace ischool.Sports
 {
     public partial class frmEvents : BaseForm
     {
@@ -20,6 +20,32 @@ namespace ischool.Sports.Ribbon.Events
         public frmEvents()
         {
             InitializeComponent();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            UDT.Events addEvents = null;
+            frmSubEvents addFrom = new frmSubEvents();
+            addFrom.SetEvents(null);
+            if (addFrom.ShowDialog() == DialogResult.OK)
+            {
+                addEvents = addFrom.GetEventData();
+            }
         }
     }
 }

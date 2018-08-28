@@ -19,6 +19,10 @@ namespace ischool.Sports
         /// </summary>
         public static string _roleName = "體育競賽管理員";
 
+        /// <summary>
+        /// 體育競賽模組專用角色的功能權限
+        /// </summary>
+        public static string _permission = "";
         public static string _roleID;
 
         [MainMethod("體育競賽模組")]
@@ -65,7 +69,62 @@ namespace ischool.Sports
 
             MotherForm.AddPanel(SportsPanel.Instance);
 
-#endregion
+            #endregion
+
+            #region Init Role
+            {
+                // 檢查腳色是否存在
+                if (!DAO.Role.CheckRoleExist())
+                {
+                    // 建立腳色
+                    _roleID = DAO.Role.CreatRole();
+                }
+                else
+                {
+                    _roleID = DAO.Role.GetRoleID();
+                }
+            }
+            #endregion
+
+            #region 設定組別
+            {
+                MotherForm.RibbonBarItems["體育競賽", "基本設定"]["競賽設定"]["設定組別"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems["體育競賽", "基本設定"]["競賽設定"]["設定組別"].Click += delegate
+                {
+                    (new frmGroupTypes()).ShowDialog();
+
+                    //if (DAO.Actor.Instance().CheckAdmin())
+                    //{
+                    //    (new frmGroupTypes()).ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    //}
+
+                };
+            }
+            #endregion
+            #region 管理競賽
+            {
+                MotherForm.RibbonBarItems["體育競賽", "基本設定"]["競賽設定"]["管理競賽"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems["體育競賽", "基本設定"]["競賽設定"]["管理競賽"].Click += delegate
+                {
+                    (new frmEvents()).ShowDialog();
+
+                    //if (DAO.Actor.Instance().CheckAdmin())
+                    //{
+                    //    (new frmGroupTypes()).ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    //}
+
+                };
+            }
+            #endregion
         }
+
     }
 }

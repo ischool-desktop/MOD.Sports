@@ -11,7 +11,7 @@ namespace ischool.Sports.UDT
         /// 管理員()
         /// </summary>
         [TableName("ischool.sports.admin")]
-        class Admin : ActiveRecord
+        public class Admin : ActiveRecord
         {
             /// <summary>
             /// 登入帳號

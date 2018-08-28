@@ -11,7 +11,7 @@ namespace ischool.Sports.UDT
     /// 組別
     /// </summary>
     [TableName("ischool.sports.group_types")]
-    class GroupTypes : ActiveRecord
+    public class GroupTypes : ActiveRecord
     {
         /// <summary>
         /// 名稱
@@ -23,13 +23,13 @@ namespace ischool.Sports.UDT
         /// 性別限定
         /// </summary>
         [Field(Field = "gender", Indexed = false)]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
         /// <summary>
         /// 年級限定
         /// </summary>
         [Field(Field = "grade", Indexed = false)]
-        public int Grade { get; set; }
+        public int? Grade { get; set; }
 
         /// <summary>
         /// 建立者帳號

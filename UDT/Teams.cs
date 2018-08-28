@@ -12,7 +12,7 @@ namespace ischool.Sports.UDT
     /// </summary>
     [TableName("ischool.sports.teams")]
 
-    class Teams : ActiveRecord
+    public class Teams : ActiveRecord
     {
         /// <summary>
         /// 年度比賽項目編號

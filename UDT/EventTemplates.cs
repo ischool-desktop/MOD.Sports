@@ -12,7 +12,7 @@ namespace ischool.Sports.UDT
     /// </summary>
     [TableName("ischool.sports.event_templates")]
 
-    class EventTemplates : ActiveRecord
+    public class EventTemplates : ActiveRecord
     {
         /// <summary>
         /// 類別

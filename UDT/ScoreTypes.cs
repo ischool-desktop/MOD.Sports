@@ -12,7 +12,7 @@ namespace ischool.Sports.UDT
     /// </summary>
     [TableName("ischool.sports.score_types")]
 
-    class ScoreTypes : ActiveRecord
+    public class ScoreTypes : ActiveRecord
     {
         /// <summary>
         /// 名稱
