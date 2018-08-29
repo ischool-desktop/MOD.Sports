@@ -54,7 +54,7 @@ namespace ischool.Sports.UDT
         /// 是否團體賽
         /// </summary>
         [Field(Field = "is_team", Indexed = false)]
-        public bool is_team { get; set; }
+        public bool IsTeam { get; set; }
 
         /// <summary>
         /// 一隊最多人數
