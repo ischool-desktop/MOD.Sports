@@ -76,7 +76,7 @@
             this.btnSave.AutoSize = true;
             this.btnSave.BackColor = System.Drawing.Color.Transparent;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(856, 255);
+            this.btnSave.Location = new System.Drawing.Point(737, 211);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 25);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -91,7 +91,7 @@
             this.btnExit.AutoSize = true;
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(943, 255);
+            this.btnExit.Location = new System.Drawing.Point(824, 211);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 25);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -123,7 +123,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(533, 26);
+            this.labelX2.Location = new System.Drawing.Point(582, 26);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(60, 21);
             this.labelX2.TabIndex = 3;
@@ -153,7 +153,7 @@
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(358, 74);
+            this.labelX6.Location = new System.Drawing.Point(293, 74);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(87, 21);
             this.labelX6.TabIndex = 6;
@@ -183,7 +183,7 @@
             // 
             this.labelX8.BackgroundStyle.Class = "";
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(358, 121);
+            this.labelX8.Location = new System.Drawing.Point(293, 121);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(87, 21);
             this.labelX8.TabIndex = 8;
@@ -213,7 +213,7 @@
             // 
             this.labelX11.BackgroundStyle.Class = "";
             this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(669, 121);
+            this.labelX11.Location = new System.Drawing.Point(555, 121);
             this.labelX11.Name = "labelX11";
             this.labelX11.Size = new System.Drawing.Size(87, 21);
             this.labelX11.TabIndex = 11;
@@ -228,7 +228,7 @@
             // 
             this.labelX12.BackgroundStyle.Class = "";
             this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(845, 121);
+            this.labelX12.Location = new System.Drawing.Point(735, 121);
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(87, 21);
             this.labelX12.TabIndex = 12;
@@ -243,7 +243,7 @@
             // 
             this.labelX13.BackgroundStyle.Class = "";
             this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX13.Location = new System.Drawing.Point(695, 74);
+            this.labelX13.Location = new System.Drawing.Point(608, 74);
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(34, 21);
             this.labelX13.TabIndex = 13;
@@ -258,7 +258,7 @@
             // 
             this.labelX14.BackgroundStyle.Class = "";
             this.labelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX14.Location = new System.Drawing.Point(149, 211);
+            this.labelX14.Location = new System.Drawing.Point(676, 163);
             this.labelX14.Name = "labelX14";
             this.labelX14.Size = new System.Drawing.Size(60, 21);
             this.labelX14.TabIndex = 14;
@@ -273,7 +273,7 @@
             // 
             this.labelX15.BackgroundStyle.Class = "";
             this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX15.Location = new System.Drawing.Point(438, 211);
+            this.labelX15.Location = new System.Drawing.Point(28, 208);
             this.labelX15.Name = "labelX15";
             this.labelX15.Size = new System.Drawing.Size(60, 21);
             this.labelX15.TabIndex = 15;
@@ -303,7 +303,7 @@
             this.iptMaxMemberCount.BackgroundStyle.Class = "DateTimeInputBackground";
             this.iptMaxMemberCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.iptMaxMemberCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.iptMaxMemberCount.Location = new System.Drawing.Point(758, 119);
+            this.iptMaxMemberCount.Location = new System.Drawing.Point(648, 119);
             this.iptMaxMemberCount.MaxValue = 999;
             this.iptMaxMemberCount.MinValue = 1;
             this.iptMaxMemberCount.Name = "iptMaxMemberCount";
@@ -321,7 +321,7 @@
             this.iptMinMemberCount.BackgroundStyle.Class = "DateTimeInputBackground";
             this.iptMinMemberCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.iptMinMemberCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.iptMinMemberCount.Location = new System.Drawing.Point(930, 119);
+            this.iptMinMemberCount.Location = new System.Drawing.Point(820, 119);
             this.iptMinMemberCount.MaxValue = 999;
             this.iptMinMemberCount.MinValue = 1;
             this.iptMinMemberCount.Name = "iptMinMemberCount";
@@ -337,10 +337,10 @@
             // 
             this.txtName.Border.Class = "TextBoxBorder";
             this.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtName.Location = new System.Drawing.Point(599, 24);
+            this.txtName.Location = new System.Drawing.Point(648, 24);
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(411, 25);
+            this.txtName.Size = new System.Drawing.Size(252, 25);
             this.txtName.TabIndex = 2;
             // 
             // dtEventStartDate
@@ -391,7 +391,7 @@
             this.dtEventStartDate.MonthCalendar.TodayButtonVisible = true;
             this.dtEventStartDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtEventStartDate.Name = "dtEventStartDate";
-            this.dtEventStartDate.Size = new System.Drawing.Size(200, 25);
+            this.dtEventStartDate.Size = new System.Drawing.Size(153, 25);
             this.dtEventStartDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtEventStartDate.TabIndex = 3;
             // 
@@ -406,7 +406,7 @@
             this.dtEventEndDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtEventEndDate.ButtonDropDown.Visible = true;
             this.dtEventEndDate.IsPopupCalendarOpen = false;
-            this.dtEventEndDate.Location = new System.Drawing.Point(452, 72);
+            this.dtEventEndDate.Location = new System.Drawing.Point(387, 72);
             // 
             // 
             // 
@@ -443,7 +443,7 @@
             this.dtEventEndDate.MonthCalendar.TodayButtonVisible = true;
             this.dtEventEndDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtEventEndDate.Name = "dtEventEndDate";
-            this.dtEventEndDate.Size = new System.Drawing.Size(200, 25);
+            this.dtEventEndDate.Size = new System.Drawing.Size(153, 25);
             this.dtEventEndDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtEventEndDate.TabIndex = 4;
             // 
@@ -495,7 +495,7 @@
             this.dtRegStartDate.MonthCalendar.TodayButtonVisible = true;
             this.dtRegStartDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtRegStartDate.Name = "dtRegStartDate";
-            this.dtRegStartDate.Size = new System.Drawing.Size(200, 25);
+            this.dtRegStartDate.Size = new System.Drawing.Size(152, 25);
             this.dtRegStartDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtRegStartDate.TabIndex = 6;
             // 
@@ -510,7 +510,7 @@
             this.dtRegEndDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtRegEndDate.ButtonDropDown.Visible = true;
             this.dtRegEndDate.IsPopupCalendarOpen = false;
-            this.dtRegEndDate.Location = new System.Drawing.Point(451, 119);
+            this.dtRegEndDate.Location = new System.Drawing.Point(386, 119);
             // 
             // 
             // 
@@ -547,7 +547,7 @@
             this.dtRegEndDate.MonthCalendar.TodayButtonVisible = true;
             this.dtRegEndDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtRegEndDate.Name = "dtRegEndDate";
-            this.dtRegEndDate.Size = new System.Drawing.Size(200, 25);
+            this.dtRegEndDate.Size = new System.Drawing.Size(153, 25);
             this.dtRegEndDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtRegEndDate.TabIndex = 7;
             // 
@@ -559,7 +559,7 @@
             this.cbxGroupType.ItemHeight = 19;
             this.cbxGroupType.Location = new System.Drawing.Point(93, 161);
             this.cbxGroupType.Name = "cbxGroupType";
-            this.cbxGroupType.Size = new System.Drawing.Size(227, 25);
+            this.cbxGroupType.Size = new System.Drawing.Size(180, 25);
             this.cbxGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbxGroupType.TabIndex = 10;
             // 
@@ -569,9 +569,9 @@
             this.cbxGameType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxGameType.FormattingEnabled = true;
             this.cbxGameType.ItemHeight = 19;
-            this.cbxGameType.Location = new System.Drawing.Point(736, 72);
+            this.cbxGameType.Location = new System.Drawing.Point(648, 72);
             this.cbxGameType.Name = "cbxGameType";
-            this.cbxGameType.Size = new System.Drawing.Size(274, 25);
+            this.cbxGameType.Size = new System.Drawing.Size(252, 25);
             this.cbxGameType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbxGameType.TabIndex = 5;
             // 
@@ -583,7 +583,7 @@
             // 
             this.chkIsDrawLots.BackgroundStyle.Class = "";
             this.chkIsDrawLots.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsDrawLots.Location = new System.Drawing.Point(28, 210);
+            this.chkIsDrawLots.Location = new System.Drawing.Point(555, 162);
             this.chkIsDrawLots.Name = "chkIsDrawLots";
             this.chkIsDrawLots.Size = new System.Drawing.Size(100, 23);
             this.chkIsDrawLots.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -601,7 +601,7 @@
             this.dtDrawLotsDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtDrawLotsDate.ButtonDropDown.Visible = true;
             this.dtDrawLotsDate.IsPopupCalendarOpen = false;
-            this.dtDrawLotsDate.Location = new System.Drawing.Point(216, 209);
+            this.dtDrawLotsDate.Location = new System.Drawing.Point(743, 161);
             // 
             // 
             // 
@@ -638,7 +638,7 @@
             this.dtDrawLotsDate.MonthCalendar.TodayButtonVisible = true;
             this.dtDrawLotsDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtDrawLotsDate.Name = "dtDrawLotsDate";
-            this.dtDrawLotsDate.Size = new System.Drawing.Size(200, 25);
+            this.dtDrawLotsDate.Size = new System.Drawing.Size(157, 25);
             this.dtDrawLotsDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtDrawLotsDate.TabIndex = 15;
             // 
@@ -649,10 +649,10 @@
             // 
             this.txtEventDescription.Border.Class = "TextBoxBorder";
             this.txtEventDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtEventDescription.Location = new System.Drawing.Point(504, 209);
+            this.txtEventDescription.Location = new System.Drawing.Point(94, 206);
             this.txtEventDescription.Multiline = true;
             this.txtEventDescription.Name = "txtEventDescription";
-            this.txtEventDescription.Size = new System.Drawing.Size(506, 25);
+            this.txtEventDescription.Size = new System.Drawing.Size(446, 25);
             this.txtEventDescription.TabIndex = 16;
             // 
             // chkIsTeam
@@ -663,7 +663,7 @@
             // 
             this.chkIsTeam.BackgroundStyle.Class = "";
             this.chkIsTeam.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsTeam.Location = new System.Drawing.Point(358, 161);
+            this.chkIsTeam.Location = new System.Drawing.Point(293, 162);
             this.chkIsTeam.Name = "chkIsTeam";
             this.chkIsTeam.Size = new System.Drawing.Size(100, 23);
             this.chkIsTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -678,7 +678,7 @@
             // 
             this.chkAthleticOnly.BackgroundStyle.Class = "";
             this.chkAthleticOnly.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAthleticOnly.Location = new System.Drawing.Point(499, 161);
+            this.chkAthleticOnly.Location = new System.Drawing.Point(422, 162);
             this.chkAthleticOnly.Name = "chkAthleticOnly";
             this.chkAthleticOnly.Size = new System.Drawing.Size(100, 23);
             this.chkAthleticOnly.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -710,14 +710,14 @@
             this.txtCategory.Location = new System.Drawing.Point(261, 24);
             this.txtCategory.Multiline = true;
             this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(253, 25);
+            this.txtCategory.Size = new System.Drawing.Size(279, 25);
             this.txtCategory.TabIndex = 1;
             // 
             // frmSubEvents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 296);
+            this.ClientSize = new System.Drawing.Size(919, 252);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.chkAthleticOnly);
             this.Controls.Add(this.chkIsTeam);

@@ -36,6 +36,7 @@ namespace ischool.Sports
         private void _bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = true;
+            LoadEventsToDataGridView();
         }
 
         private void _bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -57,12 +58,47 @@ namespace ischool.Sports
 
         private void btnDel_Click(object sender, EventArgs e)
         {
+            if (dgData.SelectedRows.Count == 0)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
+            }
+            else
+            {
+                UDT.Events selectEvent = dgData.SelectedRows[0].Tag as UDT.Events;
 
+                if(FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除競賽項目與相關聯成績，請問是否刪除？", "刪除競賽項目", MessageBoxButtons.YesNo,MessageBoxIcon.Warning,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    selectEvent.Deleted = true;
+                    selectEvent.Save();
+                    // 資料重整
+                    _bgw.RunWorkerAsync();
+                }
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (dgData.SelectedRows.Count == 0)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
+            }
+            else
+            {
+                UDT.Events selectEvent = dgData.SelectedRows[0].Tag as UDT.Events;
 
+
+                frmSubEvents editFrom = new frmSubEvents();
+                editFrom.SetEvents(selectEvent);
+                editFrom.SetIsAddMode(false);
+                editFrom.SetGameTypesDict(_GameTypesDict);
+                editFrom.SetGroupTypesDict(_GroupTypesDict);
+                if (editFrom.ShowDialog() == DialogResult.OK)
+                {
+
+                    // 資料重整
+                    _bgw.RunWorkerAsync();
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -83,6 +119,8 @@ namespace ischool.Sports
             if (addFrom.ShowDialog() == DialogResult.OK)
             {
                 addEvents = addFrom.GetEventData();
+                // 資料重整
+                _bgw.RunWorkerAsync();
             }
         }
 
@@ -92,6 +130,48 @@ namespace ischool.Sports
             this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = false;
             _bgw.RunWorkerAsync();
 
+        }
+
+        private void LoadEventsToDataGridView()
+        {
+            dgData.Rows.Clear();
+            foreach (var data in _EventsList)
+            {
+                int rowIdx = dgData.Rows.Add();
+                dgData.Rows[rowIdx].Tag = data;
+                dgData.Rows[rowIdx].Cells[colSchoolYear.Index].Value = data.SchoolYear;
+                dgData.Rows[rowIdx].Cells[colEventCategory.Index].Value = data.Category;
+                dgData.Rows[rowIdx].Cells[colEventName.Index].Value = data.Name;
+                if (data.EventStartDate.HasValue)
+                    dgData.Rows[rowIdx].Cells[colEventStartDate.Index].Value = data.EventStartDate.Value.ToShortDateString();
+                if (data.EventEndDate.HasValue)
+                    dgData.Rows[rowIdx].Cells[colEventEndDate.Index].Value = data.EventEndDate.Value.ToShortDateString();
+                string GameType = "", gaUid = data.RefGameTypeId.ToString();
+                if (_GameTypesDict.ContainsKey(gaUid))
+                {
+                    GameType = _GameTypesDict[gaUid].Name;
+                }
+                dgData.Rows[rowIdx].Cells[colGameType.Index].Value = GameType;
+                if (data.RegStartDate.HasValue)
+                    dgData.Rows[rowIdx].Cells[colRegStartDate.Index].Value = data.RegStartDate.Value.ToShortDateString();
+                if (data.RegEndDate.HasValue)
+                    dgData.Rows[rowIdx].Cells[colRegEndDate.Index].Value = data.RegEndDate.Value.ToShortDateString();
+                dgData.Rows[rowIdx].Cells[colMaxMember.Index].Value = data.MaxMemberCount;
+                dgData.Rows[rowIdx].Cells[colMinMember.Index].Value = data.MinMemberCount;
+                string GroupType = "", grUid = data.RefGroupTypeId.ToString();
+                if (_GroupTypesDict.ContainsKey(grUid))
+                {
+                    GroupType = _GroupTypesDict[grUid].Name;
+                }
+                dgData.Rows[rowIdx].Cells[colGroupType.Index].Value = GroupType;
+                dgData.Rows[rowIdx].Cells[colIsTeam.Index].Value = data.IsTeam ? "是" : "否";
+                dgData.Rows[rowIdx].Cells[colIsDrawLots.Index].Value = data.IsDrawLots ? "是" : "否";
+                if (data.DrawLotsDate.HasValue)
+                    dgData.Rows[rowIdx].Cells[colDrawLotsDate.Index].Value = data.DrawLotsDate.Value.ToShortDateString();
+                dgData.Rows[rowIdx].Cells[colEventDesc.Index].Value = data.EventDescription;
+                dgData.Rows[rowIdx].Cells[colAlthleticOnly.Index].Value = data.AthleticOnly ? "是" : "否";
+                dgData.Rows[rowIdx].Cells[colCreatedBy.Index].Value = data.CreatedBy;
+            }
         }
 
         private void LoadEventsList()
@@ -105,7 +185,7 @@ namespace ischool.Sports
             _GroupTypesList = _access.Select<UDT.GroupTypes>();
             // 建立對照
             _GroupTypesDict.Clear();
-            foreach(var data in _GroupTypesList)
+            foreach (var data in _GroupTypesList)
             {
                 if (!_GroupTypesDict.ContainsKey(data.UID))
                     _GroupTypesDict.Add(data.UID, data);
@@ -119,7 +199,7 @@ namespace ischool.Sports
         {
             _GameTypesList = _access.Select<UDT.GameTypes>();
             _GameTypesDict.Clear();
-            foreach(var data in _GameTypesList)
+            foreach (var data in _GameTypesList)
             {
                 if (!_GameTypesDict.ContainsKey(data.UID))
                     _GameTypesDict.Add(data.UID, data);

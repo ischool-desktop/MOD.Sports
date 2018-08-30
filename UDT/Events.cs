@@ -78,26 +78,26 @@ namespace ischool.Sports.UDT
         /// 報名開始時間
         /// </summary>
         [Field(Field = "reg_start_date", Indexed = false)]
-        public DateTime RegStartDate { get; set; }
+        public DateTime? RegStartDate { get; set; }
 
         /// <summary>
         /// 報名結束時間
         /// </summary>
         [Field(Field = "reg_end_date", Indexed = false)]
-        public DateTime RegEndDate { get; set; }
+        public DateTime? RegEndDate { get; set; }
 
         /// <summary>
         /// 活動開始時間
         /// </summary>
         [Field(Field = "event_start_date", Indexed = false)]
-        public DateTime EventStartDate { get; set; }
+        public DateTime? EventStartDate { get; set; }
 
 
         /// <summary>
         /// 活動結束時間
         /// </summary>
         [Field(Field = "event_end_date", Indexed = false)]
-        public DateTime EventEndDate { get; set; }
+        public DateTime? EventEndDate { get; set; }
 
         /// <summary>
         /// 是否抽籤
@@ -109,7 +109,7 @@ namespace ischool.Sports.UDT
         /// 抽籤日期
         /// </summary>
         [Field(Field = "draw_lots_date", Indexed = false)]
-        public DateTime DrawLotsDate { get; set; }
+        public DateTime? DrawLotsDate { get; set; }
 
         /// <summary>
         /// 比賽說明
