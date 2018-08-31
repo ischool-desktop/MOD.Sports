@@ -60,7 +60,7 @@ namespace ischool.Sports.UDT
         /// 抽籤號
         /// </summary>
         [Field(Field = "lot_no", Indexed = false)]
-        public int LotNo { get; set; }
+        public int? LotNo { get; set; }
 
         /// <summary>
         /// 建立者帳號

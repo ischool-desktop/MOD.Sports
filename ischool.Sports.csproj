@@ -237,6 +237,12 @@
     <Compile Include="Ribbon\GroupTypes\frmGroupTypes.Designer.cs">
       <DependentUpon>frmGroupTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegistrationRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegistrationRecord.Designer.cs">
+      <DependentUpon>frmRegistrationRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\ScoreTypes\frmScoreTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -346,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\GroupTypes\frmGroupTypes.resx">
       <DependentUpon>frmGroupTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegistrationRecord.resx">
+      <DependentUpon>frmRegistrationRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SportsPanel.resx">
       <DependentUpon>SportsPanel.cs</DependentUpon>
