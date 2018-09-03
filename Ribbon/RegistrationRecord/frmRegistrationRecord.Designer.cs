@@ -32,10 +32,11 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.lblSchoolYear = new DevComponents.DotNetBar.LabelX();
             this.gp1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.chkByEventName = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkByClassName = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.txtSearch = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,9 +45,8 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRegAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.lblRowCount = new DevComponents.DotNetBar.LabelX();
-            this.chkByClassName = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkByEventName = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.gp1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +88,7 @@
             this.gp1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.gp1.Controls.Add(this.chkByEventName);
             this.gp1.Controls.Add(this.chkByClassName);
-            this.gp1.Location = new System.Drawing.Point(485, 54);
+            this.gp1.Location = new System.Drawing.Point(449, 23);
             this.gp1.Name = "gp1";
             this.gp1.Size = new System.Drawing.Size(262, 62);
             // 
@@ -125,6 +125,35 @@
             this.gp1.TabIndex = 2;
             this.gp1.Text = "查詢方式";
             // 
+            // chkByEventName
+            // 
+            // 
+            // 
+            // 
+            this.chkByEventName.BackgroundStyle.Class = "";
+            this.chkByEventName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkByEventName.Location = new System.Drawing.Point(123, 3);
+            this.chkByEventName.Name = "chkByEventName";
+            this.chkByEventName.Size = new System.Drawing.Size(100, 23);
+            this.chkByEventName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkByEventName.TabIndex = 1;
+            this.chkByEventName.Text = "依競賽項目";
+            // 
+            // chkByClassName
+            // 
+            this.chkByClassName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.chkByClassName.BackgroundStyle.Class = "";
+            this.chkByClassName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkByClassName.Location = new System.Drawing.Point(23, 4);
+            this.chkByClassName.Name = "chkByClassName";
+            this.chkByClassName.Size = new System.Drawing.Size(67, 21);
+            this.chkByClassName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkByClassName.TabIndex = 0;
+            this.chkByClassName.Text = "依班級";
+            // 
             // labelX2
             // 
             this.labelX2.AutoSize = true;
@@ -134,7 +163,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(12, 75);
+            this.labelX2.Location = new System.Drawing.Point(14, 62);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(60, 21);
             this.labelX2.TabIndex = 3;
@@ -147,10 +176,9 @@
             // 
             this.txtSearch.Border.Class = "TextBoxBorder";
             this.txtSearch.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSearch.Location = new System.Drawing.Point(77, 73);
-            this.txtSearch.Multiline = true;
+            this.txtSearch.Location = new System.Drawing.Point(79, 60);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(388, 25);
+            this.txtSearch.Size = new System.Drawing.Size(352, 25);
             this.txtSearch.TabIndex = 4;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
@@ -158,6 +186,9 @@
             // 
             this.dgData.AllowUserToAddRows = false;
             this.dgData.AllowUserToDeleteRows = false;
+            this.dgData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgData.BackgroundColor = System.Drawing.Color.White;
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -178,26 +209,12 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgData.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgData.Location = new System.Drawing.Point(13, 137);
+            this.dgData.Location = new System.Drawing.Point(14, 104);
             this.dgData.Name = "dgData";
             this.dgData.RowTemplate.Height = 24;
             this.dgData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgData.Size = new System.Drawing.Size(734, 263);
+            this.dgData.Size = new System.Drawing.Size(842, 287);
             this.dgData.TabIndex = 5;
-            // 
-            // btnExit
-            // 
-            this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExit.AutoSize = true;
-            this.btnExit.BackColor = System.Drawing.Color.Transparent;
-            this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(672, 421);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 25);
-            this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "離開";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // colEventItem
             // 
@@ -239,55 +256,43 @@
             this.colRegAccount.HeaderText = "報名者帳號";
             this.colRegAccount.Name = "colRegAccount";
             // 
+            // btnExit
+            // 
+            this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.AutoSize = true;
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExit.Location = new System.Drawing.Point(781, 407);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 25);
+            this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "離開";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // lblRowCount
             // 
-            this.lblRowCount.AutoSize = true;
+            this.lblRowCount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRowCount.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.lblRowCount.BackgroundStyle.Class = "";
             this.lblRowCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblRowCount.Location = new System.Drawing.Point(643, 23);
+            this.lblRowCount.Location = new System.Drawing.Point(752, 77);
             this.lblRowCount.Name = "lblRowCount";
-            this.lblRowCount.Size = new System.Drawing.Size(30, 21);
+            this.lblRowCount.Size = new System.Drawing.Size(104, 18);
             this.lblRowCount.TabIndex = 8;
             this.lblRowCount.Text = "107";
-            // 
-            // chkByClassName
-            // 
-            this.chkByClassName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.chkByClassName.BackgroundStyle.Class = "";
-            this.chkByClassName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkByClassName.Location = new System.Drawing.Point(23, 4);
-            this.chkByClassName.Name = "chkByClassName";
-            this.chkByClassName.Size = new System.Drawing.Size(67, 21);
-            this.chkByClassName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkByClassName.TabIndex = 0;
-            this.chkByClassName.Text = "依班級";
-            // 
-            // chkByEventName
-            // 
-            // 
-            // 
-            // 
-            this.chkByEventName.BackgroundStyle.Class = "";
-            this.chkByEventName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkByEventName.Location = new System.Drawing.Point(123, 3);
-            this.chkByEventName.Name = "chkByEventName";
-            this.chkByEventName.Size = new System.Drawing.Size(100, 23);
-            this.chkByEventName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkByEventName.TabIndex = 1;
-            this.chkByEventName.Text = "依競賽項目";
             // 
             // frmRegistrationRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 458);
+            this.ClientSize = new System.Drawing.Size(875, 455);
             this.Controls.Add(this.lblRowCount);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.dgData);
