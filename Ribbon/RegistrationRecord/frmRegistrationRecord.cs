@@ -22,6 +22,9 @@ namespace ischool.Sports
         QueryHelper qh = new QueryHelper();
         DataTable _dtData = new DataTable();
 
+        // 目前所選 data GridView
+        private string _currentSelectDGView = "";
+        
         private string searchText = "";
         private StringBuilder _querySB = new StringBuilder();
         private List<string> _queryItems = new List<string>();
@@ -59,7 +62,6 @@ namespace ischool.Sports
 
         private void LoadDataToGridView()
         {
-            
             dgTeamData.Rows.Clear();
             dgPlayerData.Rows.Clear();
             foreach (DataRow dr in _teamList)
@@ -80,6 +82,7 @@ namespace ischool.Sports
             // 統計數
             lblTeamCount.Text = "共 " + _teamList.Count + " 筆";
             lblPlayerCount.Text = "";
+            _currentSelectDGView = "team";
         }
         private void LoadData()
         {
@@ -181,29 +184,63 @@ namespace ischool.Sports
         {
             btnDel.Enabled = false;
             // 取得資料
-            if (dgTeamData.SelectedRows.Count == 1)
+            if(_currentSelectDGView == "team")
             {
-                if (dgTeamData.SelectedRows[0].Tag != null)
+                if (dgTeamData.SelectedRows.Count == 1)
                 {
-                    if (FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除報名參賽選手資料，請問是否刪除？", "刪除報名資料", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (dgTeamData.SelectedRows[0].Tag != null)
                     {
-                        string puid = dgTeamData.SelectedRows[0].Tag.ToString();
-                        DeletePlayerRec(puid);
-                        Run();
+                        if (FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除報名隊與參賽選手資料，請問是否刪除？", "刪除報名隊資料", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        {
+                            string puid = dgTeamData.SelectedRows[0].Tag.ToString();
+                            DeleteTeamRec(puid);
+                            Run();
+                        }
+                    }
+                    else
+                    {
+                        FISCA.Presentation.Controls.MsgBox.Show("刪除發生錯誤:沒有隊uid");
                     }
                 }
                 else
                 {
-                    FISCA.Presentation.Controls.MsgBox.Show("刪除發生錯誤:沒有uid");
+                    FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
                 }
             }
-            else
+
+            if(_currentSelectDGView == "player")
             {
-                FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
-            }
+                // 刪隊員
+                if (dgPlayerData.SelectedRows.Count == 1)
+                {
+                    if (dgPlayerData.SelectedRows[0].Tag != null)
+                    {
+                        if (FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除參賽選手資料，請問是否刪除？", "刪除報名隊員資料", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        {
+                            string puid = dgPlayerData.SelectedRows[0].Tag.ToString();
+                            DeletePlayerRec(puid);
+                            Run();
+                        }
+                    }
+                    else
+                    {
+                        FISCA.Presentation.Controls.MsgBox.Show("刪除發生錯誤:沒有隊員uid");
+                    }
+                }
+                else
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
+                }
+            }           
+            
+
             btnDel.Enabled = true;
         }
 
+        /// <summary>
+        /// 刪除隊員
+        /// </summary>
+        /// <param name="uid"></param>
         private void DeletePlayerRec(string uid)
         {
             if (!string.IsNullOrEmpty(uid))
@@ -217,7 +254,31 @@ namespace ischool.Sports
                 }
                 catch (Exception ex)
                 {
-                    FISCA.Presentation.Controls.MsgBox.Show("刪除過程發生錯誤:" + ex.Message);
+                    FISCA.Presentation.Controls.MsgBox.Show("刪除隊員過程發生錯誤:" + ex.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 刪除隊
+        /// </summary>
+        /// <param name="uid"></param>
+        private void DeleteTeamRec(string uid)
+        {
+            if (!string.IsNullOrEmpty(uid))
+            {
+                try
+                {
+                    string strSQLDelPlayer = "delete from $ischool.sports.players where ref_team_id = " + uid;
+                    string strSQLDelTeam = "delete from $ischool.sports.teams where uid = " + uid;
+                    UpdateHelper uh = new UpdateHelper();
+                    int n1 = uh.Execute(strSQLDelPlayer);
+                    int n2 = uh.Execute(strSQLDelTeam);
+                    FISCA.Presentation.Controls.MsgBox.Show("刪除完成");
+                }
+                catch (Exception ex)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("刪除隊過程發生錯誤:" + ex.Message);
                 }
             }
         }
@@ -229,6 +290,7 @@ namespace ischool.Sports
 
         private void dgTeamData_MouseClick(object sender, MouseEventArgs e)
         {
+            _currentSelectDGView = "team";
             if(dgTeamData.SelectedRows.Count == 1)
             {
                 string t_uid = dgTeamData.SelectedRows[0].Tag.ToString();
@@ -244,6 +306,7 @@ namespace ischool.Sports
                 foreach (DataRow dr in _playerDict[uid])
                 {
                     int rowIdx = dgPlayerData.Rows.Add();
+                    dgPlayerData.Rows[rowIdx].Tag = dr["p_uid"].ToString();
                     dgPlayerData.Rows[rowIdx].Cells[colClassName.Index].Value = dr["class_name"].ToString();
                     dgPlayerData.Rows[rowIdx].Cells[colSeatNo.Index].Value = dr["seat_no"].ToString();
                     dgPlayerData.Rows[rowIdx].Cells[colName.Index].Value = dr["student_name"].ToString();
@@ -253,6 +316,22 @@ namespace ischool.Sports
 
                 // 統計數
                 lblPlayerCount.Text = "共 " + _playerDict[uid].Count + " 筆";
+            }
+        }
+
+        private void dgPlayerData_MouseClick(object sender, MouseEventArgs e)
+        {
+            _currentSelectDGView = "player";
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmSubAddRegistrationRecord fsar = new frmSubAddRegistrationRecord();
+            fsar.setSchoolYear(iptSchoolYear.Value.ToString());
+
+            if(fsar.ShowDialog() == DialogResult.Yes)
+            {
+                Run();
             }
         }
     }

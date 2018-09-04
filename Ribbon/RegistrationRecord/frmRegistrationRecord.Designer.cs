@@ -291,6 +291,7 @@
             this.btnAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "新增";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -379,6 +380,7 @@
             this.dgPlayerData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgPlayerData.Size = new System.Drawing.Size(842, 218);
             this.dgPlayerData.TabIndex = 11;
+            this.dgPlayerData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgPlayerData_MouseClick);
             // 
             // colClassName
             // 
