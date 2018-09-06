@@ -28,14 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.dgTeamData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.iptSchoolYear = new DevComponents.Editors.IntegerInput();
             this.lblTeamCount = new DevComponents.DotNetBar.LabelX();
@@ -57,6 +53,12 @@
             this.btnAddPlayer = new DevComponents.DotNetBar.ButtonX();
             this.btnEditPlayer = new DevComponents.DotNetBar.ButtonX();
             this.btnDelPlayer = new DevComponents.DotNetBar.ButtonX();
+            this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeamLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPlayerLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgTeamData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlayerData)).BeginInit();
@@ -84,18 +86,19 @@
             this.dgTeamData.BackgroundColor = System.Drawing.Color.White;
             this.dgTeamData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTeamData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCategory,
             this.colEventItem,
             this.colGroupType,
-            this.colTeamName});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgTeamData.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colTeamName,
+            this.colTeamLotNo,
+            this.colCategory});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgTeamData.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgTeamData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgTeamData.Location = new System.Drawing.Point(22, 100);
             this.dgTeamData.Name = "dgTeamData";
@@ -104,27 +107,6 @@
             this.dgTeamData.Size = new System.Drawing.Size(500, 401);
             this.dgTeamData.TabIndex = 1;
             this.dgTeamData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgTeamData_MouseClick);
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "競賽類別";
-            this.colCategory.Name = "colCategory";
-            // 
-            // colEventItem
-            // 
-            this.colEventItem.HeaderText = "競賽項目";
-            this.colEventItem.Name = "colEventItem";
-            // 
-            // colGroupType
-            // 
-            this.colGroupType.HeaderText = "參賽組別";
-            this.colGroupType.Name = "colGroupType";
-            // 
-            // colTeamName
-            // 
-            this.colTeamName.HeaderText = "隊名";
-            this.colTeamName.Name = "colTeamName";
-            this.colTeamName.Width = 150;
             // 
             // btnExit
             // 
@@ -185,15 +167,16 @@
             this.colSeatNo,
             this.colName,
             this.colRegDate,
-            this.colRegAccount});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgPlayerData.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colRegAccount,
+            this.colPlayerLotNo});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgPlayerData.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgPlayerData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgPlayerData.Location = new System.Drawing.Point(550, 103);
             this.dgPlayerData.Name = "dgPlayerData";
@@ -395,6 +378,37 @@
             this.btnDelPlayer.Text = "刪除人員";
             this.btnDelPlayer.Click += new System.EventHandler(this.btnDelPlayer_Click);
             // 
+            // colEventItem
+            // 
+            this.colEventItem.HeaderText = "競賽項目";
+            this.colEventItem.Name = "colEventItem";
+            // 
+            // colGroupType
+            // 
+            this.colGroupType.HeaderText = "參賽組別";
+            this.colGroupType.Name = "colGroupType";
+            // 
+            // colTeamName
+            // 
+            this.colTeamName.HeaderText = "隊名";
+            this.colTeamName.Name = "colTeamName";
+            this.colTeamName.Width = 150;
+            // 
+            // colTeamLotNo
+            // 
+            this.colTeamLotNo.HeaderText = "抽籤號";
+            this.colTeamLotNo.Name = "colTeamLotNo";
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "競賽類別";
+            this.colCategory.Name = "colCategory";
+            // 
+            // colPlayerLotNo
+            // 
+            this.colPlayerLotNo.HeaderText = "抽籤號";
+            this.colPlayerLotNo.Name = "colPlayerLotNo";
+            // 
             // frmRegistrationRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -436,10 +450,6 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgTeamData;
         private DevComponents.DotNetBar.ButtonX btnExit;
         private DevComponents.Editors.IntegerInput iptSchoolYear;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEventItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTeamName;
         private DevComponents.DotNetBar.LabelX lblTeamCount;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgPlayerData;
         private DevComponents.DotNetBar.LabelX lblPlayerCount;
@@ -459,5 +469,11 @@
         private DevComponents.DotNetBar.ButtonX btnAddPlayer;
         private DevComponents.DotNetBar.ButtonX btnEditPlayer;
         private DevComponents.DotNetBar.ButtonX btnDelPlayer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEventItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTeamName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTeamLotNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPlayerLotNo;
     }
 }

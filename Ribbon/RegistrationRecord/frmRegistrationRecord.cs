@@ -22,8 +22,10 @@ namespace ischool.Sports
         BackgroundWorker _bgSearch = new BackgroundWorker();
         QueryHelper qh = new QueryHelper();
         DataTable _dtData = new DataTable();
+        DataTable _dtData1 = new DataTable();
         DataTable _dtClassData = new DataTable();
         DataTable _dtEventData = new DataTable();
+        string _PersionalTeam = "==個人賽^^";
 
         Dictionary<string, string> _classNameIdDict = new Dictionary<string, string>();
         Dictionary<string, string> _eventItemDict = new Dictionary<string, string>();
@@ -51,6 +53,11 @@ namespace ischool.Sports
         {
             SetControlEnabled(true);
             LoadDataToGridView();
+            // 檢查個人賽
+            if(_playerDict.ContainsKey(_PersionalTeam))
+            {
+                LoadDGPlayerDataGridView(_PersionalTeam);
+            }
         }
 
         private void _bgSearch_DoWork(object sender, DoWorkEventArgs e)
@@ -150,8 +157,8 @@ namespace ischool.Sports
         {
             try
             {
-                // 取得資料
-                string strSQL = "select $ischool.sports.teams.uid as t_uid,$ischool.sports.players.uid as p_uid,category,$ischool.sports.events.name as event_name,$ischool.sports.events.is_team as event_is_team ,$ischool.sports.group_types.name as group_types_name ,$ischool.sports.teams.name as team_name,$ischool.sports.players.name as student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update as player_last_update from $ischool.sports.events inner join $ischool.sports.teams on $ischool.sports.events.uid = $ischool.sports.teams.ref_event_id inner join $ischool.sports.players on $ischool.sports.teams.uid = $ischool.sports.players.ref_team_id inner join  $ischool.sports.group_types on $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid where $ischool.sports.events.school_year = " + _selectSchoolYear + _querySB.ToString() + " order by category,event_name,team_name,class_name,seat_no";
+                // 取得資料 (團體)
+                string strSQL = "SELECT $ischool.sports.teams.uid AS t_uid,$ischool.sports.players.uid AS p_uid,category,$ischool.sports.events.name AS event_name,$ischool.sports.events.is_team AS event_is_team ,$ischool.sports.group_types.name AS group_types_name ,$ischool.sports.teams.name AS team_name,$ischool.sports.players.name AS student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update AS player_last_update FROM $ischool.sports.events INNER JOIN $ischool.sports.teams ON $ischool.sports.events.uid = $ischool.sports.teams.ref_event_id INNER JOIN $ischool.sports.players ON $ischool.sports.teams.uid = $ischool.sports.players.ref_team_id INNER JOIN  $ischool.sports.group_types ON $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid WHERE $ischool.sports.events.school_year = " + _selectSchoolYear + _querySB.ToString() + " ORDER BY category,event_name,team_name,class_name,seat_no";
                 _dtData = qh.Select(strSQL);
 
                 _teamList.Clear();
@@ -171,6 +178,18 @@ namespace ischool.Sports
                     _playerDict[t_uid].Add(dr);
                 }
 
+                // 個人賽
+                string strSQL1 = "SELECT $ischool.sports.players.uid AS p_uid,category,$ischool.sports.events.name AS event_name,$ischool.sports.events.is_team AS event_is_team ,$ischool.sports.group_types.name AS group_types_name,$ischool.sports.players.name AS student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update AS player_last_update FROM $ischool.sports.events INNER JOIN $ischool.sports.players ON $ischool.sports.events.uid = $ischool.sports.players.ref_event_id INNER JOIN $ischool.sports.group_types ON $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid WHERE $ischool.sports.players.ref_team_id IS NULL AND $ischool.sports.events.school_year =" + _selectSchoolYear + _querySB.ToString() + " ORDER BY category,event_name,class_name,seat_no";
+                _dtData1 = qh.Select(strSQL1);
+
+                if (_dtData1.Rows.Count > 0)
+                {
+                    _playerDict.Add(_PersionalTeam, new List<DataRow>());
+                    foreach (DataRow dr in _dtData1.Rows)
+                    {
+                        _playerDict[_PersionalTeam].Add(dr);
+                    }
+                }
             }
             catch (Exception err)
             {
@@ -427,9 +446,9 @@ namespace ischool.Sports
                 }
             }
 
-            if (cbxClassName.Text != "全部")
+            if (cbxClassName.Text != "全部" && cbxClassName.Text != "")
             {
-                _querySB.Append(" AND $ischool.sports.players.class_name = '" + cbxClassName.Text+"'");
+                _querySB.Append(" AND $ischool.sports.players.class_name = '" + cbxClassName.Text + "'");
             }
 
             _bgSearch.RunWorkerAsync();
