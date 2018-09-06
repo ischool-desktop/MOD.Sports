@@ -28,36 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.gp1 = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.chkByName = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkByEventName = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkByClassName = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.txtSearch = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgTeamData = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
-            this.lblTeamCount = new DevComponents.DotNetBar.LabelX();
-            this.btnAdd = new DevComponents.DotNetBar.ButtonX();
-            this.btnEdit = new DevComponents.DotNetBar.ButtonX();
-            this.btnDel = new DevComponents.DotNetBar.ButtonX();
             this.iptSchoolYear = new DevComponents.Editors.IntegerInput();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.lblTeamCount = new DevComponents.DotNetBar.LabelX();
             this.dgPlayerData = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRegAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.lblPlayerCount = new DevComponents.DotNetBar.LabelX();
-            this.gp1.SuspendLayout();
+            this.labelX2 = new DevComponents.DotNetBar.LabelX();
+            this.cbxEventItem = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbxClassName = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.btnSearch = new DevComponents.DotNetBar.ButtonX();
+            this.btnAddTeam = new DevComponents.DotNetBar.ButtonX();
+            this.btnEditTeam = new DevComponents.DotNetBar.ButtonX();
+            this.btnDelTeam = new DevComponents.DotNetBar.ButtonX();
+            this.btnAddPlayer = new DevComponents.DotNetBar.ButtonX();
+            this.btnEditPlayer = new DevComponents.DotNetBar.ButtonX();
+            this.btnDelPlayer = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgTeamData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlayerData)).BeginInit();
@@ -78,131 +77,10 @@
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "學年度";
             // 
-            // gp1
-            // 
-            this.gp1.BackColor = System.Drawing.Color.Transparent;
-            this.gp1.CanvasColor = System.Drawing.SystemColors.Control;
-            this.gp1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.gp1.Controls.Add(this.chkByName);
-            this.gp1.Controls.Add(this.chkByEventName);
-            this.gp1.Controls.Add(this.chkByClassName);
-            this.gp1.Location = new System.Drawing.Point(449, 23);
-            this.gp1.Name = "gp1";
-            this.gp1.Size = new System.Drawing.Size(267, 62);
-            // 
-            // 
-            // 
-            this.gp1.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.gp1.Style.BackColorGradientAngle = 90;
-            this.gp1.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.gp1.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.gp1.Style.BorderBottomWidth = 1;
-            this.gp1.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.gp1.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.gp1.Style.BorderLeftWidth = 1;
-            this.gp1.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.gp1.Style.BorderRightWidth = 1;
-            this.gp1.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.gp1.Style.BorderTopWidth = 1;
-            this.gp1.Style.Class = "";
-            this.gp1.Style.CornerDiameter = 4;
-            this.gp1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.gp1.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.gp1.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.gp1.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.gp1.StyleMouseDown.Class = "";
-            this.gp1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.gp1.StyleMouseOver.Class = "";
-            this.gp1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.gp1.TabIndex = 2;
-            this.gp1.Text = "查詢方式";
-            // 
-            // chkByName
-            // 
-            this.chkByName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.chkByName.BackgroundStyle.Class = "";
-            this.chkByName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkByName.Location = new System.Drawing.Point(190, 4);
-            this.chkByName.Name = "chkByName";
-            this.chkByName.Size = new System.Drawing.Size(54, 21);
-            this.chkByName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkByName.TabIndex = 2;
-            this.chkByName.Text = "姓名";
-            // 
-            // chkByEventName
-            // 
-            this.chkByEventName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.chkByEventName.BackgroundStyle.Class = "";
-            this.chkByEventName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkByEventName.Location = new System.Drawing.Point(99, 4);
-            this.chkByEventName.Name = "chkByEventName";
-            this.chkByEventName.Size = new System.Drawing.Size(80, 21);
-            this.chkByEventName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkByEventName.TabIndex = 1;
-            this.chkByEventName.Text = "競賽項目";
-            // 
-            // chkByClassName
-            // 
-            this.chkByClassName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.chkByClassName.BackgroundStyle.Class = "";
-            this.chkByClassName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkByClassName.Location = new System.Drawing.Point(23, 4);
-            this.chkByClassName.Name = "chkByClassName";
-            this.chkByClassName.Size = new System.Drawing.Size(54, 21);
-            this.chkByClassName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkByClassName.TabIndex = 0;
-            this.chkByClassName.Text = "班級";
-            // 
-            // labelX2
-            // 
-            this.labelX2.AutoSize = true;
-            this.labelX2.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(14, 62);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(60, 21);
-            this.labelX2.TabIndex = 3;
-            this.labelX2.Text = "查詢文字";
-            // 
-            // txtSearch
-            // 
-            // 
-            // 
-            // 
-            this.txtSearch.Border.Class = "TextBoxBorder";
-            this.txtSearch.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSearch.Location = new System.Drawing.Point(79, 60);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(352, 25);
-            this.txtSearch.TabIndex = 0;
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
-            // 
             // dgTeamData
             // 
             this.dgTeamData.AllowUserToAddRows = false;
             this.dgTeamData.AllowUserToDeleteRows = false;
-            this.dgTeamData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgTeamData.BackgroundColor = System.Drawing.Color.White;
             this.dgTeamData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTeamData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -210,20 +88,20 @@
             this.colEventItem,
             this.colGroupType,
             this.colTeamName});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgTeamData.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgTeamData.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgTeamData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgTeamData.Location = new System.Drawing.Point(14, 129);
+            this.dgTeamData.Location = new System.Drawing.Point(22, 100);
             this.dgTeamData.Name = "dgTeamData";
             this.dgTeamData.RowTemplate.Height = 24;
             this.dgTeamData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTeamData.Size = new System.Drawing.Size(842, 149);
+            this.dgTeamData.Size = new System.Drawing.Size(500, 401);
             this.dgTeamData.TabIndex = 1;
             this.dgTeamData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgTeamData_MouseClick);
             // 
@@ -251,76 +129,19 @@
             // btnExit
             // 
             this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.AutoSize = true;
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(781, 550);
+            this.btnExit.Location = new System.Drawing.Point(1091, 518);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 25);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // lblTeamCount
-            // 
-            this.lblTeamCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTeamCount.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.lblTeamCount.BackgroundStyle.Class = "";
-            this.lblTeamCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTeamCount.Location = new System.Drawing.Point(752, 100);
-            this.lblTeamCount.Name = "lblTeamCount";
-            this.lblTeamCount.Size = new System.Drawing.Size(104, 18);
-            this.lblTeamCount.TabIndex = 8;
-            this.lblTeamCount.Text = "107";
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.AutoSize = true;
-            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
-            this.btnAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAdd.Location = new System.Drawing.Point(449, 550);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 25);
-            this.btnAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "新增";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.AutoSize = true;
-            this.btnEdit.BackColor = System.Drawing.Color.Transparent;
-            this.btnEdit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnEdit.Location = new System.Drawing.Point(551, 550);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 25);
-            this.btnEdit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.Text = "修改";
-            // 
-            // btnDel
-            // 
-            this.btnDel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDel.AutoSize = true;
-            this.btnDel.BackColor = System.Drawing.Color.Transparent;
-            this.btnDel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDel.Location = new System.Drawing.Point(655, 550);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 25);
-            this.btnDel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDel.TabIndex = 4;
-            this.btnDel.Text = "刪除";
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // iptSchoolYear
             // 
@@ -338,20 +159,20 @@
             this.iptSchoolYear.TabIndex = 9;
             this.iptSchoolYear.ValueChanged += new System.EventHandler(this.iptSchoolYear_ValueChanged);
             // 
-            // labelX3
+            // lblTeamCount
             // 
-            this.labelX3.AutoSize = true;
-            this.labelX3.BackColor = System.Drawing.Color.Transparent;
+            this.lblTeamCount.AutoSize = true;
+            this.lblTeamCount.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.labelX3.BackgroundStyle.Class = "";
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(14, 100);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(34, 21);
-            this.labelX3.TabIndex = 10;
-            this.labelX3.Text = "隊伍";
+            this.lblTeamCount.BackgroundStyle.Class = "";
+            this.lblTeamCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTeamCount.Location = new System.Drawing.Point(22, 71);
+            this.lblTeamCount.Name = "lblTeamCount";
+            this.lblTeamCount.Size = new System.Drawing.Size(34, 21);
+            this.lblTeamCount.TabIndex = 10;
+            this.lblTeamCount.Text = "隊伍";
             // 
             // dgPlayerData
             // 
@@ -365,20 +186,20 @@
             this.colName,
             this.colRegDate,
             this.colRegAccount});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgPlayerData.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgPlayerData.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgPlayerData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgPlayerData.Location = new System.Drawing.Point(14, 316);
+            this.dgPlayerData.Location = new System.Drawing.Point(550, 103);
             this.dgPlayerData.Name = "dgPlayerData";
             this.dgPlayerData.RowTemplate.Height = 24;
             this.dgPlayerData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPlayerData.Size = new System.Drawing.Size(842, 218);
+            this.dgPlayerData.Size = new System.Drawing.Size(613, 398);
             this.dgPlayerData.TabIndex = 11;
             this.dgPlayerData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgPlayerData_MouseClick);
             // 
@@ -391,6 +212,7 @@
             // 
             this.colSeatNo.HeaderText = "座號";
             this.colSeatNo.Name = "colSeatNo";
+            this.colSeatNo.Width = 70;
             // 
             // colName
             // 
@@ -406,63 +228,200 @@
             // 
             this.colRegAccount.HeaderText = "報名者帳號";
             this.colRegAccount.Name = "colRegAccount";
-            // 
-            // labelX4
-            // 
-            this.labelX4.AutoSize = true;
-            this.labelX4.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX4.BackgroundStyle.Class = "";
-            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(14, 289);
-            this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(34, 21);
-            this.labelX4.TabIndex = 12;
-            this.labelX4.Text = "隊員";
+            this.colRegAccount.Width = 200;
             // 
             // lblPlayerCount
             // 
-            this.lblPlayerCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPlayerCount.AutoSize = true;
             this.lblPlayerCount.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.lblPlayerCount.BackgroundStyle.Class = "";
             this.lblPlayerCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblPlayerCount.Location = new System.Drawing.Point(752, 290);
+            this.lblPlayerCount.Location = new System.Drawing.Point(550, 69);
             this.lblPlayerCount.Name = "lblPlayerCount";
-            this.lblPlayerCount.Size = new System.Drawing.Size(104, 18);
-            this.lblPlayerCount.TabIndex = 13;
-            this.lblPlayerCount.Text = "107";
+            this.lblPlayerCount.Size = new System.Drawing.Size(60, 21);
+            this.lblPlayerCount.TabIndex = 12;
+            this.lblPlayerCount.Text = "參賽人員";
+            // 
+            // labelX2
+            // 
+            this.labelX2.AutoSize = true;
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.Location = new System.Drawing.Point(199, 23);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(60, 21);
+            this.labelX2.TabIndex = 14;
+            this.labelX2.Text = "競賽項目";
+            // 
+            // cbxEventItem
+            // 
+            this.cbxEventItem.DisplayMember = "Text";
+            this.cbxEventItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxEventItem.FormattingEnabled = true;
+            this.cbxEventItem.ItemHeight = 19;
+            this.cbxEventItem.Location = new System.Drawing.Point(266, 21);
+            this.cbxEventItem.Name = "cbxEventItem";
+            this.cbxEventItem.Size = new System.Drawing.Size(256, 25);
+            this.cbxEventItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxEventItem.TabIndex = 15;
+            this.cbxEventItem.WatermarkText = "請選擇競賽項目";
+            // 
+            // cbxClassName
+            // 
+            this.cbxClassName.DisplayMember = "Text";
+            this.cbxClassName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxClassName.FormattingEnabled = true;
+            this.cbxClassName.ItemHeight = 19;
+            this.cbxClassName.Location = new System.Drawing.Point(608, 21);
+            this.cbxClassName.Name = "cbxClassName";
+            this.cbxClassName.Size = new System.Drawing.Size(156, 25);
+            this.cbxClassName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxClassName.TabIndex = 17;
+            this.cbxClassName.WatermarkText = "請選班級名稱";
+            // 
+            // labelX5
+            // 
+            this.labelX5.AutoSize = true;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.Class = "";
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX5.Location = new System.Drawing.Point(568, 23);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(34, 21);
+            this.labelX5.TabIndex = 16;
+            this.labelX5.Text = "班級";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSearch.AutoSize = true;
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSearch.Location = new System.Drawing.Point(826, 21);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 25);
+            this.btnSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSearch.TabIndex = 18;
+            this.btnSearch.Text = "查詢";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnAddTeam
+            // 
+            this.btnAddTeam.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAddTeam.AutoSize = true;
+            this.btnAddTeam.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddTeam.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAddTeam.Location = new System.Drawing.Point(247, 518);
+            this.btnAddTeam.Name = "btnAddTeam";
+            this.btnAddTeam.Size = new System.Drawing.Size(75, 25);
+            this.btnAddTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAddTeam.TabIndex = 19;
+            this.btnAddTeam.Text = "新增隊伍";
+            // 
+            // btnEditTeam
+            // 
+            this.btnEditTeam.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEditTeam.AutoSize = true;
+            this.btnEditTeam.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditTeam.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEditTeam.Location = new System.Drawing.Point(343, 518);
+            this.btnEditTeam.Name = "btnEditTeam";
+            this.btnEditTeam.Size = new System.Drawing.Size(75, 25);
+            this.btnEditTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEditTeam.TabIndex = 20;
+            this.btnEditTeam.Text = "修改隊伍";
+            // 
+            // btnDelTeam
+            // 
+            this.btnDelTeam.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDelTeam.AutoSize = true;
+            this.btnDelTeam.BackColor = System.Drawing.Color.Transparent;
+            this.btnDelTeam.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDelTeam.Location = new System.Drawing.Point(435, 518);
+            this.btnDelTeam.Name = "btnDelTeam";
+            this.btnDelTeam.Size = new System.Drawing.Size(75, 25);
+            this.btnDelTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDelTeam.TabIndex = 21;
+            this.btnDelTeam.Text = "刪除隊伍";
+            this.btnDelTeam.Click += new System.EventHandler(this.btnDelTeam_Click);
+            // 
+            // btnAddPlayer
+            // 
+            this.btnAddPlayer.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAddPlayer.AutoSize = true;
+            this.btnAddPlayer.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddPlayer.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAddPlayer.Location = new System.Drawing.Point(807, 518);
+            this.btnAddPlayer.Name = "btnAddPlayer";
+            this.btnAddPlayer.Size = new System.Drawing.Size(75, 25);
+            this.btnAddPlayer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAddPlayer.TabIndex = 22;
+            this.btnAddPlayer.Text = "新增人員";
+            // 
+            // btnEditPlayer
+            // 
+            this.btnEditPlayer.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEditPlayer.AutoSize = true;
+            this.btnEditPlayer.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditPlayer.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEditPlayer.Location = new System.Drawing.Point(901, 518);
+            this.btnEditPlayer.Name = "btnEditPlayer";
+            this.btnEditPlayer.Size = new System.Drawing.Size(75, 25);
+            this.btnEditPlayer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEditPlayer.TabIndex = 23;
+            this.btnEditPlayer.Text = "修改人員";
+            // 
+            // btnDelPlayer
+            // 
+            this.btnDelPlayer.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDelPlayer.AutoSize = true;
+            this.btnDelPlayer.BackColor = System.Drawing.Color.Transparent;
+            this.btnDelPlayer.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDelPlayer.Location = new System.Drawing.Point(995, 518);
+            this.btnDelPlayer.Name = "btnDelPlayer";
+            this.btnDelPlayer.Size = new System.Drawing.Size(75, 25);
+            this.btnDelPlayer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDelPlayer.TabIndex = 24;
+            this.btnDelPlayer.Text = "刪除人員";
+            this.btnDelPlayer.Click += new System.EventHandler(this.btnDelPlayer_Click);
             // 
             // frmRegistrationRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 598);
+            this.ClientSize = new System.Drawing.Size(1178, 558);
+            this.Controls.Add(this.btnDelPlayer);
+            this.Controls.Add(this.btnEditPlayer);
+            this.Controls.Add(this.btnAddPlayer);
+            this.Controls.Add(this.btnDelTeam);
+            this.Controls.Add(this.btnEditTeam);
+            this.Controls.Add(this.btnAddTeam);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.cbxClassName);
+            this.Controls.Add(this.labelX5);
+            this.Controls.Add(this.cbxEventItem);
+            this.Controls.Add(this.labelX2);
             this.Controls.Add(this.lblPlayerCount);
-            this.Controls.Add(this.labelX4);
             this.Controls.Add(this.dgPlayerData);
-            this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.iptSchoolYear);
-            this.Controls.Add(this.btnDel);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblTeamCount);
+            this.Controls.Add(this.iptSchoolYear);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.dgTeamData);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.labelX2);
-            this.Controls.Add(this.gp1);
             this.Controls.Add(this.labelX1);
             this.DoubleBuffered = true;
             this.Name = "frmRegistrationRecord";
             this.Text = "管理報名記錄";
             this.Load += new System.EventHandler(this.frmRegistrationRecord_Load);
-            this.gp1.ResumeLayout(false);
-            this.gp1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTeamData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlayerData)).EndInit();
@@ -474,31 +433,31 @@
         #endregion
 
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.Controls.GroupPanel gp1;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtSearch;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgTeamData;
         private DevComponents.DotNetBar.ButtonX btnExit;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkByEventName;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkByClassName;
-        private DevComponents.DotNetBar.LabelX lblTeamCount;
-        private DevComponents.DotNetBar.ButtonX btnAdd;
-        private DevComponents.DotNetBar.ButtonX btnEdit;
-        private DevComponents.DotNetBar.ButtonX btnDel;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkByName;
         private DevComponents.Editors.IntegerInput iptSchoolYear;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTeamName;
-        private DevComponents.DotNetBar.LabelX labelX3;
+        private DevComponents.DotNetBar.LabelX lblTeamCount;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgPlayerData;
-        private DevComponents.DotNetBar.LabelX labelX4;
+        private DevComponents.DotNetBar.LabelX lblPlayerCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSeatNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRegDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRegAccount;
-        private DevComponents.DotNetBar.LabelX lblPlayerCount;
+        private DevComponents.DotNetBar.LabelX labelX2;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxEventItem;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxClassName;
+        private DevComponents.DotNetBar.LabelX labelX5;
+        private DevComponents.DotNetBar.ButtonX btnSearch;
+        private DevComponents.DotNetBar.ButtonX btnAddTeam;
+        private DevComponents.DotNetBar.ButtonX btnEditTeam;
+        private DevComponents.DotNetBar.ButtonX btnDelTeam;
+        private DevComponents.DotNetBar.ButtonX btnAddPlayer;
+        private DevComponents.DotNetBar.ButtonX btnEditPlayer;
+        private DevComponents.DotNetBar.ButtonX btnDelPlayer;
     }
 }
