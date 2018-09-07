@@ -588,7 +588,7 @@
             this.chkIsDrawLots.Size = new System.Drawing.Size(100, 23);
             this.chkIsDrawLots.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkIsDrawLots.TabIndex = 14;
-            this.chkIsDrawLots.Text = "是否抽籤";
+            this.chkIsDrawLots.Text = "\\";
             // 
             // dtDrawLotsDate
             // 
@@ -668,7 +668,7 @@
             this.chkIsTeam.Size = new System.Drawing.Size(100, 23);
             this.chkIsTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkIsTeam.TabIndex = 12;
-            this.chkIsTeam.Text = "是否團體賽";
+            this.chkIsTeam.Text = "團體賽";
             // 
             // chkAthleticOnly
             // 

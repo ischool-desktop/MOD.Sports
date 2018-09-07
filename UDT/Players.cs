@@ -48,7 +48,7 @@ namespace ischool.Sports.UDT
         /// 參賽隊伍編號
         /// </summary>
         [Field(Field = "ref_team_id", Indexed = false)]
-        public int RefTeamId { get; set; }
+        public int? RefTeamId { get; set; }
 
         /// <summary>
         /// 是否是隊長

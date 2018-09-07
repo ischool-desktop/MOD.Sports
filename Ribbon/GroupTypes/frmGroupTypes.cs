@@ -33,7 +33,10 @@ namespace ischool.Sports
                 int rowIdx = dgData.Rows.Add();
                 dgData.Rows[rowIdx].Tag = data;
                 dgData.Rows[rowIdx].Cells[colName.Index].Value = data.Name;
-                dgData.Rows[rowIdx].Cells[colGender.Index].Value = data.Gender;
+                if (data.Gender == "M")
+                    dgData.Rows[rowIdx].Cells[colGender.Index].Value = "男";
+                if (data.Gender == "F")
+                    dgData.Rows[rowIdx].Cells[colGender.Index].Value = "女";
                 dgData.Rows[rowIdx].Cells[colGrade.Index].Value = data.Grade;
                 dgData.Rows[rowIdx].Cells[colCreatedBy.Index].Value = data.CreatedBy;
             }
@@ -46,7 +49,7 @@ namespace ischool.Sports
             this.Close();
         }
 
-        
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -106,7 +109,14 @@ namespace ischool.Sports
                 }
                 else
                 {
-                    data.Gender = drv.Cells[colGender.Index].Value.ToString();
+                    if (drv.Cells[colGender.Index].Value.ToString() == "男")
+                    {
+                        data.Gender = "M";
+                    }
+                    if (drv.Cells[colGender.Index].Value.ToString() == "女")
+                    {
+                        data.Gender = "F";
+                    }
                 }
 
                 saveDataList.Add(data);

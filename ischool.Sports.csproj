@@ -243,6 +243,24 @@
     <Compile Include="Ribbon\RegistrationRecord\frmRegistrationRecord.Designer.cs">
       <DependentUpon>frmRegistrationRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegRecordAddPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegRecordAddPlayer.Designer.cs">
+      <DependentUpon>frmRegRecordAddPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegRecordSetTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegRecordSetTeam.Designer.cs">
+      <DependentUpon>frmRegRecordSetTeam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegRecordUpdatePlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\RegistrationRecord\frmRegRecordUpdatePlayer.Designer.cs">
+      <DependentUpon>frmRegRecordUpdatePlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\RegistrationRecord\frmSubAddRegistrationRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -361,6 +379,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegistrationRecord.resx">
       <DependentUpon>frmRegistrationRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegRecordAddPlayer.resx">
+      <DependentUpon>frmRegRecordAddPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegRecordSetTeam.resx">
+      <DependentUpon>frmRegRecordSetTeam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegRecordUpdatePlayer.resx">
+      <DependentUpon>frmRegRecordUpdatePlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RegistrationRecord\frmSubAddRegistrationRecord.resx">
       <DependentUpon>frmSubAddRegistrationRecord.cs</DependentUpon>

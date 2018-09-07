@@ -26,9 +26,15 @@ namespace ischool.Sports
         DataTable _dtClassData = new DataTable();
         DataTable _dtEventData = new DataTable();
         string _PersionalTeam = "==個人賽^^";
+        // 畫面上所選是團體或個人，如果是全部 null
+        bool? _selectedIsTeam = null;
 
         Dictionary<string, string> _classNameIdDict = new Dictionary<string, string>();
         Dictionary<string, string> _eventItemDict = new Dictionary<string, string>();
+        Dictionary<string, bool> _eventItemIsTemDict = new Dictionary<string, bool>();
+        Dictionary<string, UDT.Events> _eventDict = new Dictionary<string, UDT.Events>();
+        Dictionary<string, UDT.GroupTypes> _groupDict = new Dictionary<string, UDT.GroupTypes>();
+
 
         //private string searchText = "";
         private StringBuilder _querySB = new StringBuilder();
@@ -54,7 +60,7 @@ namespace ischool.Sports
             SetControlEnabled(true);
             LoadDataToGridView();
             // 檢查個人賽
-            if(_playerDict.ContainsKey(_PersionalTeam))
+            if (_playerDict.ContainsKey(_PersionalTeam))
             {
                 LoadDGPlayerDataGridView(_PersionalTeam);
             }
@@ -70,12 +76,12 @@ namespace ischool.Sports
             SetControlEnabled(true);
             LoadEventDataToCombo();
             LoadClassDataToCombo();
-            LoadDataToGridView();
+
         }
 
         private void _bgwLoad_DoWork(object sender, DoWorkEventArgs e)
         {
-            LoadData();
+
             LoadEventData();
             LoadClassData();
         }
@@ -116,6 +122,7 @@ namespace ischool.Sports
                 dgTeamData.Rows[rowIdx].Cells[colEventItem.Index].Value = dr["event_name"].ToString();
                 dgTeamData.Rows[rowIdx].Cells[colGroupType.Index].Value = dr["group_types_name"].ToString();
                 dgTeamData.Rows[rowIdx].Cells[colTeamName.Index].Value = dr["team_name"].ToString();
+                dgTeamData.Rows[rowIdx].Cells[colTeamLotNo.Index].Value = dr["t_lot_no"].ToString();
             }
 
             SetLblTeamCount(_teamList.Count);
@@ -133,14 +140,39 @@ namespace ischool.Sports
             QueryHelper qh = new QueryHelper();
             _dtEventData = qh.Select(qryStr);
             _eventItemDict.Clear();
+            _eventItemIsTemDict.Clear();
             foreach (DataRow dr in _dtEventData.Rows)
             {
                 string key = dr["event_name"].ToString() + "-" + dr["group_types_name"].ToString();
                 if (!_eventItemDict.ContainsKey(key))
                 {
                     _eventItemDict.Add(key, dr["uid"].ToString());
+                    _eventItemIsTemDict.Add(key, bool.Parse(dr["event_is_team"].ToString()));
                 }
             }
+
+            AccessHelper ah = new AccessHelper();
+            List<UDT.Events> evList = ah.Select<UDT.Events>(" school_year = " + _selectSchoolYear);
+            _eventDict.Clear();
+            List<int> grIDList = new List<int>();
+            foreach (UDT.Events data in evList)
+            {
+                
+                if (!_eventDict.ContainsKey(data.UID))
+                    _eventDict.Add(data.UID, data);
+
+                if (!grIDList.Contains(data.RefGroupTypeId))
+                    grIDList.Add(data.RefGroupTypeId);
+            }
+
+            List<UDT.GroupTypes> gpList = ah.Select<UDT.GroupTypes>(" uid in (" + string.Join(",", grIDList.ToArray()) + ")");
+            _groupDict.Clear();
+            foreach(UDT.GroupTypes d in gpList)
+            {
+                if (!_groupDict.ContainsKey(d.UID))
+                    _groupDict.Add(d.UID, d);
+            }
+            
         }
 
         private void LoadEventDataToCombo()
@@ -158,7 +190,7 @@ namespace ischool.Sports
             try
             {
                 // 取得資料 (團體)
-                string strSQL = "SELECT $ischool.sports.teams.uid AS t_uid,$ischool.sports.players.uid AS p_uid,category,$ischool.sports.events.name AS event_name,$ischool.sports.events.is_team AS event_is_team ,$ischool.sports.group_types.name AS group_types_name ,$ischool.sports.teams.name AS team_name,$ischool.sports.players.name AS student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update AS player_last_update FROM $ischool.sports.events INNER JOIN $ischool.sports.teams ON $ischool.sports.events.uid = $ischool.sports.teams.ref_event_id INNER JOIN $ischool.sports.players ON $ischool.sports.teams.uid = $ischool.sports.players.ref_team_id INNER JOIN  $ischool.sports.group_types ON $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid WHERE $ischool.sports.events.school_year = " + _selectSchoolYear + _querySB.ToString() + " ORDER BY category,event_name,team_name,class_name,seat_no";
+                string strSQL = "SELECT $ischool.sports.teams.uid AS t_uid,$ischool.sports.players.uid AS p_uid,category,$ischool.sports.events.name AS event_name,$ischool.sports.events.is_team AS event_is_team ,$ischool.sports.group_types.name AS group_types_name ,$ischool.sports.teams.name AS team_name,$ischool.sports.players.name AS student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update AS player_last_update,$ischool.sports.teams.lot_no AS t_lot_no,$ischool.sports.players.lot_no AS p_lot_no FROM $ischool.sports.events INNER JOIN $ischool.sports.teams ON $ischool.sports.events.uid = $ischool.sports.teams.ref_event_id LEFT JOIN $ischool.sports.players ON $ischool.sports.teams.uid = $ischool.sports.players.ref_team_id INNER JOIN  $ischool.sports.group_types ON $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid WHERE $ischool.sports.events.school_year = " + _selectSchoolYear + _querySB.ToString() + " ORDER BY category,event_name,team_name,class_name,seat_no";
                 _dtData = qh.Select(strSQL);
 
                 _teamList.Clear();
@@ -179,7 +211,7 @@ namespace ischool.Sports
                 }
 
                 // 個人賽
-                string strSQL1 = "SELECT $ischool.sports.players.uid AS p_uid,category,$ischool.sports.events.name AS event_name,$ischool.sports.events.is_team AS event_is_team ,$ischool.sports.group_types.name AS group_types_name,$ischool.sports.players.name AS student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update AS player_last_update FROM $ischool.sports.events INNER JOIN $ischool.sports.players ON $ischool.sports.events.uid = $ischool.sports.players.ref_event_id INNER JOIN $ischool.sports.group_types ON $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid WHERE $ischool.sports.players.ref_team_id IS NULL AND $ischool.sports.events.school_year =" + _selectSchoolYear + _querySB.ToString() + " ORDER BY category,event_name,class_name,seat_no";
+                string strSQL1 = "SELECT $ischool.sports.players.uid AS p_uid,category,$ischool.sports.events.name AS event_name,$ischool.sports.events.is_team AS event_is_team ,$ischool.sports.group_types.name AS group_types_name,$ischool.sports.players.name AS student_name,class_name,seat_no,$ischool.sports.players.created_by,$ischool.sports.players.last_update AS player_last_update,$ischool.sports.players.lot_no AS p_lot_no FROM $ischool.sports.events INNER JOIN $ischool.sports.players ON $ischool.sports.events.uid = $ischool.sports.players.ref_event_id INNER JOIN $ischool.sports.group_types ON $ischool.sports.events.ref_group_type_id= $ischool.sports.group_types.uid WHERE $ischool.sports.players.ref_team_id IS NULL AND $ischool.sports.events.school_year =" + _selectSchoolYear + _querySB.ToString() + " ORDER BY category,event_name,class_name,seat_no";
                 _dtData1 = qh.Select(strSQL1);
 
                 if (_dtData1.Rows.Count > 0)
@@ -246,56 +278,14 @@ namespace ischool.Sports
             this.Close();
         }
 
-        //private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    // 當輸入 enter
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        this.searchText = txtSearch.Text;
-        //        this._querySB.Clear();
-        //        this._queryItems.Clear();
-
-        //        // 使用 OR 的方式進行搜尋
-        //        if (txtSearch.Text.Length > 0)
-        //        {
-        //            // 依班級
-        //            if (chkByClassName.Checked)
-        //            {
-        //                _queryItems.Add(" class_name like '%" + searchText + "%' ");
-        //            }
-
-        //            // 依競賽項目
-        //            if (chkByEventName.Checked)
-        //            {
-        //                _queryItems.Add(" $ischool.sports.events.name like '%" + searchText + "%' ");
-        //            }
-
-        //            //  學生姓名
-        //            if(chkByName.Checked)
-        //            {
-        //                _queryItems.Add(" $ischool.sports.players.name like '%" + searchText + "%' ");
-        //            }
-
-        //            if (_queryItems.Count > 0)
-        //            {
-        //                _querySB.Append(" AND (");
-        //                if (_queryItems.Count == 1)
-        //                {
-        //                    _querySB.Append(_queryItems[0]);
-        //                }
-        //                else
-        //                {
-        //                    _querySB.Append(string.Join(" OR ", _queryItems.ToArray()));
-        //                }
-        //                _querySB.Append(") ");
-        //            }
-
-        //        }
-        //        Run();
-        //    }
-        //}
-
-
+        /// <summary>
+        /// 設定隊功能是否可以使用
+        /// </summary>
+        /// <param name="bo"></param>
+        private void SetTeamFuncEnable(bool bo)
+        {
+            dgTeamData.Enabled = btnAddTeam.Enabled = btnEditTeam.Enabled = btnDelTeam.Enabled = bo;
+        }
 
         /// <summary>
         /// 刪除隊員
@@ -374,19 +364,26 @@ namespace ischool.Sports
             dgPlayerData.Rows.Clear();
             if (_playerDict.ContainsKey(uid))
             {
+                int count = 0;
                 foreach (DataRow dr in _playerDict[uid])
                 {
-                    int rowIdx = dgPlayerData.Rows.Add();
-                    dgPlayerData.Rows[rowIdx].Tag = dr["p_uid"].ToString();
-                    dgPlayerData.Rows[rowIdx].Cells[colClassName.Index].Value = dr["class_name"].ToString();
-                    dgPlayerData.Rows[rowIdx].Cells[colSeatNo.Index].Value = dr["seat_no"].ToString();
-                    dgPlayerData.Rows[rowIdx].Cells[colName.Index].Value = dr["student_name"].ToString();
-                    dgPlayerData.Rows[rowIdx].Cells[colRegDate.Index].Value = dr["player_last_update"].ToString();
-                    dgPlayerData.Rows[rowIdx].Cells[colRegAccount.Index].Value = dr["created_by"].ToString();
+                    string puid = dr["p_uid"].ToString();
+                    if (!string.IsNullOrEmpty(puid))
+                    {
+                        count++;
+                        int rowIdx = dgPlayerData.Rows.Add();
+                        dgPlayerData.Rows[rowIdx].Tag = puid;
+                        dgPlayerData.Rows[rowIdx].Cells[colClassName.Index].Value = dr["class_name"].ToString();
+                        dgPlayerData.Rows[rowIdx].Cells[colSeatNo.Index].Value = dr["seat_no"].ToString();
+                        dgPlayerData.Rows[rowIdx].Cells[colName.Index].Value = dr["student_name"].ToString();
+                        dgPlayerData.Rows[rowIdx].Cells[colPlayerLotNo.Index].Value = dr["p_lot_no"].ToString();
+                        dgPlayerData.Rows[rowIdx].Cells[colRegDate.Index].Value = dr["player_last_update"].ToString();
+                        dgPlayerData.Rows[rowIdx].Cells[colRegAccount.Index].Value = dr["created_by"].ToString();
+                    }
                 }
 
                 // 統計數
-                SetLblPlayerCount(_playerDict[uid].Count);
+                SetLblPlayerCount(count);
             }
         }
 
@@ -480,6 +477,141 @@ namespace ischool.Sports
                 FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
             }
             btnDelPlayer.Enabled = true;
+        }
+
+        private void cbxEventItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // 檢查所選的是團體或個人賽
+            _selectedIsTeam = null;
+
+            if (_eventItemIsTemDict.ContainsKey(cbxEventItem.Text))
+            {
+                _selectedIsTeam = _eventItemIsTemDict[cbxEventItem.Text];
+            }
+
+            if (_selectedIsTeam.HasValue)
+            {
+                SetTeamFuncEnable(_selectedIsTeam.Value);
+            }
+        }
+
+        private void btnAddTeam_Click(object sender, EventArgs e)
+        {
+            string refEventID = "";
+            // 檢查競賽項目
+            if (_eventItemDict.ContainsKey(cbxEventItem.Text))
+            {
+                refEventID = _eventItemDict[cbxEventItem.Text];
+            }
+            else
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選擇競賽項目");
+                return;
+            }
+
+            frmRegRecordSetTeam frrs = new frmRegRecordSetTeam();
+            frrs.SetIsAddMode(true);
+            frrs.SetRefEventID(refEventID);
+            frrs.SetEventItemName(cbxEventItem.Text);
+            if (frrs.ShowDialog() == DialogResult.Yes)
+            {
+                _bgSearch.RunWorkerAsync();
+            }
+        }
+
+        private void btnEditTeam_Click(object sender, EventArgs e)
+        {
+            if (dgTeamData.SelectedRows.Count == 1)
+            {
+                string uid = dgTeamData.SelectedRows[0].Tag.ToString();
+                AccessHelper ah = new AccessHelper();
+                List<UDT.Teams> data = ah.Select<UDT.Teams>(" uid = " + uid);
+                if (data.Count > 0)
+                {
+                    UDT.Teams updateTeam = data[0];
+                    frmRegRecordSetTeam frrs = new frmRegRecordSetTeam();
+                    frrs.SetIsAddMode(false);
+                    frrs.SetUpdateTeam(updateTeam);
+                    frrs.SetEventItemName(cbxEventItem.Text);
+                    if (frrs.ShowDialog() == DialogResult.Yes)
+                    {
+                        _bgSearch.RunWorkerAsync();
+                    }
+                }
+            }
+
+
+        }
+
+        private void btnEditPlayer_Click(object sender, EventArgs e)
+        {
+            if (dgPlayerData.SelectedRows.Count == 1)
+            {
+                string uid = dgPlayerData.SelectedRows[0].Tag.ToString();
+                frmRegRecordUpdatePlayer frup = new frmRegRecordUpdatePlayer();
+                frup.SetPlayerUID(uid);
+                if (frup.ShowDialog() == DialogResult.Yes)
+                {
+
+                }
+            }
+            else
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選1位參賽人員。");
+            }
+        }
+
+        private void btnAddPlayer_Click(object sender, EventArgs e)
+        {
+            string refEventID = "";
+            // 檢查競賽項目
+            if (_eventItemDict.ContainsKey(cbxEventItem.Text))
+            {
+                refEventID = _eventItemDict[cbxEventItem.Text];
+            }
+            else
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選擇競賽項目");
+                return;
+            }
+            UDT.Events curEvent = null;
+            // 取得競賽 udt
+            if(_eventDict.ContainsKey(refEventID))
+            {
+                curEvent = _eventDict[refEventID];
+            }
+
+            int maxCount = 0;
+
+            if( curEvent != null)
+            {
+                maxCount = curEvent.MaxMemberCount;
+            }
+            UDT.GroupTypes curGp = null;
+            // 取得 group
+            if (_groupDict.ContainsKey(curEvent.RefGroupTypeId.ToString()))
+            {
+                curGp = _groupDict[curEvent.RefGroupTypeId.ToString()];
+            }
+
+
+            frmRegRecordAddPlayer frrap = new frmRegRecordAddPlayer();
+            if(curGp != null)
+            {
+                if(curGp.Grade.HasValue)
+                {
+                    frrap.SetGradeYearFilter(curGp.Grade.Value.ToString());
+                }
+
+                if(curGp.Gender == "M" || curGp.Gender == "F")
+                {
+                    frrap.SetGenderFilter(curGp.Gender);
+                }
+            }
+
+            if (frrap.ShowDialog() == DialogResult.Yes)
+            {
+            }
         }
     }
 }
