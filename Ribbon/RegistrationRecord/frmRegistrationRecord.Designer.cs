@@ -32,33 +32,34 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.dgTeamData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTeamLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.iptSchoolYear = new DevComponents.Editors.IntegerInput();
             this.lblTeamCount = new DevComponents.DotNetBar.LabelX();
             this.dgPlayerData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPlayerLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRegAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblPlayerCount = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.cbxEventItem = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbxClassName = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
-            this.btnSearch = new DevComponents.DotNetBar.ButtonX();
             this.btnAddTeam = new DevComponents.DotNetBar.ButtonX();
             this.btnEditTeam = new DevComponents.DotNetBar.ButtonX();
             this.btnDelTeam = new DevComponents.DotNetBar.ButtonX();
             this.btnAddPlayer = new DevComponents.DotNetBar.ButtonX();
             this.btnEditPlayer = new DevComponents.DotNetBar.ButtonX();
             this.btnDelPlayer = new DevComponents.DotNetBar.ButtonX();
+            this.lblTeamType = new DevComponents.DotNetBar.LabelX();
+            this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeamLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPlayerLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgTeamData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlayerData)).BeginInit();
@@ -107,32 +108,6 @@
             this.dgTeamData.Size = new System.Drawing.Size(500, 401);
             this.dgTeamData.TabIndex = 1;
             this.dgTeamData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgTeamData_MouseClick);
-            // 
-            // colEventItem
-            // 
-            this.colEventItem.HeaderText = "競賽項目";
-            this.colEventItem.Name = "colEventItem";
-            // 
-            // colGroupType
-            // 
-            this.colGroupType.HeaderText = "參賽組別";
-            this.colGroupType.Name = "colGroupType";
-            // 
-            // colTeamName
-            // 
-            this.colTeamName.HeaderText = "隊名";
-            this.colTeamName.Name = "colTeamName";
-            this.colTeamName.Width = 150;
-            // 
-            // colTeamLotNo
-            // 
-            this.colTeamLotNo.HeaderText = "抽籤號";
-            this.colTeamLotNo.Name = "colTeamLotNo";
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "競賽類別";
-            this.colCategory.Name = "colCategory";
             // 
             // btnExit
             // 
@@ -193,6 +168,7 @@
             this.colSeatNo,
             this.colName,
             this.colPlayerLotNo,
+            this.colLeader,
             this.colRegDate,
             this.colRegAccount});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -211,38 +187,6 @@
             this.dgPlayerData.Size = new System.Drawing.Size(613, 398);
             this.dgPlayerData.TabIndex = 11;
             this.dgPlayerData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgPlayerData_MouseClick);
-            // 
-            // colClassName
-            // 
-            this.colClassName.HeaderText = "班級";
-            this.colClassName.Name = "colClassName";
-            // 
-            // colSeatNo
-            // 
-            this.colSeatNo.HeaderText = "座號";
-            this.colSeatNo.Name = "colSeatNo";
-            this.colSeatNo.Width = 70;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "姓名";
-            this.colName.Name = "colName";
-            // 
-            // colPlayerLotNo
-            // 
-            this.colPlayerLotNo.HeaderText = "抽籤號";
-            this.colPlayerLotNo.Name = "colPlayerLotNo";
-            // 
-            // colRegDate
-            // 
-            this.colRegDate.HeaderText = "報名時間";
-            this.colRegDate.Name = "colRegDate";
-            // 
-            // colRegAccount
-            // 
-            this.colRegAccount.HeaderText = "報名者帳號";
-            this.colRegAccount.Name = "colRegAccount";
-            this.colRegAccount.Width = 200;
             // 
             // lblPlayerCount
             // 
@@ -294,12 +238,13 @@
             this.cbxClassName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxClassName.FormattingEnabled = true;
             this.cbxClassName.ItemHeight = 19;
-            this.cbxClassName.Location = new System.Drawing.Point(608, 21);
+            this.cbxClassName.Location = new System.Drawing.Point(694, 21);
             this.cbxClassName.Name = "cbxClassName";
             this.cbxClassName.Size = new System.Drawing.Size(156, 25);
             this.cbxClassName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbxClassName.TabIndex = 17;
             this.cbxClassName.WatermarkText = "請選班級名稱";
+            this.cbxClassName.SelectedIndexChanged += new System.EventHandler(this.cbxClassName_SelectedIndexChanged);
             // 
             // labelX5
             // 
@@ -310,25 +255,11 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(568, 23);
+            this.labelX5.Location = new System.Drawing.Point(654, 23);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(34, 21);
             this.labelX5.TabIndex = 16;
             this.labelX5.Text = "班級";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSearch.AutoSize = true;
-            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
-            this.btnSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSearch.Location = new System.Drawing.Point(826, 21);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 25);
-            this.btnSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSearch.TabIndex = 18;
-            this.btnSearch.Text = "查詢";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnAddTeam
             // 
@@ -414,18 +345,108 @@
             this.btnDelPlayer.Text = "刪除人員";
             this.btnDelPlayer.Click += new System.EventHandler(this.btnDelPlayer_Click);
             // 
+            // lblTeamType
+            // 
+            this.lblTeamType.AutoSize = true;
+            this.lblTeamType.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblTeamType.BackgroundStyle.Class = "";
+            this.lblTeamType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTeamType.Location = new System.Drawing.Point(550, 23);
+            this.lblTeamType.Name = "lblTeamType";
+            this.lblTeamType.Size = new System.Drawing.Size(47, 21);
+            this.lblTeamType.TabIndex = 25;
+            this.lblTeamType.Text = "團體賽";
+            // 
+            // colEventItem
+            // 
+            this.colEventItem.HeaderText = "競賽項目";
+            this.colEventItem.Name = "colEventItem";
+            this.colEventItem.ReadOnly = true;
+            // 
+            // colGroupType
+            // 
+            this.colGroupType.HeaderText = "參賽組別";
+            this.colGroupType.Name = "colGroupType";
+            this.colGroupType.ReadOnly = true;
+            // 
+            // colTeamName
+            // 
+            this.colTeamName.HeaderText = "隊名";
+            this.colTeamName.Name = "colTeamName";
+            this.colTeamName.ReadOnly = true;
+            this.colTeamName.Width = 150;
+            // 
+            // colTeamLotNo
+            // 
+            this.colTeamLotNo.HeaderText = "抽籤號";
+            this.colTeamLotNo.Name = "colTeamLotNo";
+            this.colTeamLotNo.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "競賽類別";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colClassName
+            // 
+            this.colClassName.HeaderText = "班級";
+            this.colClassName.Name = "colClassName";
+            this.colClassName.ReadOnly = true;
+            // 
+            // colSeatNo
+            // 
+            this.colSeatNo.HeaderText = "座號";
+            this.colSeatNo.Name = "colSeatNo";
+            this.colSeatNo.ReadOnly = true;
+            this.colSeatNo.Width = 70;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "姓名";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPlayerLotNo
+            // 
+            this.colPlayerLotNo.HeaderText = "抽籤號";
+            this.colPlayerLotNo.Name = "colPlayerLotNo";
+            this.colPlayerLotNo.ReadOnly = true;
+            // 
+            // colLeader
+            // 
+            this.colLeader.HeaderText = "隊長";
+            this.colLeader.Name = "colLeader";
+            this.colLeader.ReadOnly = true;
+            // 
+            // colRegDate
+            // 
+            this.colRegDate.HeaderText = "報名時間";
+            this.colRegDate.Name = "colRegDate";
+            this.colRegDate.ReadOnly = true;
+            // 
+            // colRegAccount
+            // 
+            this.colRegAccount.HeaderText = "報名者帳號";
+            this.colRegAccount.Name = "colRegAccount";
+            this.colRegAccount.ReadOnly = true;
+            this.colRegAccount.Width = 200;
+            // 
             // frmRegistrationRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 558);
+            this.Controls.Add(this.lblTeamType);
             this.Controls.Add(this.btnDelPlayer);
             this.Controls.Add(this.btnEditPlayer);
             this.Controls.Add(this.btnAddPlayer);
             this.Controls.Add(this.btnDelTeam);
             this.Controls.Add(this.btnEditTeam);
             this.Controls.Add(this.btnAddTeam);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cbxClassName);
             this.Controls.Add(this.labelX5);
             this.Controls.Add(this.cbxEventItem);
@@ -462,13 +483,13 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxEventItem;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxClassName;
         private DevComponents.DotNetBar.LabelX labelX5;
-        private DevComponents.DotNetBar.ButtonX btnSearch;
         private DevComponents.DotNetBar.ButtonX btnAddTeam;
         private DevComponents.DotNetBar.ButtonX btnEditTeam;
         private DevComponents.DotNetBar.ButtonX btnDelTeam;
         private DevComponents.DotNetBar.ButtonX btnAddPlayer;
         private DevComponents.DotNetBar.ButtonX btnEditPlayer;
         private DevComponents.DotNetBar.ButtonX btnDelPlayer;
+        private DevComponents.DotNetBar.LabelX lblTeamType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTeamName;
@@ -478,6 +499,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSeatNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPlayerLotNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRegDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRegAccount;
     }

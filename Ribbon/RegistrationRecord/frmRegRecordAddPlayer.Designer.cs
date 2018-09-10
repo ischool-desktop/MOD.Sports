@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTeamName = new DevComponents.DotNetBar.LabelX();
             this.dgSearch = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,6 +37,7 @@
             this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnOk = new DevComponents.DotNetBar.ButtonX();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             // 
             this.lblTeamName.BackgroundStyle.Class = "";
             this.lblTeamName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTeamName.Location = new System.Drawing.Point(27, 28);
+            this.lblTeamName.Location = new System.Drawing.Point(14, 15);
             this.lblTeamName.Name = "lblTeamName";
             this.lblTeamName.Size = new System.Drawing.Size(34, 21);
             this.lblTeamName.TabIndex = 0;
@@ -67,21 +68,22 @@
             this.colSeatNo,
             this.colName,
             this.colAccount});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgSearch.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgSearch.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgSearch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgSearch.Location = new System.Drawing.Point(27, 96);
+            this.dgSearch.Location = new System.Drawing.Point(27, 44);
             this.dgSearch.Name = "dgSearch";
             this.dgSearch.RowTemplate.Height = 24;
             this.dgSearch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSearch.Size = new System.Drawing.Size(472, 294);
+            this.dgSearch.Size = new System.Drawing.Size(472, 346);
             this.dgSearch.TabIndex = 5;
+            this.dgSearch.SelectionChanged += new System.EventHandler(this.dgSearch_SelectionChanged);
             // 
             // colClassName
             // 
@@ -131,11 +133,26 @@
             this.btnCancel.Text = "取消";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblCount
+            // 
+            this.lblCount.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCount.Location = new System.Drawing.Point(411, 14);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(88, 23);
+            this.lblCount.TabIndex = 10;
+            this.lblCount.Text = "人數";
+            // 
             // frmRegRecordAddPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(517, 444);
+            this.Controls.Add(this.lblCount);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.dgSearch);
@@ -160,5 +177,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
         private DevComponents.DotNetBar.ButtonX btnOk;
         private DevComponents.DotNetBar.ButtonX btnCancel;
+        private DevComponents.DotNetBar.LabelX lblCount;
     }
 }
