@@ -24,10 +24,12 @@ namespace ischool.Sports
         /// </summary>
         public static string _permission = "";
         public static string _roleID;
+        
 
         [MainMethod("體育競賽模組")]
         static public void Main()
         {
+            string MODName = "體育競賽(開發中)";
             #region Init UDT
             {
                 ConfigData cd = K12.Data.School.Configuration["體育競賽模組載入設定"];
@@ -88,8 +90,8 @@ namespace ischool.Sports
 
             #region 設定組別
             {
-                MotherForm.RibbonBarItems["體育競賽", "基本設定"]["競賽設定"]["設定組別"].Enable = true;//Permissions.設定時段權限;
-                MotherForm.RibbonBarItems["體育競賽", "基本設定"]["競賽設定"]["設定組別"].Click += delegate
+                MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定組別"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定組別"].Click += delegate
                 {
                     (new frmGroupTypes()).ShowDialog();
 
@@ -107,8 +109,8 @@ namespace ischool.Sports
             #endregion
             #region 管理競賽
             {
-                MotherForm.RibbonBarItems["體育競賽", "管理"]["管理"]["管理競賽"].Enable = true;//Permissions.設定時段權限;
-                MotherForm.RibbonBarItems["體育競賽", "管理"]["管理"]["管理競賽"].Click += delegate
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽"].Click += delegate
                 {
                     (new frmEvents()).ShowDialog();
 
@@ -127,8 +129,8 @@ namespace ischool.Sports
 
             #region 管理報名記錄
             {
-                MotherForm.RibbonBarItems["體育競賽", "管理"]["管理"]["管理報名記錄"].Enable = true;//Permissions.設定時段權限;
-                MotherForm.RibbonBarItems["體育競賽", "管理"]["管理"]["管理報名記錄"].Click += delegate
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理報名記錄"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理報名記錄"].Click += delegate
                 {
                     (new frmRegistrationRecord()).ShowDialog();
 

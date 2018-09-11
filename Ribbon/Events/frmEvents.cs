@@ -66,7 +66,7 @@ namespace ischool.Sports
             {
                 UDT.Events selectEvent = dgData.SelectedRows[0].Tag as UDT.Events;
 
-                if(FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除競賽項目與相關聯成績，請問是否刪除？", "刪除競賽項目", MessageBoxButtons.YesNo,MessageBoxIcon.Warning,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除競賽項目與相關聯成績，請問是否刪除？", "刪除競賽項目", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     selectEvent.Deleted = true;
                     selectEvent.Save();
@@ -166,11 +166,20 @@ namespace ischool.Sports
                 dgData.Rows[rowIdx].Cells[colGroupType.Index].Value = GroupType;
                 dgData.Rows[rowIdx].Cells[colIsTeam.Index].Value = data.IsTeam ? "是" : "否";
                 dgData.Rows[rowIdx].Cells[colIsDrawLots.Index].Value = data.IsDrawLots ? "是" : "否";
-                if (data.DrawLotsDate.HasValue)
-                    dgData.Rows[rowIdx].Cells[colDrawLotsDate.Index].Value = data.DrawLotsDate.Value.ToShortDateString();
+                if (data.DrawLotsStartDate.HasValue)
+                {
+                    dgData.Rows[rowIdx].Cells[colDrawLotsStartDate.Index].Value = data.DrawLotsStartDate.Value.ToShortDateString();
+                }
+
+                if (data.DrawLotsEndDate.HasValue)
+                {
+                    dgData.Rows[rowIdx].Cells[colDrawLotsEndDate.Index].Value = data.DrawLotsEndDate.Value.ToShortDateString();
+                }
                 dgData.Rows[rowIdx].Cells[colEventDesc.Index].Value = data.EventDescription;
                 dgData.Rows[rowIdx].Cells[colAlthleticOnly.Index].Value = data.AthleticOnly ? "是" : "否";
                 dgData.Rows[rowIdx].Cells[colCreatedBy.Index].Value = data.CreatedBy;
+                if (data.AnnouncementDate.HasValue)
+                    dgData.Rows[rowIdx].Cells[colAnnouncementDate.Index].Value = data.AnnouncementDate.Value.ToShortDateString();
             }
         }
 

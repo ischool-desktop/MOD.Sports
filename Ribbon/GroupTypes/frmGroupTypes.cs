@@ -34,10 +34,27 @@ namespace ischool.Sports
                 dgData.Rows[rowIdx].Tag = data;
                 dgData.Rows[rowIdx].Cells[colName.Index].Value = data.Name;
                 if (data.Gender == "M")
+                {
                     dgData.Rows[rowIdx].Cells[colGender.Index].Value = "男";
-                if (data.Gender == "F")
+                }
+                else if (data.Gender == "F")
+                {
                     dgData.Rows[rowIdx].Cells[colGender.Index].Value = "女";
-                dgData.Rows[rowIdx].Cells[colGrade.Index].Value = data.Grade;
+                }
+                else
+                {
+                    dgData.Rows[rowIdx].Cells[colGender.Index].Value = "不限";
+                }
+
+                if (data.Grade.HasValue)
+                {
+                    dgData.Rows[rowIdx].Cells[colGrade.Index].Value = data.Grade.Value.ToString();
+                }
+                else
+                {
+                    dgData.Rows[rowIdx].Cells[colGrade.Index].Value = "不限";
+                }
+
                 dgData.Rows[rowIdx].Cells[colCreatedBy.Index].Value = data.CreatedBy;
             }
 
@@ -62,6 +79,9 @@ namespace ischool.Sports
 
                 foreach (DataGridViewCell cell in drv.Cells)
                 {
+                    if (cell.ColumnIndex == colCreatedBy.Index)
+                        continue;
+
                     if (cell.Value == null)
                     {
                         hasError = true;
@@ -113,9 +133,13 @@ namespace ischool.Sports
                     {
                         data.Gender = "M";
                     }
-                    if (drv.Cells[colGender.Index].Value.ToString() == "女")
+                    else if (drv.Cells[colGender.Index].Value.ToString() == "女")
                     {
                         data.Gender = "F";
+                    }
+                    else
+                    {
+                        data.Gender = "";
                     }
                 }
 
@@ -141,7 +165,7 @@ namespace ischool.Sports
             try
             {
                 saveDataList.SaveAll();
-                FISCA.Presentation.Controls.MsgBox.Show("儲存完成");
+                this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
@@ -155,7 +179,9 @@ namespace ischool.Sports
             int? value = null;
             if (cell.Value != null)
             {
-                value = int.Parse(cell.Value.ToString());
+                string x = cell.Value.ToString();
+                if (x != "不限")
+                    value = int.Parse(x);
             }
             return value;
         }

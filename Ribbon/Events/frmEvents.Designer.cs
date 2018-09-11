@@ -30,6 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgData = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.btnAdd = new DevComponents.DotNetBar.ButtonX();
+            this.btnEdit = new DevComponents.DotNetBar.ButtonX();
+            this.btnDel = new DevComponents.DotNetBar.ButtonX();
+            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.colSchoolYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,14 +47,12 @@
             this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsDrawLots = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDrawLotsDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDrawLotsStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDrawLotsEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAlthleticOnly = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAdd = new DevComponents.DotNetBar.ButtonX();
-            this.btnEdit = new DevComponents.DotNetBar.ButtonX();
-            this.btnDel = new DevComponents.DotNetBar.ButtonX();
-            this.btnExit = new DevComponents.DotNetBar.ButtonX();
+            this.colAnnouncementDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,10 +79,12 @@
             this.colGroupType,
             this.colIsTeam,
             this.colIsDrawLots,
-            this.colDrawLotsDate,
+            this.colDrawLotsStartDate,
+            this.colDrawLotsEndDate,
             this.colEventDesc,
             this.colAlthleticOnly,
-            this.colCreatedBy});
+            this.colCreatedBy,
+            this.colAnnouncementDate});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -97,91 +101,6 @@
             this.dgData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgData.Size = new System.Drawing.Size(1052, 311);
             this.dgData.TabIndex = 0;
-            // 
-            // colSchoolYear
-            // 
-            this.colSchoolYear.HeaderText = "學年度";
-            this.colSchoolYear.Name = "colSchoolYear";
-            // 
-            // colEventCategory
-            // 
-            this.colEventCategory.HeaderText = "競賽類型";
-            this.colEventCategory.Name = "colEventCategory";
-            // 
-            // colEventName
-            // 
-            this.colEventName.HeaderText = "競賽名稱";
-            this.colEventName.Name = "colEventName";
-            // 
-            // colEventStartDate
-            // 
-            this.colEventStartDate.HeaderText = "活動開始日期";
-            this.colEventStartDate.Name = "colEventStartDate";
-            // 
-            // colEventEndDate
-            // 
-            this.colEventEndDate.HeaderText = "活動結束日期";
-            this.colEventEndDate.Name = "colEventEndDate";
-            // 
-            // colGameType
-            // 
-            this.colGameType.HeaderText = "賽制";
-            this.colGameType.Name = "colGameType";
-            // 
-            // colRegStartDate
-            // 
-            this.colRegStartDate.HeaderText = "報名開始日期";
-            this.colRegStartDate.Name = "colRegStartDate";
-            // 
-            // colRegEndDate
-            // 
-            this.colRegEndDate.HeaderText = "報名結束日期";
-            this.colRegEndDate.Name = "colRegEndDate";
-            // 
-            // colMaxMember
-            // 
-            this.colMaxMember.HeaderText = "報名人數上限";
-            this.colMaxMember.Name = "colMaxMember";
-            // 
-            // colMinMember
-            // 
-            this.colMinMember.HeaderText = "報名人數下限";
-            this.colMinMember.Name = "colMinMember";
-            // 
-            // colGroupType
-            // 
-            this.colGroupType.HeaderText = "參賽組別";
-            this.colGroupType.Name = "colGroupType";
-            // 
-            // colIsTeam
-            // 
-            this.colIsTeam.HeaderText = "是否團體賽";
-            this.colIsTeam.Name = "colIsTeam";
-            // 
-            // colIsDrawLots
-            // 
-            this.colIsDrawLots.HeaderText = "是否抽籤";
-            this.colIsDrawLots.Name = "colIsDrawLots";
-            // 
-            // colDrawLotsDate
-            // 
-            this.colDrawLotsDate.HeaderText = "抽籤時間";
-            this.colDrawLotsDate.Name = "colDrawLotsDate";
-            // 
-            // colEventDesc
-            // 
-            this.colEventDesc.HeaderText = "競賽說明";
-            this.colEventDesc.Name = "colEventDesc";
-            // 
-            // colAlthleticOnly
-            // 
-            this.colAlthleticOnly.HeaderText = "僅體育股長報名";
-            this.colAlthleticOnly.Name = "colAlthleticOnly";
-            // 
-            // colCreatedBy
-            // 
-            this.colCreatedBy.HeaderText = "建立者";
-            this.colCreatedBy.Name = "colCreatedBy";
             // 
             // btnAdd
             // 
@@ -239,6 +158,120 @@
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // colSchoolYear
+            // 
+            this.colSchoolYear.HeaderText = "學年度";
+            this.colSchoolYear.Name = "colSchoolYear";
+            this.colSchoolYear.ReadOnly = true;
+            // 
+            // colEventCategory
+            // 
+            this.colEventCategory.HeaderText = "競賽類型";
+            this.colEventCategory.Name = "colEventCategory";
+            this.colEventCategory.ReadOnly = true;
+            // 
+            // colEventName
+            // 
+            this.colEventName.HeaderText = "競賽名稱";
+            this.colEventName.Name = "colEventName";
+            this.colEventName.ReadOnly = true;
+            // 
+            // colEventStartDate
+            // 
+            this.colEventStartDate.HeaderText = "活動開始日期";
+            this.colEventStartDate.Name = "colEventStartDate";
+            this.colEventStartDate.ReadOnly = true;
+            // 
+            // colEventEndDate
+            // 
+            this.colEventEndDate.HeaderText = "活動結束日期";
+            this.colEventEndDate.Name = "colEventEndDate";
+            this.colEventEndDate.ReadOnly = true;
+            // 
+            // colGameType
+            // 
+            this.colGameType.HeaderText = "賽制";
+            this.colGameType.Name = "colGameType";
+            this.colGameType.ReadOnly = true;
+            // 
+            // colRegStartDate
+            // 
+            this.colRegStartDate.HeaderText = "報名開始日期";
+            this.colRegStartDate.Name = "colRegStartDate";
+            this.colRegStartDate.ReadOnly = true;
+            // 
+            // colRegEndDate
+            // 
+            this.colRegEndDate.HeaderText = "報名結束日期";
+            this.colRegEndDate.Name = "colRegEndDate";
+            this.colRegEndDate.ReadOnly = true;
+            // 
+            // colMaxMember
+            // 
+            this.colMaxMember.HeaderText = "報名人數上限";
+            this.colMaxMember.Name = "colMaxMember";
+            this.colMaxMember.ReadOnly = true;
+            // 
+            // colMinMember
+            // 
+            this.colMinMember.HeaderText = "報名人數下限";
+            this.colMinMember.Name = "colMinMember";
+            this.colMinMember.ReadOnly = true;
+            // 
+            // colGroupType
+            // 
+            this.colGroupType.HeaderText = "參賽組別";
+            this.colGroupType.Name = "colGroupType";
+            this.colGroupType.ReadOnly = true;
+            // 
+            // colIsTeam
+            // 
+            this.colIsTeam.HeaderText = "是否團體賽";
+            this.colIsTeam.Name = "colIsTeam";
+            this.colIsTeam.ReadOnly = true;
+            // 
+            // colIsDrawLots
+            // 
+            this.colIsDrawLots.HeaderText = "是否抽籤";
+            this.colIsDrawLots.Name = "colIsDrawLots";
+            this.colIsDrawLots.ReadOnly = true;
+            // 
+            // colDrawLotsStartDate
+            // 
+            this.colDrawLotsStartDate.HeaderText = "抽籤開始日期";
+            this.colDrawLotsStartDate.Name = "colDrawLotsStartDate";
+            this.colDrawLotsStartDate.ReadOnly = true;
+            // 
+            // colDrawLotsEndDate
+            // 
+            this.colDrawLotsEndDate.HeaderText = "抽籤結束日期";
+            this.colDrawLotsEndDate.Name = "colDrawLotsEndDate";
+            this.colDrawLotsEndDate.ReadOnly = true;
+            // 
+            // colEventDesc
+            // 
+            this.colEventDesc.HeaderText = "競賽說明";
+            this.colEventDesc.Name = "colEventDesc";
+            this.colEventDesc.ReadOnly = true;
+            // 
+            // colAlthleticOnly
+            // 
+            this.colAlthleticOnly.HeaderText = "僅體育股長報名";
+            this.colAlthleticOnly.Name = "colAlthleticOnly";
+            this.colAlthleticOnly.ReadOnly = true;
+            // 
+            // colCreatedBy
+            // 
+            this.colCreatedBy.HeaderText = "建立者";
+            this.colCreatedBy.Name = "colCreatedBy";
+            this.colCreatedBy.ReadOnly = true;
+            // 
+            // colAnnouncementDate
+            // 
+            this.colAnnouncementDate.HeaderText = "公告日期";
+            this.colAnnouncementDate.Name = "colAnnouncementDate";
+            this.colAnnouncementDate.ReadOnly = true;
+            // 
             // frmEvents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -278,9 +311,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsDrawLots;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDrawLotsDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDrawLotsStartDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDrawLotsEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAlthleticOnly;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreatedBy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAnnouncementDate;
     }
 }

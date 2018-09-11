@@ -34,7 +34,7 @@
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGender = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGrade = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colCreatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
@@ -116,14 +116,19 @@
             // colGrade
             // 
             this.colGrade.HeaderText = "年級限定";
+            this.colGrade.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "不限"});
             this.colGrade.Name = "colGrade";
             this.colGrade.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colGrade.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colCreatedBy
             // 
             this.colCreatedBy.HeaderText = "建立者";
             this.colCreatedBy.Name = "colCreatedBy";
+            this.colCreatedBy.ReadOnly = true;
             this.colCreatedBy.Width = 140;
             // 
             // frmGroupTypes
@@ -150,7 +155,7 @@
         private DevComponents.DotNetBar.ButtonX btnExit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewComboBoxColumn colGender;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGrade;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colGrade;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreatedBy;
     }
 }

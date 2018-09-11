@@ -51,6 +51,12 @@ namespace ischool.Sports.UDT
         public int RefGameTypeId { get; set; }
 
         /// <summary>
+        /// 計分方式編號
+        /// </summary>
+        [Field(Field = "ref_score_type_id", Indexed = false)]
+        public int RefScoreTypeId { get; set; }
+
+        /// <summary>
         /// 是否團體賽
         /// </summary>
         [Field(Field = "is_team", Indexed = false)]
@@ -106,10 +112,16 @@ namespace ischool.Sports.UDT
         public bool IsDrawLots { get; set; }
 
         /// <summary>
-        /// 抽籤日期
+        /// 抽籤開始日期
         /// </summary>
-        [Field(Field = "draw_lots_date", Indexed = false)]
-        public DateTime? DrawLotsDate { get; set; }
+        [Field(Field = "draw_lots_start_date", Indexed = false)]
+        public DateTime? DrawLotsStartDate { get; set; }
+
+        /// <summary>
+        /// 抽籤結束日期
+        /// </summary>
+        [Field(Field = "draw_lots_end_date", Indexed = false)]
+        public DateTime? DrawLotsEndDate { get; set; }
 
         /// <summary>
         /// 比賽說明
@@ -122,6 +134,13 @@ namespace ischool.Sports.UDT
         /// </summary>
         [Field(Field = "created_by", Indexed = false)]
         public string CreatedBy { get; set; }
+
+        /// <summary>
+        /// 公告日期
+        /// </summary>
+        [Field(Field = "announcement_date", Indexed = false)]
+        public DateTime? AnnouncementDate { get; set; }
+
 
     }
 }

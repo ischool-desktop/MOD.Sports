@@ -86,6 +86,7 @@ namespace ischool.Sports
                 _AddEvents.Category = temp.Category;
                 _AddEvents.Name = temp.Name;
                 _AddEvents.IsTeam = temp.IsTeam;
+                _AddEvents.RefScoreTypeId = temp.RefScoreTypeId;
                 _AddEvents.MaxMemberCount = temp.MaxMemberCount;
                 _AddEvents.MinMemberCount = temp.MinMemberCount;
                 _AddEvents.AthleticOnly = temp.AthleticOnly;

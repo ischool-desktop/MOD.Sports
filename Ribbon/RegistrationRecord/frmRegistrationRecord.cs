@@ -173,16 +173,16 @@ namespace ischool.Sports
                 }
             }
 
-
-
-            List<UDT.GroupTypes> gpList = ah.Select<UDT.GroupTypes>(" uid in (" + string.Join(",", grIDList.ToArray()) + ")");
             _groupDict.Clear();
-            foreach (UDT.GroupTypes d in gpList)
+            if (grIDList.Count > 0)
             {
-                if (!_groupDict.ContainsKey(d.UID))
-                    _groupDict.Add(d.UID, d);
+                List<UDT.GroupTypes> gpList = ah.Select<UDT.GroupTypes>(" uid in (" + string.Join(",", grIDList.ToArray()) + ")");
+                foreach (UDT.GroupTypes d in gpList)
+                {
+                    if (!_groupDict.ContainsKey(d.UID))
+                        _groupDict.Add(d.UID, d);
+                }
             }
-
         }
 
         private void LoadEventDataToCombo()

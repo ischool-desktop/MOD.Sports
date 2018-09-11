@@ -176,17 +176,77 @@ namespace ischool.Sports
             _EventData.SchoolYear = iptSchoolYear.Value;
             _EventData.Category = txtCategory.Text;
             _EventData.Name = txtName.Text;
-            _EventData.EventStartDate = dtEventStartDate.Value;
-            _EventData.EventEndDate = dtEventEndDate.Value;
-            _EventData.RegStartDate = dtRegStartDate.Value;
-            _EventData.RegEndDate = dtRegEndDate.Value;
+
+            if (dtEventStartDate.IsEmpty)
+            {
+                _EventData.EventStartDate = null;
+            }
+            else
+            {
+                _EventData.EventStartDate = dtEventStartDate.Value;
+            }
+
+            if (dtEventEndDate.IsEmpty)
+            {
+                _EventData.EventEndDate = null;
+            }
+            else
+            {
+                _EventData.EventEndDate = dtEventEndDate.Value;
+            }
+
+            if (dtRegStartDate.IsEmpty)
+            {
+                _EventData.RegStartDate = null;
+            }
+            else
+            {
+                _EventData.RegStartDate = dtRegStartDate.Value;
+            }
+
+            if (dtRegEndDate.IsEmpty)
+            {
+                _EventData.RegEndDate = null;
+            }
+            else
+            {
+                _EventData.RegEndDate = dtRegEndDate.Value;
+            }
+
             _EventData.MaxMemberCount = iptMaxMemberCount.Value;
             _EventData.MinMemberCount = iptMinMemberCount.Value;
 
             _EventData.IsTeam = chkIsTeam.Checked;
             _EventData.AthleticOnly = chkAthleticOnly.Checked;
             _EventData.IsDrawLots = chkIsDrawLots.Checked;
-            _EventData.DrawLotsDate = dtDrawLotsDate.Value;
+
+            if (dtDrawLotsStartDate.IsEmpty)
+            {
+                _EventData.DrawLotsStartDate = null;
+            }
+            else
+            {
+                _EventData.DrawLotsStartDate = dtDrawLotsStartDate.Value;
+            }
+
+
+            if (dtDrawLotsEndDate.IsEmpty)
+            {
+                _EventData.DrawLotsEndDate = null;
+            }
+            else
+            {
+                _EventData.DrawLotsEndDate = dtDrawLotsEndDate.Value;
+            }
+
+            if (dtAnnouncementDate.IsEmpty)
+            {
+                _EventData.AnnouncementDate = null;
+            }else
+            {
+                _EventData.AnnouncementDate = dtAnnouncementDate.Value;
+            }
+
             _EventData.EventDescription = txtEventDescription.Text;
             _EventData.CreatedBy = _userAccount;
             _EventData.Save();
@@ -222,8 +282,16 @@ namespace ischool.Sports
             chkIsTeam.Checked = _EventData.IsTeam;
             chkAthleticOnly.Checked = _EventData.AthleticOnly;
             chkIsDrawLots.Checked = _EventData.IsDrawLots;
-            if (_EventData.DrawLotsDate.HasValue)
-                dtDrawLotsDate.Value = _EventData.DrawLotsDate.Value;
+
+            if (_EventData.AnnouncementDate.HasValue)
+                dtAnnouncementDate.Value = _EventData.AnnouncementDate.Value;
+
+            if (_EventData.DrawLotsStartDate.HasValue)
+                dtDrawLotsStartDate.Value = _EventData.DrawLotsStartDate.Value;
+
+            if (_EventData.DrawLotsEndDate.HasValue)
+                dtDrawLotsEndDate.Value = _EventData.DrawLotsEndDate.Value;
+
             txtEventDescription.Text = _EventData.EventDescription;
 
             // 當畫面上學年度0，使用預設學年度學期
