@@ -188,7 +188,7 @@ namespace ischool.Sports
         private void LoadEventDataToCombo()
         {
             cbxEventItem.Items.Clear();
-            cbxEventItem.Items.Add("全部");
+           // cbxEventItem.Items.Add("全部");
             foreach (string key in _eventItemDict.Keys)
             {
                 cbxEventItem.Items.Add(key);
@@ -389,7 +389,12 @@ namespace ischool.Sports
                         dgPlayerData.Rows[rowIdx].Cells[colClassName.Index].Value = dr["class_name"].ToString();
                         dgPlayerData.Rows[rowIdx].Cells[colSeatNo.Index].Value = dr["seat_no"].ToString();
                         dgPlayerData.Rows[rowIdx].Cells[colName.Index].Value = dr["student_name"].ToString();
-                       // dgPlayerData.Rows[rowIdx].Cells[colLeader.Index].Value = dr[""]
+                        string strLeader = "否";
+                        if (dr["is_team_leader"].ToString() == "true" || dr["is_team_leader"].ToString() == "t")
+                        {
+                            strLeader = "是";
+                        }
+                        dgPlayerData.Rows[rowIdx].Cells[colLeader.Index].Value = strLeader;
                         dgPlayerData.Rows[rowIdx].Cells[colPlayerLotNo.Index].Value = dr["p_lot_no"].ToString();
                         dgPlayerData.Rows[rowIdx].Cells[colRegDate.Index].Value = dr["player_last_update"].ToString();
                         dgPlayerData.Rows[rowIdx].Cells[colRegAccount.Index].Value = dr["created_by"].ToString();

@@ -188,6 +188,10 @@ namespace ischool.Sports
                     p.CreatedBy = drv.Cells[colAccount.Index].Value.ToString();
                     p.RefTeamId = _team_id;
                     p.RefEventId = _refEventID;
+                    // 如果沒有隊，自己是隊長
+                    if (_team_id.HasValue == false)                    
+                        p.IsTeamLeader = true;
+                    
                     addplayers.Add(p);
                 }
                 addplayers.SaveAll();
