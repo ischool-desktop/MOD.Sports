@@ -8,17 +8,23 @@ using FISCA.UDT;
 namespace ischool.Sports.UDT
 {
     /// <summary>
-    /// 比賽場次
+    /// 比賽對象
     /// </summary>
-    [TableName("ischool.sports.games")]
+    [TableName("ischool.sports.game_candidates")]
 
-    public class Games : ActiveRecord
+    public class GameCandidates : ActiveRecord
     {
         /// <summary>
-        /// 年度比賽項目編號
+        /// 比賽場次編號
         /// </summary>
-        [Field(Field = "ref_event_id", Indexed = false)]
-        public int RefEventId { get; set; }
+        [Field(Field = "ref_game_id", Indexed = false)]
+        public int RefGameId { get; set; }
+
+        /// <summary>
+        /// 比賽場次唯一識別碼
+        /// </summary>
+        [Field(Field = "ref_game_uuid", Indexed = false)]
+        public string RefGameUuid { get; set; }
 
         /// <summary>
         /// 唯一識別碼
@@ -27,22 +33,23 @@ namespace ischool.Sports.UDT
         public string UUID { get; set; }
 
         /// <summary>
-        /// 第幾場比賽
+        /// 第一輪編號
         /// </summary>
-        [Field(Field = "game_no", Indexed = false)]
-        public int GameNo { get; set; }
+        [Field(Field = "lot_no", Indexed = false)]
+        public int LotNo { get; set; }
 
         /// <summary>
-        /// 第幾輪比賽
+        /// 第一區或第二區
         /// </summary>
-        [Field(Field = "round_no", Indexed = false)]
-        public int RoundNo { get; set; }
+        [Field(Field = "div_no", Indexed = false)]
+        public int DivNo { get; set; }
 
         /// <summary>
         /// 比賽時間
         /// </summary>
         [Field(Field = "occur_time", Indexed = false)]
         public DateTime? OccurTime { get; set; }
+
 
         /// <summary>
         /// 比賽地點

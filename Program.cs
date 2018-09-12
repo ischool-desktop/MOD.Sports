@@ -37,6 +37,8 @@ namespace ischool.Sports
                 bool checkUDT = false;
                 string name = "體育競賽UDT是否已載入";
 
+               // cd[name] = "false";
+
                 //如果尚無設定值,預設為
                 if (string.IsNullOrEmpty(cd[name]))
                 {
@@ -59,7 +61,8 @@ namespace ischool.Sports
                     access.Select<UDT.Players>("UID = '00000'");
                     access.Select<UDT.ScoreTypes>("UID = '00000'");
                     access.Select<UDT.Teams>("UID = '00000'");
-
+                    access.Select<UDT.GameCandidates>("UID = '00000'");
+                    access.Select<UDT.SportsChief>("UID = '00000'");
 
                     cd[name] = "true";
                     cd.Save();
@@ -133,6 +136,26 @@ namespace ischool.Sports
                 MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理報名記錄"].Click += delegate
                 {
                     (new frmRegistrationRecord()).ShowDialog();
+
+                    //if (DAO.Actor.Instance().CheckAdmin())
+                    //{
+                    //    (new frmGroupTypes()).ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    //}
+
+                };
+            }
+            #endregion
+
+            #region 管理賽程
+            {
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理賽程"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理賽程"].Click += delegate
+                {
+                    (new frmGameProducer()).ShowDialog();
 
                     //if (DAO.Actor.Instance().CheckAdmin())
                     //{

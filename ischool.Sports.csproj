@@ -229,6 +229,12 @@
     <Compile Include="Ribbon\EventTemplates\frmEventTemplates.Designer.cs">
       <DependentUpon>frmEventTemplates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\GameProducer\frmGameProducer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\GameProducer\frmGameProducer.Designer.cs">
+      <DependentUpon>frmGameProducer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\GameTypes\frmGameTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,12 +283,14 @@
     <Compile Include="UDT\Admin.cs" />
     <Compile Include="UDT\Events.cs" />
     <Compile Include="UDT\EventTemplates.cs" />
+    <Compile Include="UDT\GameCandidates.cs" />
     <Compile Include="UDT\Games.cs" />
     <Compile Include="UDT\GameTypes.cs" />
     <Compile Include="UDT\GroupTypes.cs" />
     <Compile Include="UDT\HistoricalRecords.cs" />
     <Compile Include="UDT\Players.cs" />
     <Compile Include="UDT\ScoreTypes.cs" />
+    <Compile Include="UDT\SportsChief.cs" />
     <Compile Include="UDT\Teams.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -361,7 +369,12 @@
   <ItemGroup>
     <None Include="Library\FISCA.dll.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="Tournaments\Tournaments.csproj">
+      <Project>{994ab692-ee54-4339-a328-3dae5e452efc}</Project>
+      <Name>Tournaments</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Ribbon\Events\frmEvents.resx">
       <DependentUpon>frmEvents.cs</DependentUpon>
@@ -371,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\Events\frmSubEvents.resx">
       <DependentUpon>frmSubEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\GameProducer\frmGameProducer.resx">
+      <DependentUpon>frmGameProducer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\GroupTypes\frmGroupTypes.resx">
       <DependentUpon>frmGroupTypes.cs</DependentUpon>

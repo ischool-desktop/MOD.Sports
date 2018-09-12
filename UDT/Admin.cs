@@ -26,18 +26,6 @@ namespace ischool.Sports.UDT
             public int RefTeacherID { get; set; }
 
             /// <summary>
-            /// 是否為主要管理者
-            /// </summary>
-            [Field(Field = "is_boss", Indexed = false)]
-            public bool IsBoss { get; set; }
-
-            /// <summary>
-            /// 建立日期
-            /// </summary>
-            [Field(Field = "create_time", Indexed = false)]
-            public DateTime CreateTime { get; set; }
-
-            /// <summary>
             /// 建立者帳號
             /// </summary>
             [Field(Field = "created_by", Indexed = false)]

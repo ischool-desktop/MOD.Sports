@@ -65,8 +65,7 @@
             this.dgData.RowTemplate.Height = 24;
             this.dgData.Size = new System.Drawing.Size(623, 222);
             this.dgData.TabIndex = 0;
-            this.dgData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellContentClick);
-            this.dgData.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgData_DataError);
+
             // 
             // btnSave
             // 

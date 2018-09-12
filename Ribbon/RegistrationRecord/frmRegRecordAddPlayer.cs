@@ -27,7 +27,7 @@ namespace ischool.Sports
         int _refEventID = 0;
         int? _team_id = null;
         string _teamName = "";
-
+        List<string> _hasSids = new List<string>();
 
         public frmRegRecordAddPlayer()
         {
@@ -60,8 +60,11 @@ namespace ischool.Sports
             dgSearch.Rows.Clear();
             foreach (DataRow dr in _dtStudent.Rows)
             {
+                string sid = dr["sid"].ToString();
+                if (_hasSids.Contains(sid))
+                    continue;
                 int rowIdx = dgSearch.Rows.Add();
-                dgSearch.Rows[rowIdx].Tag = dr["sid"].ToString();
+                dgSearch.Rows[rowIdx].Tag = sid;
                 dgSearch.Rows[rowIdx].Cells[colClassName.Index].Value = dr["class_name"].ToString();
                 dgSearch.Rows[rowIdx].Cells[colSeatNo.Index].Value = dr["seat_no"].ToString();
                 dgSearch.Rows[rowIdx].Cells[colName.Index].Value = dr["name"].ToString();
@@ -91,6 +94,9 @@ namespace ischool.Sports
 
         private void _bgLoadData_DoWork(object sender, DoWorkEventArgs e)
         {
+            // 取得已有資料 student id
+            _hasSids = GetDBData();
+
             _sbText.Clear();
             if (_genderFilter != "")
             {
@@ -169,17 +175,12 @@ namespace ischool.Sports
         {
             try
             {
-                // 取得已有資料 student id
-                List<int> hasSids = GetDBData();
+
                 List<UDT.Players> addplayers = new List<UDT.Players>();
                 foreach (DataGridViewRow drv in dgSearch.SelectedRows)
                 {
                     int sid = int.Parse(drv.Tag.ToString());
-
-                    // 已有資料跳出
-                    if (hasSids.Contains(sid))
-                        continue;
-
+                    
                     UDT.Players p = new UDT.Players();
                     p.RefStudentId = sid;
                     p.ClassName = drv.Cells[colClassName.Index].Value.ToString();
@@ -208,24 +209,23 @@ namespace ischool.Sports
             lblCount.Text = "已選 " + dgSearch.SelectedRows.Count.ToString() + " 人";
         }
 
-        private List<int> GetDBData()
+        private List<string> GetDBData()
         {
-            List<int> value = new List<int>();
+            List<string> value = new List<string>();
             string strSQL = "SELECT ref_student_id FROM $ischool.sports.players WHERE  ref_event_id = " + _refEventID;
-            if (_team_id.HasValue)
-            {
-                strSQL += " AND  ref_team_id = " + _team_id.Value;
-            }
-            else
-            {
-                strSQL += " AND  ref_team_id IS NULL";
-            }
+            //if (_team_id.HasValue)
+            //{
+            //    strSQL += " AND  ref_team_id = " + _team_id.Value;
+            //}
+            //else
+            //{
+            //    strSQL += " AND  ref_team_id IS NULL";
+            //}
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(strSQL);
             foreach(DataRow dr in dt.Rows)
             {
-                int sid = int.Parse(dr["ref_student_id"].ToString());
-                value.Add(sid);
+                value.Add(dr["ref_student_id"].ToString());
             }
             return value;
         }

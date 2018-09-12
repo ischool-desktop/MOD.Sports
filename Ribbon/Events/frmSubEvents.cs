@@ -85,9 +85,32 @@ namespace ischool.Sports
         private void btnSave_Click(object sender, EventArgs e)
         {
             parseItems();
+
+            // 檢查資料新增是否有重複
+            // 條件 學年度+名稱+組別id
+            if (_IsAddMode)
+            {
+                // 已有資料無法新增
+                if (CheckHasEvent())
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("資料庫內已有相同學年度+競賽名稱+組別，無法新增。");
+                    return;
+                }
+            }
             btnSave.Enabled = false;
             _bgwSave.RunWorkerAsync();
 
+        }
+
+        private bool CheckHasEvent()
+        {
+            bool value = false;
+            AccessHelper acc = new AccessHelper();
+            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='"+_EventData.Name+"'";
+            List<UDT.Events> dd = acc.Select<UDT.Events>(strQry);
+            if (dd.Count > 0)
+                value = true;
+            return value;
         }
 
         public void SetEvents(UDT.Events data)
@@ -124,6 +147,10 @@ namespace ischool.Sports
             else
             {
                 this.Text = "修改競賽項目";
+                // key 無法修改
+                iptSchoolYear.Enabled = false;
+                txtName.Enabled = false;
+                cbxGroupType.Enabled = false;
             }
             BindCanSelectItems();
             _bgw.RunWorkerAsync();

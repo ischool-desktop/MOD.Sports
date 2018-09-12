@@ -37,6 +37,7 @@
             this.colSchoolYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGameType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,7 +45,6 @@
             this.colRegEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaxMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMinMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsDrawLots = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDrawLotsStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +69,7 @@
             this.colSchoolYear,
             this.colEventCategory,
             this.colEventName,
+            this.colGroupType,
             this.colEventStartDate,
             this.colEventEndDate,
             this.colGameType,
@@ -76,7 +77,6 @@
             this.colRegEndDate,
             this.colMaxMember,
             this.colMinMember,
-            this.colGroupType,
             this.colIsTeam,
             this.colIsDrawLots,
             this.colDrawLotsStartDate,
@@ -176,6 +176,12 @@
             this.colEventName.Name = "colEventName";
             this.colEventName.ReadOnly = true;
             // 
+            // colGroupType
+            // 
+            this.colGroupType.HeaderText = "參賽組別";
+            this.colGroupType.Name = "colGroupType";
+            this.colGroupType.ReadOnly = true;
+            // 
             // colEventStartDate
             // 
             this.colEventStartDate.HeaderText = "活動開始日期";
@@ -217,12 +223,6 @@
             this.colMinMember.HeaderText = "報名人數下限";
             this.colMinMember.Name = "colMinMember";
             this.colMinMember.ReadOnly = true;
-            // 
-            // colGroupType
-            // 
-            this.colGroupType.HeaderText = "參賽組別";
-            this.colGroupType.Name = "colGroupType";
-            this.colGroupType.ReadOnly = true;
             // 
             // colIsTeam
             // 
@@ -301,6 +301,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSchoolYear;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventStartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGameType;
@@ -308,7 +309,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRegEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaxMember;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMinMember;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsDrawLots;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDrawLotsStartDate;

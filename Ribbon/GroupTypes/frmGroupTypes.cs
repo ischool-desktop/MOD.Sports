@@ -112,6 +112,7 @@ namespace ischool.Sports
                 {
                     // 新增
                     data = new UDT.GroupTypes();
+                    data.CreatedBy = _userAccount;
                 }
                 else
                 {
@@ -119,8 +120,7 @@ namespace ischool.Sports
                     hasDataUID.Add(data.UID);
                 }
 
-                data.Name = drv.Cells[colName.Index].Value.ToString();
-                data.CreatedBy = _userAccount;
+                data.Name = drv.Cells[colName.Index].Value.ToString();                
                 data.Grade = parseGrade(drv.Cells[colGrade.Index]);
 
                 if (drv.Cells[colGender.Index].Value == null)
@@ -191,14 +191,5 @@ namespace ischool.Sports
             LoadDataToDataGridView();
         }
 
-        private void dgData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dgData_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-
-        }
     }
 }
