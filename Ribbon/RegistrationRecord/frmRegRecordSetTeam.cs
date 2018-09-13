@@ -61,12 +61,12 @@ namespace ischool.Sports
                 return;
             }
 
-            // 檢查隊名是否重複並新增
-            if (CheckTeamNamePass(txtTeamName.Text))
+            if (_isAddMode)
             {
-
-                if (_isAddMode)
+                // 檢查隊名是否重複並新增
+                if (CheckTeamNamePass(txtTeamName.Text))
                 {
+
                     try
                     {
                         // 新增
@@ -80,26 +80,26 @@ namespace ischool.Sports
                 }
                 else
                 {
-                    try
-                    {
-                        // 更新
-                        _updateTeam.Name = txtTeamName.Text;
-                        _updateTeam.LotNo = _lotNo;
-                        _updateTeam.CreatedBy = _userAccount;
-                        _updateTeam.Save();
-                    }
-                    catch (Exception ex)
-                    {
-                        FISCA.Presentation.Controls.MsgBox.Show("更新隊伍發生錯誤," + ex.Message);
-                    }
+                    FISCA.Presentation.Controls.MsgBox.Show("輸入隊名已被使用，無法新增。");
+                    return;
+
                 }
             }
             else
             {
-                FISCA.Presentation.Controls.MsgBox.Show("輸入隊名已被使用，無法新增。");
-                return;
-
-            }
+                try
+                {
+                    // 更新
+                    _updateTeam.Name = txtTeamName.Text;
+                    _updateTeam.LotNo = _lotNo;
+                    _updateTeam.CreatedBy = _userAccount;
+                    _updateTeam.Save();
+                }
+                catch (Exception ex)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("更新隊伍發生錯誤," + ex.Message);
+                }           
+            }           
 
             this.DialogResult = DialogResult.Yes;
         }
@@ -185,6 +185,7 @@ namespace ischool.Sports
                 if( _updateTeam != null)
                 {
                     txtTeamName.Text = _updateTeam.Name;
+                    txtTeamName.Enabled = false;
                     if (_updateTeam.LotNo.HasValue)
                     {
                         iptLotNo.Value = _updateTeam.LotNo.Value;

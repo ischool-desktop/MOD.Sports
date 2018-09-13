@@ -35,16 +35,17 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.cbxGameType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.dgData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnRun = new DevComponents.DotNetBar.ButtonX();
-            this.btnExit = new DevComponents.DotNetBar.ButtonX();
-            this.cbxEventItem = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.colRoundNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGameNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOccurTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPlace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnRun = new DevComponents.DotNetBar.ButtonX();
+            this.btnExit = new DevComponents.DotNetBar.ButtonX();
+            this.cbxEventItem = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.btnReport = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
@@ -127,6 +128,8 @@
             // 
             // dgData
             // 
+            this.dgData.AllowUserToAddRows = false;
+            this.dgData.AllowUserToDeleteRows = false;
             this.dgData.BackgroundColor = System.Drawing.Color.White;
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -151,13 +154,49 @@
             this.dgData.Size = new System.Drawing.Size(861, 330);
             this.dgData.TabIndex = 8;
             // 
+            // colRoundNo
+            // 
+            this.colRoundNo.HeaderText = "回合";
+            this.colRoundNo.Name = "colRoundNo";
+            this.colRoundNo.ReadOnly = true;
+            // 
+            // colGameNo
+            // 
+            this.colGameNo.HeaderText = "場次";
+            this.colGameNo.Name = "colGameNo";
+            this.colGameNo.ReadOnly = true;
+            // 
+            // colTeam1
+            // 
+            this.colTeam1.HeaderText = "隊伍1";
+            this.colTeam1.Name = "colTeam1";
+            this.colTeam1.ReadOnly = true;
+            // 
+            // colTeam2
+            // 
+            this.colTeam2.HeaderText = "隊伍2";
+            this.colTeam2.Name = "colTeam2";
+            this.colTeam2.ReadOnly = true;
+            // 
+            // colOccurTime
+            // 
+            this.colOccurTime.HeaderText = "比賽時間";
+            this.colOccurTime.Name = "colOccurTime";
+            this.colOccurTime.ReadOnly = true;
+            // 
+            // colPlace
+            // 
+            this.colPlace.HeaderText = "比賽地點";
+            this.colPlace.Name = "colPlace";
+            this.colPlace.ReadOnly = true;
+            // 
             // btnRun
             // 
             this.btnRun.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnRun.AutoSize = true;
             this.btnRun.BackColor = System.Drawing.Color.Transparent;
             this.btnRun.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnRun.Location = new System.Drawing.Point(801, 67);
+            this.btnRun.Location = new System.Drawing.Point(711, 67);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 25);
             this.btnRun.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -207,47 +246,26 @@
             this.labelX5.TabIndex = 16;
             this.labelX5.Text = "競賽項目";
             // 
-            // colRoundNo
+            // btnReport
             // 
-            this.colRoundNo.HeaderText = "回合";
-            this.colRoundNo.Name = "colRoundNo";
-            this.colRoundNo.ReadOnly = true;
-            // 
-            // colGameNo
-            // 
-            this.colGameNo.HeaderText = "場次";
-            this.colGameNo.Name = "colGameNo";
-            this.colGameNo.ReadOnly = true;
-            // 
-            // colTeam1
-            // 
-            this.colTeam1.HeaderText = "隊伍1";
-            this.colTeam1.Name = "colTeam1";
-            this.colTeam1.ReadOnly = true;
-            // 
-            // colTeam2
-            // 
-            this.colTeam2.HeaderText = "隊伍2";
-            this.colTeam2.Name = "colTeam2";
-            this.colTeam2.ReadOnly = true;
-            // 
-            // colOccurTime
-            // 
-            this.colOccurTime.HeaderText = "比賽時間";
-            this.colOccurTime.Name = "colOccurTime";
-            this.colOccurTime.ReadOnly = true;
-            // 
-            // colPlace
-            // 
-            this.colPlace.HeaderText = "比賽地點";
-            this.colPlace.Name = "colPlace";
-            this.colPlace.ReadOnly = true;
+            this.btnReport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReport.AutoSize = true;
+            this.btnReport.BackColor = System.Drawing.Color.Transparent;
+            this.btnReport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReport.Location = new System.Drawing.Point(807, 67);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(78, 25);
+            this.btnReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReport.TabIndex = 18;
+            this.btnReport.Text = "產生賽程表";
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // frmGameProducer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(903, 480);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.cbxEventItem);
             this.Controls.Add(this.labelX5);
             this.Controls.Add(this.btnExit);
@@ -287,5 +305,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTeam2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOccurTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPlace;
+        private DevComponents.DotNetBar.ButtonX btnReport;
     }
 }

@@ -12,6 +12,7 @@ using K12.Data;
 using FISCA.UDT;
 using FISCA.Data;
 using Tournaments;
+using Aspose.Cells;
 
 namespace ischool.Sports
 {
@@ -20,6 +21,7 @@ namespace ischool.Sports
         BackgroundWorker _bgwRun = new BackgroundWorker();
         BackgroundWorker _bgwLoadData = new BackgroundWorker();
         private AccessHelper _access = new AccessHelper();
+        BackgroundWorker _bgwRunReport = new BackgroundWorker();
         private string _userAccount = DAO.Actor.Instance().GetUserAccount();
         int _defaultSchoolYear = 0, _selectSchoolYear = 0;
         BackgroundWorker _bgwLoadPlayer = new BackgroundWorker();
@@ -29,6 +31,9 @@ namespace ischool.Sports
         Dictionary<string, int> _GameTypeDict = new Dictionary<string, int>();
         Dictionary<string, UDT.Events> _EventItemDict = new Dictionary<string, UDT.Events>();
         int _playerCount = 0, _TeamCount = 0;
+        Dictionary<int, List<DAO.rptCell>> rptMapDict = new Dictionary<int, List<DAO.rptCell>>();
+
+
         UDT.Events _selectedEvent = null;
 
         public frmGameProducer()
@@ -41,10 +46,139 @@ namespace ischool.Sports
             _bgwRun.RunWorkerCompleted += _bgwRun_RunWorkerCompleted;
             _bgwLoadPlayer.DoWork += _bgwLoadPlayer_DoWork;
             _bgwLoadPlayer.RunWorkerCompleted += _bgwLoadPlayer_RunWorkerCompleted;
+            _bgwRunReport.DoWork += _bgwRunReport_DoWork;
+            _bgwRunReport.RunWorkerCompleted += _bgwRunReport_RunWorkerCompleted;
         }
+
+        private void _bgwRunReport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            btnReport.Enabled = true;
+        }
+
+        private void _bgwRunReport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            rptMapDict.Clear();
+
+            System.IO.MemoryStream ms = new System.IO.MemoryStream(Properties.Resources.單淘汰賽程樣板);
+            Workbook wb = new Workbook(ms);
+            Cell cellTemp = wb.Worksheets[1].Cells["A1"];
+            Style style = cellTemp.GetStyle();
+
+
+            // 取得隊伍數
+            int pCount = GetPCount();
+
+            Tournaments.SingleElimination se = new Tournaments.SingleElimination(pCount);
+            se.startMatching();
+            runRptMatches(se);
+
+            int r = rptMapDict.Count;
+
+            int round = 0;
+            foreach (int i in rptMapDict.Keys)
+            {
+                if (i > round)
+                {
+                    round = i;
+                }
+            }
+
+            int col = 0;
+            int LeftRo = 1;
+            int RightRo = round;
+
+            int right1x = round * 2 - 1;
+            // 解析位置
+            foreach (int i in rptMapDict.Keys)
+            {
+                bool lc = false;
+                bool rc = false;
+
+                foreach (DAO.rptCell cel in rptMapDict[i])
+                {
+                    if (cel.RoundNo == i && cel.divNo == 1)
+                    {
+
+                        cel.Column = i - 1;
+                        cel.Row = i - 1;
+                        if (lc)
+                        {
+                            cel.Row += cel.GetMoveInt();
+                        }
+                        lc = true;
+                    }
+
+                    if (cel.RoundNo == i && cel.divNo == 2)
+                    {
+
+                        cel.Column = right1x - i + 1;
+                        cel.Row = i - 1;
+                        if (rc)
+                        {
+                            cel.Row += cel.GetMoveInt();
+                        }
+                        rc = true;
+                    }
+                }
+            }
+
+            foreach (int i in rptMapDict.Keys)
+            {
+                foreach (DAO.rptCell cel in rptMapDict[i])
+                {
+                    if (cel.Team1No == 0 && cel.Team2No == 0)
+                        continue;
+
+
+
+                    wb.Worksheets[0].Cells[cel.Row, cel.Column].PutValue(cel.Team1No);
+                    wb.Worksheets[0].Cells[cel.Row + cel.GetMoveRow() - 1, cel.Column].PutValue(cel.Text);
+                    wb.Worksheets[0].Cells[cel.Row + cel.GetMoveRow(), cel.Column].PutValue(cel.Team2No);
+                }
+            }
+
+            //for (int ro = 1; ro <= round; ro ++)
+            //{
+            //    wb.Worksheets[0].Cells[ro+1, col].PutValue(ro);
+
+
+            //    if (rptMapDict.ContainsKey(ro))
+            //    {
+            //        foreach(DAO.rptCell cel in rptMapDict[ro])
+            //        {
+            //            if (cel.divNo == 1)
+            //            {
+            //                wb.Worksheets[0].Cells[ro + 1, col].PutValue(cel.Team1No);
+            //                wb.Worksheets[0].Cells[ro + 2, col].PutValue(cel.Team2No);
+            //            }
+            //            if(cel.divNo == 2)
+            //            {
+            //                wb.Worksheets[0].Cells[ro + 1, col + round + 1].PutValue(cel.Team1No);
+            //                wb.Worksheets[0].Cells[ro + 2, col + round + 1].PutValue(cel.Team2No);
+            //            }
+            //        }
+            //    }
+
+
+            //    LeftRo++;
+            //    RightRo--;
+            //    col++;
+
+            //}
+
+            wb.Worksheets.RemoveAt(1);
+            string fileName = Application.StartupPath + "\\test.xlsx";
+            wb.Save(fileName);
+
+
+
+        }
+
+
 
         private void _bgwLoadPlayer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            cbxEventItem.Enabled = true;
             if (_selectedEvent != null)
             {
                 if (_selectedEvent.IsTeam)
@@ -59,6 +193,105 @@ namespace ischool.Sports
                 LoadGameDataGridView();
 
             }
+        }
+
+        private void runRptMatches(SingleElimination se)
+        {
+            StringBuilder resultHTML = new StringBuilder();
+
+            for (int i = 0; i < se.roundCount; i++)
+            {
+                List<Match> mat1s = se.getMatchesOfDiv(1, i + 1);
+                if (mat1s.Count > 0)
+                {
+                    foreach (Match m in mat1s)
+                    {
+
+                        if (m.is_virtual)
+                        {
+                            String msg = @"左空白\n";
+                            resultHTML.Append(msg);
+                            if (!rptMapDict.ContainsKey(0))
+                                rptMapDict.Add(0, new List<DAO.rptCell>());
+                            DAO.rptCell cell = new DAO.rptCell();
+                            cell.divNo = 1;
+                            cell.Text = "空白";
+                            rptMapDict[m.round_no].Add(cell);
+                        }
+                        else
+                        {
+                            int c1 = m.getCandidates()[0].lotsNo;
+                            int c2 = m.getCandidates()[1].lotsNo;
+                            string msg = @"左 {0}({1} - {2}){3}\n";
+
+                            if (!rptMapDict.ContainsKey(m.round_no))
+                                rptMapDict.Add(m.round_no, new List<DAO.rptCell>());
+
+                            DAO.rptCell cell = new DAO.rptCell();
+                            cell.GameNo = m.no;
+                            cell.RoundNo = m.round_no;
+                            cell.Team1No = c1;
+                            cell.Team2No = c2;
+                            cell.divNo = 1;
+                            cell.Text = "(" + m.round_no + "-" + m.no + ")";
+                            rptMapDict[m.round_no].Add(cell);
+
+                            resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
+                        }
+
+
+                    }
+                }
+
+            }
+
+
+            for (int i = se.roundCount - 1; i > -1; i--)
+            {
+                List<Match> mat2s = se.getMatchesOfDiv(2, i + 1);
+                if (mat2s.Count > 0)
+                {
+                    foreach (Match m in mat2s)
+                    {
+                        // console.log( m );
+                        if (m.is_virtual)
+                        {
+                            string msg = @"右空白\n";
+                            resultHTML.Append(msg);
+                            if (!rptMapDict.ContainsKey(0))
+                                rptMapDict.Add(0, new List<DAO.rptCell>());
+                            DAO.rptCell cell = new DAO.rptCell();
+                            cell.divNo = 2;
+                            cell.Text = "空白";
+                            rptMapDict[m.round_no].Add(cell);
+                        }
+                        else
+                        {
+
+                            int c1 = m.getCandidates()[0].lotsNo;
+                            int c2 = m.getCandidates()[1].lotsNo;
+                            string msg = @"右 {0}({1} - {2}){3}\n";
+
+                            if (!rptMapDict.ContainsKey(m.round_no))
+                                rptMapDict.Add(m.round_no, new List<DAO.rptCell>());
+
+                            DAO.rptCell cell = new DAO.rptCell();
+                            cell.GameNo = m.no;
+                            cell.RoundNo = m.round_no;
+                            cell.Team1No = c1;
+                            cell.Team2No = c2;
+                            cell.divNo = 2;
+                            cell.Text = "(" + m.round_no + "-" + m.no + ")"; ;
+                            rptMapDict[m.round_no].Add(cell);
+
+                            resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
+                        }
+                    }
+                }
+
+            }
+
+            Console.WriteLine(resultHTML);
         }
 
         private void LoadGameDataGridView()
@@ -151,6 +384,22 @@ namespace ischool.Sports
             this.DialogResult = DialogResult.No;
         }
 
+        private int GetPCount()
+        {
+            int value = 0;
+            if (_selectedEvent != null)
+            {
+                if (_selectedEvent.IsTeam)
+                {
+                    value = _TeamCount;
+                }
+                else
+                {
+                    value = _playerCount;
+                }
+            }
+            return value;
+        }
 
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -159,16 +408,8 @@ namespace ischool.Sports
             // 單淘汰賽
             if (_selectedEvent != null)
             {
-                int pCount = 1;
-                if (_selectedEvent.IsTeam)
-                {
-                    pCount = _TeamCount;
-                }
-                else
-                {
-                    pCount = _playerCount;
-                }
-
+                // 取得隊伍數
+                int pCount = GetPCount();
 
                 if (_GameList.Count > 0)
                 {
@@ -184,7 +425,6 @@ namespace ischool.Sports
                     }
 
                 }
-
 
                 Tournaments.SingleElimination se = new Tournaments.SingleElimination(pCount);
                 se.startMatching();
@@ -228,7 +468,7 @@ namespace ischool.Sports
             List<UDT.GameCandidates> addGameCandidates = new List<UDT.GameCandidates>();
             int ref_event_id = int.Parse(_selectedEvent.UID);
 
-            for (int i = 0; i < se.roundCount - 1; i++)
+            for (int i = 0; i < se.roundCount; i++)
             {
                 List<Match> mat1s = se.getMatchesOfDiv(1, i + 1);
                 if (mat1s.Count > 0)
@@ -262,7 +502,7 @@ namespace ischool.Sports
             }
 
 
-            for (int i = se.roundCount - 2; i > -1; i--)
+            for (int i = se.roundCount - 1; i > -1; i--)
             {
                 List<Match> mat2s = se.getMatchesOfDiv(2, i + 1);
                 //console.log(` === div:2, round:${i+1}, matches count: ${(mat2s ? mat2s.length : 0)}`)
@@ -415,17 +655,30 @@ namespace ischool.Sports
                 _GameList.Clear();
                 AccessHelper acc = new AccessHelper();
                 _GameList = acc.Select<UDT.Games>(" ref_event_id = " + _selectedEvent.UID);
+
+                _GameList = _GameList.OrderBy(x => x.GameNo).ToList();
+
             }
         }
 
         private void cbxEventItem_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cbxEventItem.Enabled = false;
             // 取得畫面所選 event uid
             _selectedEvent = null;
             if (_EventItemDict.ContainsKey(cbxEventItem.Text))
             {
                 _selectedEvent = _EventItemDict[cbxEventItem.Text];
                 _bgwLoadPlayer.RunWorkerAsync();
+            }
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            if (_selectedEvent != null)
+            {
+                btnReport.Enabled = false;
+                _bgwRunReport.RunWorkerAsync();
             }
         }
 
