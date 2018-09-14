@@ -26,12 +26,15 @@ namespace ischool.Sports
         int _defaultSchoolYear = 0, _selectSchoolYear = 0;
         BackgroundWorker _bgwLoadPlayer = new BackgroundWorker();
         List<UDT.Games> _GameList = new List<UDT.Games>();
+        string _rptName = "";
 
         Dictionary<int, UDT.GroupTypes> _GroupTypeMapDict = new Dictionary<int, UDT.GroupTypes>();
         Dictionary<string, int> _GameTypeDict = new Dictionary<string, int>();
         Dictionary<string, UDT.Events> _EventItemDict = new Dictionary<string, UDT.Events>();
         int _playerCount = 0, _TeamCount = 0;
         Dictionary<int, List<DAO.rptCell>> rptMapDict = new Dictionary<int, List<DAO.rptCell>>();
+        Dictionary<int, string> _roundTempNameDict = new Dictionary<int, string>();
+
 
 
         UDT.Events _selectedEvent = null;
@@ -53,6 +56,19 @@ namespace ischool.Sports
         private void _bgwRunReport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             btnReport.Enabled = true;
+
+            // 開啟檔案
+            if (e.Error == null)
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(_rptName);
+                }
+                catch (Exception ex)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("檔案開啟失敗" + ex.Message);
+                }
+            }
         }
 
         private void _bgwRunReport_DoWork(object sender, DoWorkEventArgs e)
@@ -61,13 +77,10 @@ namespace ischool.Sports
 
             System.IO.MemoryStream ms = new System.IO.MemoryStream(Properties.Resources.單淘汰賽程樣板);
             Workbook wb = new Workbook(ms);
-            Cell cellTemp = wb.Worksheets[1].Cells["A1"];
-            Style style = cellTemp.GetStyle();
-
 
             // 取得隊伍數
             int pCount = GetPCount();
-
+            
             Tournaments.SingleElimination se = new Tournaments.SingleElimination(pCount);
             se.startMatching();
             runRptMatches(se);
@@ -82,96 +95,103 @@ namespace ischool.Sports
                     round = i;
                 }
             }
+            round += 1;
+            // 判斷並選擇樣板
+            if (_roundTempNameDict.ContainsKey(round))
+            {
+                string wbTempName = _roundTempNameDict[round];
+                wb.Worksheets["Data"].Cells.CopyRows(wb.Worksheets[wbTempName].Cells, 0, 0, 100);
+            }
 
-            int col = 0;
-            int LeftRo = 1;
-            int RightRo = round;
+            wb.Worksheets["Data"].IsSelected = true;
 
-            int right1x = round * 2 - 1;
+            int LeftCol = 0;
+            int LeftRow = -2;
+            int RightRow = -2;
+            int RightCol = 3;
+            int RightEnd = 0;
+
+
+            if (round == 3)
+            {
+                RightEnd = 5;
+            }
+            else if (round == 4)
+            {
+                RightEnd = 7;
+            }
+            else if (round == 5)
+            {
+                RightEnd = 9;
+            }
+            else
+            {
+                RightEnd = 3;
+            }
+
             // 解析位置
             foreach (int i in rptMapDict.Keys)
             {
-                bool lc = false;
-                bool rc = false;
+                // 下向移動位置
+                int movRow = int.Parse(Math.Pow(2, (i+1)).ToString());
+                int LRow = int.Parse(Math.Pow(2, i - 1).ToString());
+                // 初始值
+
+                LeftRow = RightRow = (LRow - 1);
+                LeftCol = i - 1;
+                RightCol = (RightEnd - i + 1);
 
                 foreach (DAO.rptCell cel in rptMapDict[i])
                 {
-                    if (cel.RoundNo == i && cel.divNo == 1)
+                    // 左
+                    if (cel.divNo == 1)
                     {
-
-                        cel.Column = i - 1;
-                        cel.Row = i - 1;
-                        if (lc)
-                        {
-                            cel.Row += cel.GetMoveInt();
-                        }
-                        lc = true;
+                        cel.Column = LeftCol;
+                        cel.Row = LeftRow;
+                        LeftRow += movRow;
                     }
 
-                    if (cel.RoundNo == i && cel.divNo == 2)
+                    // 右
+                    if (cel.divNo == 2)
                     {
-
-                        cel.Column = right1x - i + 1;
-                        cel.Row = i - 1;
-                        if (rc)
-                        {
-                            cel.Row += cel.GetMoveInt();
-                        }
-                        rc = true;
+                        cel.Column = RightCol;
+                        cel.Row = RightRow;
+                        RightRow += movRow;
                     }
                 }
             }
 
+
+            // 填入 Excel 樣板
             foreach (int i in rptMapDict.Keys)
             {
                 foreach (DAO.rptCell cel in rptMapDict[i])
                 {
-                    if (cel.Team1No == 0 && cel.Team2No == 0)
+                    if (cel.Team1No == 0 && cel.Team2No == 0 && cel.Row == 0)
                         continue;
 
-
-
-                    wb.Worksheets[0].Cells[cel.Row, cel.Column].PutValue(cel.Team1No);
-                    wb.Worksheets[0].Cells[cel.Row + cel.GetMoveRow() - 1, cel.Column].PutValue(cel.Text);
-                    wb.Worksheets[0].Cells[cel.Row + cel.GetMoveRow(), cel.Column].PutValue(cel.Team2No);
+                    wb.Worksheets[0].Cells[cel.Row, cel.Column].PutValue(cel.Team1No + "號");
+                    wb.Worksheets[0].Cells[cel.Row + 1, cel.Column].PutValue(cel.Text);
+                    wb.Worksheets[0].Cells[cel.Row + 2, cel.Column].PutValue(cel.Team2No + "號");
                 }
             }
 
-            //for (int ro = 1; ro <= round; ro ++)
-            //{
-            //    wb.Worksheets[0].Cells[ro+1, col].PutValue(ro);
 
+            // 清除樣板
+            foreach (string name in _roundTempNameDict.Values)
+                wb.Worksheets.RemoveAt(name);
 
-            //    if (rptMapDict.ContainsKey(ro))
-            //    {
-            //        foreach(DAO.rptCell cel in rptMapDict[ro])
-            //        {
-            //            if (cel.divNo == 1)
-            //            {
-            //                wb.Worksheets[0].Cells[ro + 1, col].PutValue(cel.Team1No);
-            //                wb.Worksheets[0].Cells[ro + 2, col].PutValue(cel.Team2No);
-            //            }
-            //            if(cel.divNo == 2)
-            //            {
-            //                wb.Worksheets[0].Cells[ro + 1, col + round + 1].PutValue(cel.Team1No);
-            //                wb.Worksheets[0].Cells[ro + 2, col + round + 1].PutValue(cel.Team2No);
-            //            }
-            //        }
-            //    }
+            wb.Worksheets["Data"].AutoFitColumns(0, 10);
 
-
-            //    LeftRo++;
-            //    RightRo--;
-            //    col++;
-
-            //}
-
-            wb.Worksheets.RemoveAt(1);
-            string fileName = Application.StartupPath + "\\test.xlsx";
-            wb.Save(fileName);
-
-
-
+            try
+            {
+                _rptName = Application.StartupPath + "\\單淘汰賽.xlsx";
+                wb.Save(_rptName);
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex.Message;
+            }
         }
 
 
@@ -199,7 +219,13 @@ namespace ischool.Sports
         {
             StringBuilder resultHTML = new StringBuilder();
 
-            for (int i = 0; i < se.roundCount; i++)
+            int x = se.roundCount;
+            if (se.roundCount > 1)
+            {
+                x = se.roundCount - 1;
+            }
+
+            for (int i = 0; i < x; i++)
             {
                 List<Match> mat1s = se.getMatchesOfDiv(1, i + 1);
                 if (mat1s.Count > 0)
@@ -211,12 +237,12 @@ namespace ischool.Sports
                         {
                             String msg = @"左空白\n";
                             resultHTML.Append(msg);
-                            if (!rptMapDict.ContainsKey(0))
-                                rptMapDict.Add(0, new List<DAO.rptCell>());
-                            DAO.rptCell cell = new DAO.rptCell();
-                            cell.divNo = 1;
-                            cell.Text = "空白";
-                            rptMapDict[m.round_no].Add(cell);
+                            //if (!rptMapDict.ContainsKey(0))
+                            //    rptMapDict.Add(0, new List<DAO.rptCell>());
+                            //DAO.rptCell cell = new DAO.rptCell();
+                            //cell.divNo = 1;
+                            //cell.Text = "空白";
+                            //rptMapDict[0].Add(cell);
                         }
                         else
                         {
@@ -233,7 +259,7 @@ namespace ischool.Sports
                             cell.Team1No = c1;
                             cell.Team2No = c2;
                             cell.divNo = 1;
-                            cell.Text = "(" + m.round_no + "-" + m.no + ")";
+                            cell.Text = "(" + m.round_no + "輪-" + m.no + "場)";
                             rptMapDict[m.round_no].Add(cell);
 
                             resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
@@ -245,8 +271,13 @@ namespace ischool.Sports
 
             }
 
+            x = se.roundCount - 1;
+            if (se.roundCount > 1)
+            {
+                x = se.roundCount - 2;
+            }
 
-            for (int i = se.roundCount - 1; i > -1; i--)
+            for (int i = x; i > -1; i--)
             {
                 List<Match> mat2s = se.getMatchesOfDiv(2, i + 1);
                 if (mat2s.Count > 0)
@@ -258,12 +289,12 @@ namespace ischool.Sports
                         {
                             string msg = @"右空白\n";
                             resultHTML.Append(msg);
-                            if (!rptMapDict.ContainsKey(0))
-                                rptMapDict.Add(0, new List<DAO.rptCell>());
-                            DAO.rptCell cell = new DAO.rptCell();
-                            cell.divNo = 2;
-                            cell.Text = "空白";
-                            rptMapDict[m.round_no].Add(cell);
+                            //if (!rptMapDict.ContainsKey(0))
+                            //    rptMapDict.Add(0, new List<DAO.rptCell>());
+                            //DAO.rptCell cell = new DAO.rptCell();
+                            //cell.divNo = 2;
+                            //cell.Text = "空白";
+                            //rptMapDict[0].Add(cell);
                         }
                         else
                         {
@@ -281,7 +312,7 @@ namespace ischool.Sports
                             cell.Team1No = c1;
                             cell.Team2No = c2;
                             cell.divNo = 2;
-                            cell.Text = "(" + m.round_no + "-" + m.no + ")"; ;
+                            cell.Text = "(" + m.round_no + "輪-" + m.no + "場)";
                             rptMapDict[m.round_no].Add(cell);
 
                             resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
@@ -374,6 +405,14 @@ namespace ischool.Sports
             btnRun.Enabled = false;
             cbxEventItem.Enabled = false;
             lblPlayerCount.Text = "";
+            // 預設報表樣板五個<單淘汰賽樣板使用
+            _roundTempNameDict.Clear();
+            _roundTempNameDict.Add(1, "r1");
+            _roundTempNameDict.Add(2, "r2");
+            _roundTempNameDict.Add(3, "r3");
+            _roundTempNameDict.Add(4, "r4");
+            _roundTempNameDict.Add(5, "r5");
+
             // 載入預設學年度
             iptSchoolYear.Value = _defaultSchoolYear = int.Parse(K12.Data.School.DefaultSchoolYear);
             _bgwLoadData.RunWorkerAsync();
@@ -468,7 +507,14 @@ namespace ischool.Sports
             List<UDT.GameCandidates> addGameCandidates = new List<UDT.GameCandidates>();
             int ref_event_id = int.Parse(_selectedEvent.UID);
 
-            for (int i = 0; i < se.roundCount; i++)
+            int x = se.roundCount;
+
+            if (se.roundCount > 1)
+            {
+                x = se.roundCount - 1;
+            }
+
+            for (int i = 0; i < x; i++)
             {
                 List<Match> mat1s = se.getMatchesOfDiv(1, i + 1);
                 if (mat1s.Count > 0)
@@ -501,8 +547,13 @@ namespace ischool.Sports
 
             }
 
+            x = se.roundCount - 1;
+            if (se.roundCount > 1)
+            {
+                x = se.roundCount - 2;
+            }
 
-            for (int i = se.roundCount - 1; i > -1; i--)
+            for (int i = x; i > -1; i--)
             {
                 List<Match> mat2s = se.getMatchesOfDiv(2, i + 1);
                 //console.log(` === div:2, round:${i+1}, matches count: ${(mat2s ? mat2s.length : 0)}`)

@@ -25,9 +25,14 @@ namespace ischool.Sports.DAO
             int v = 0;
             if (divNo == 1)
             {
-
+                v = int.Parse(Math.Pow(2, (RoundNo)).ToString());
             }
-            v = int.Parse(Math.Pow(2, (RoundNo)).ToString()) ;
+            
+            if(divNo == 2)
+            {
+                v = int.Parse(Math.Pow(2, (RoundNo)).ToString());
+            }
+
             return v;
         }
 
