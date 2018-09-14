@@ -35,6 +35,9 @@ namespace ischool.Sports
         Dictionary<int, List<DAO.rptCell>> rptMapDict = new Dictionary<int, List<DAO.rptCell>>();
         Dictionary<int, string> _roundTempNameDict = new Dictionary<int, string>();
 
+        // 有抽籤號
+        Dictionary<int, UDT.Teams> _lotNoTeamDict = new Dictionary<int, UDT.Teams>();
+        Dictionary<int, UDT.Players> _lotNoPlayerDict = new Dictionary<int, UDT.Players>();
 
 
         UDT.Events _selectedEvent = null;
@@ -78,9 +81,11 @@ namespace ischool.Sports
             System.IO.MemoryStream ms = new System.IO.MemoryStream(Properties.Resources.單淘汰賽程樣板);
             Workbook wb = new Workbook(ms);
 
+            Dictionary<int, UDT.Teams> team = GetTeamLotNoByUID(_selectedEvent.UID);
+
             // 取得隊伍數
             int pCount = GetPCount();
-            
+
             Tournaments.SingleElimination se = new Tournaments.SingleElimination(pCount);
             se.startMatching();
             runRptMatches(se);
@@ -133,7 +138,7 @@ namespace ischool.Sports
             foreach (int i in rptMapDict.Keys)
             {
                 // 下向移動位置
-                int movRow = int.Parse(Math.Pow(2, (i+1)).ToString());
+                int movRow = int.Parse(Math.Pow(2, (i + 1)).ToString());
                 int LRow = int.Parse(Math.Pow(2, i - 1).ToString());
                 // 初始值
 
@@ -169,10 +174,26 @@ namespace ischool.Sports
                 {
                     if (cel.Team1No == 0 && cel.Team2No == 0 && cel.Row == 0)
                         continue;
+                    if (team.ContainsKey(cel.Team1No))
+                    {
+                        wb.Worksheets[0].Cells[cel.Row, cel.Column].PutValue(team[cel.Team1No].Name);
+                    }
+                    else
+                    {
+                        wb.Worksheets[0].Cells[cel.Row, cel.Column].PutValue(cel.Team1No);
+                    }
 
-                    wb.Worksheets[0].Cells[cel.Row, cel.Column].PutValue(cel.Team1No + "號");
                     wb.Worksheets[0].Cells[cel.Row + 1, cel.Column].PutValue(cel.Text);
-                    wb.Worksheets[0].Cells[cel.Row + 2, cel.Column].PutValue(cel.Team2No + "號");
+
+                    if (team.ContainsKey(cel.Team2No))
+                    {
+                        wb.Worksheets[0].Cells[cel.Row + 2, cel.Column].PutValue(team[cel.Team2No].Name);
+                    }
+                    else
+                    {
+                        wb.Worksheets[0].Cells[cel.Row + 2, cel.Column].PutValue(cel.Team2No);
+                    }
+
                 }
             }
 
@@ -259,7 +280,7 @@ namespace ischool.Sports
                             cell.Team1No = c1;
                             cell.Team2No = c2;
                             cell.divNo = 1;
-                            cell.Text = "(" + m.round_no + "輪-" + m.no + "場)";
+                            cell.Text = "(" + m.round_no + "回-" + m.no + "場)";
                             rptMapDict[m.round_no].Add(cell);
 
                             resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
@@ -312,7 +333,7 @@ namespace ischool.Sports
                             cell.Team1No = c1;
                             cell.Team2No = c2;
                             cell.divNo = 2;
-                            cell.Text = "(" + m.round_no + "輪-" + m.no + "場)";
+                            cell.Text = "(" + m.round_no + "回-" + m.no + "場)";
                             rptMapDict[m.round_no].Add(cell);
 
                             resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
@@ -328,12 +349,30 @@ namespace ischool.Sports
         private void LoadGameDataGridView()
         {
             dgData.Rows.Clear();
+
+            Dictionary<int, UDT.Teams> team = GetTeamLotNoByUID(_selectedEvent.UID);
+
             foreach (UDT.Games data in _GameList)
             {
                 int rowIdx = dgData.Rows.Add();
                 dgData.Rows[rowIdx].Cells[colRoundNo.Index].Value = data.RoundNo;
                 dgData.Rows[rowIdx].Cells[colGameNo.Index].Value = data.GameNo;
 
+                if (data.LotNo1.HasValue)
+                {
+                    if (team.ContainsKey(data.LotNo1.Value))
+                    {
+                        dgData.Rows[rowIdx].Cells[colTeam1.Index].Value = team[data.LotNo1.Value].Name;
+                    }
+                }
+
+                if (data.LotNo2.HasValue)
+                {
+                    if (team.ContainsKey(data.LotNo2.Value))
+                    {
+                        dgData.Rows[rowIdx].Cells[colTeam2.Index].Value = team[data.LotNo2.Value].Name;
+                    }
+                }
             }
         }
 
@@ -534,10 +573,12 @@ namespace ischool.Sports
                             gL.GameNo = m.no;
                             gL.RoundNo = m.round_no;
                             gL.CreatedBy = _userAccount;
-                            addGameLeftList.Add(gL);
 
                             int c1 = m.getCandidates()[0].lotsNo;
                             int c2 = m.getCandidates()[1].lotsNo;
+                            gL.LotNo1 = c1;
+                            gL.LotNo2 = c2;
+                            addGameLeftList.Add(gL);
                             string msg = @"左 {0}({1} - {2}){3}\n";
                             resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
                         }
@@ -575,10 +616,13 @@ namespace ischool.Sports
                             gR.GameNo = m.no;
                             gR.RoundNo = m.round_no;
                             gR.CreatedBy = _userAccount;
-                            addGameRightList.Add(gR);
-
                             int c1 = m.getCandidates()[0].lotsNo;
                             int c2 = m.getCandidates()[1].lotsNo;
+                            gR.LotNo1 = c1;
+                            gR.LotNo2 = c2;
+
+                            addGameRightList.Add(gR);
+
                             string msg = @"右 {0}({1} - {2}){3}\n";
                             resultHTML.Append(String.Format(msg, c1, m.round_no, m.no, c2));
                         }
@@ -739,6 +783,23 @@ namespace ischool.Sports
             value = _access.Select<UDT.Players>(" ref_event_id = " + uid);
             return value;
         }
+
+        private Dictionary<int, UDT.Teams> GetTeamLotNoByUID(string uid)
+        {
+            Dictionary<int, UDT.Teams> value = new Dictionary<int, UDT.Teams>();
+            List<UDT.Teams> datas = _access.Select<UDT.Teams>(" ref_event_id = " + uid);
+            foreach (UDT.Teams t in datas)
+            {
+                if (t.LotNo.HasValue)
+                {
+                    if (!value.ContainsKey(t.LotNo.Value))
+                        value.Add(t.LotNo.Value, t);
+                }
+
+            }
+            return value;
+        }
+
 
         private void iptSchoolYear_ValueChanged(object sender, EventArgs e)
         {

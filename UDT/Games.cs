@@ -56,5 +56,17 @@ namespace ischool.Sports.UDT
         [Field(Field = "created_by", Indexed = false)]
         public string CreatedBy { get; set; }
 
+        /// <summary>
+        /// 比賽抽籤1
+        /// </summary>
+        [Field(Field = "lot_no1", Indexed = false)]
+        public int? LotNo1 { get; set; }
+
+        /// <summary>
+        /// 比賽抽籤2
+        /// </summary>
+        [Field(Field = "lot_no2", Indexed = false)]
+        public int? LotNo2 { get; set; }
+
     }
 }
