@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using FISCA.Presentation.Controls;
 using FISCA.UDT;
 
-namespace ischool.Sports.Ribbon.ScoreTypes
+namespace ischool.Sports
 {
     public partial class frmScoreTypes : BaseForm
     {

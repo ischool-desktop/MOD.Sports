@@ -1,4 +1,4 @@
-﻿namespace ischool.Sports.Ribbon.ScoreTypes
+﻿namespace ischool.Sports
 {
     partial class frmScoreTypes
     {

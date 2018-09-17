@@ -279,6 +279,18 @@
     <Compile Include="Ribbon\ScoreTypes\frmScoreTypes.Designer.cs">
       <DependentUpon>frmScoreTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\SportsChief\frmSetSportsChief.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\SportsChief\frmSetSportsChief.Designer.cs">
+      <DependentUpon>frmSetSportsChief.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\SportsChief\frmSetSportsChiefAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\SportsChief\frmSetSportsChiefAdd.Designer.cs">
+      <DependentUpon>frmSetSportsChiefAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="SportsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -407,6 +419,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegRecordUpdatePlayer.resx">
       <DependentUpon>frmRegRecordUpdatePlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\SportsChief\frmSetSportsChief.resx">
+      <DependentUpon>frmSetSportsChief.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\SportsChief\frmSetSportsChiefAdd.resx">
+      <DependentUpon>frmSetSportsChiefAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SportsPanel.resx">
       <DependentUpon>SportsPanel.cs</DependentUpon>
