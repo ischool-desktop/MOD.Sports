@@ -166,7 +166,7 @@
             // 
             // colEventCategory
             // 
-            this.colEventCategory.HeaderText = "競賽類型";
+            this.colEventCategory.HeaderText = "競賽類別";
             this.colEventCategory.Name = "colEventCategory";
             this.colEventCategory.ReadOnly = true;
             // 

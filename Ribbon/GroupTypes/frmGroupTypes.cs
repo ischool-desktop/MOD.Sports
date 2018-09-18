@@ -165,6 +165,7 @@ namespace ischool.Sports
             try
             {
                 saveDataList.SaveAll();
+                FISCA.Presentation.Controls.MsgBox.Show("儲存完成");
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)

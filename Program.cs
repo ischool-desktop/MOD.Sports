@@ -110,6 +110,47 @@ namespace ischool.Sports
                 };
             }
             #endregion
+
+            #region 設定計分方式
+            {
+                MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定計分方式"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定計分方式"].Click += delegate
+                {
+                    (new frmScoreTypes()).ShowDialog();
+
+                    //if (DAO.Actor.Instance().CheckAdmin())
+                    //{
+                    //    (new frmGroupTypes()).ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    //}
+
+                };
+            }
+            #endregion
+
+            #region 設定賽制
+            {
+                MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定賽制"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定賽制"].Click += delegate
+                {
+                    (new frmGameTypes()).ShowDialog();
+
+                    //if (DAO.Actor.Instance().CheckAdmin())
+                    //{
+                    //    (new frmGroupTypes()).ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    //}
+
+                };
+            }
+            #endregion
+
             #region 管理競賽
             {
                 MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽"].Enable = true;//Permissions.設定時段權限;

@@ -405,6 +405,9 @@
     <EmbeddedResource Include="Ribbon\GameProducer\frmGameProducer.resx">
       <DependentUpon>frmGameProducer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\GameTypes\frmGameTypes.resx">
+      <DependentUpon>frmGameTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\GroupTypes\frmGroupTypes.resx">
       <DependentUpon>frmGroupTypes.cs</DependentUpon>
     </EmbeddedResource>
@@ -419,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\RegistrationRecord\frmRegRecordUpdatePlayer.resx">
       <DependentUpon>frmRegRecordUpdatePlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\ScoreTypes\frmScoreTypes.resx">
+      <DependentUpon>frmScoreTypes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\SportsChief\frmSetSportsChief.resx">
       <DependentUpon>frmSetSportsChief.cs</DependentUpon>

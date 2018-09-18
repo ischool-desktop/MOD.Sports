@@ -705,7 +705,7 @@
             this.labelX10.Name = "labelX10";
             this.labelX10.Size = new System.Drawing.Size(60, 21);
             this.labelX10.TabIndex = 10;
-            this.labelX10.Text = "競賽類型";
+            this.labelX10.Text = "競賽類別";
             // 
             // txtCategory
             // 
