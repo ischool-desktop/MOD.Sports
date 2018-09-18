@@ -80,7 +80,7 @@
             this.iptSchoolYear.Name = "iptSchoolYear";
             this.iptSchoolYear.ShowUpDown = true;
             this.iptSchoolYear.Size = new System.Drawing.Size(80, 25);
-            this.iptSchoolYear.TabIndex = 1;
+            this.iptSchoolYear.TabIndex = 0;
             this.iptSchoolYear.Value = 1;
             this.iptSchoolYear.ValueChanged += new System.EventHandler(this.iptSchoolYear_ValueChanged);
             // 
@@ -124,7 +124,7 @@
             this.cbxGameType.Name = "cbxGameType";
             this.cbxGameType.Size = new System.Drawing.Size(172, 25);
             this.cbxGameType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbxGameType.TabIndex = 7;
+            this.cbxGameType.TabIndex = 2;
             // 
             // dgData
             // 
@@ -152,7 +152,7 @@
             this.dgData.Name = "dgData";
             this.dgData.RowTemplate.Height = 24;
             this.dgData.Size = new System.Drawing.Size(861, 330);
-            this.dgData.TabIndex = 8;
+            this.dgData.TabIndex = 6;
             // 
             // colRoundNo
             // 
@@ -200,7 +200,7 @@
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 25);
             this.btnRun.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnRun.TabIndex = 9;
+            this.btnRun.TabIndex = 3;
             this.btnRun.Text = "產生賽程";
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
@@ -213,7 +213,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExit.TabIndex = 10;
+            this.btnExit.TabIndex = 5;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -227,7 +227,7 @@
             this.cbxEventItem.Name = "cbxEventItem";
             this.cbxEventItem.Size = new System.Drawing.Size(256, 25);
             this.cbxEventItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbxEventItem.TabIndex = 17;
+            this.cbxEventItem.TabIndex = 1;
             this.cbxEventItem.WatermarkText = "請選擇競賽項目";
             this.cbxEventItem.SelectedIndexChanged += new System.EventHandler(this.cbxEventItem_SelectedIndexChanged);
             // 
@@ -256,7 +256,7 @@
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(78, 25);
             this.btnReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReport.TabIndex = 18;
+            this.btnReport.TabIndex = 4;
             this.btnReport.Text = "產生賽程表";
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 

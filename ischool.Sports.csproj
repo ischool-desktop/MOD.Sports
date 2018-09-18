@@ -231,6 +231,12 @@
     <Compile Include="Ribbon\EventTemplates\frmEventTemplates.Designer.cs">
       <DependentUpon>frmEventTemplates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\EventTemplates\frmSetEventTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\EventTemplates\frmSetEventTemplate.Designer.cs">
+      <DependentUpon>frmSetEventTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\GameProducer\frmGameProducer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -401,6 +407,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\Events\frmSubEvents.resx">
       <DependentUpon>frmSubEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\EventTemplates\frmEventTemplates.resx">
+      <DependentUpon>frmEventTemplates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\EventTemplates\frmSetEventTemplate.resx">
+      <DependentUpon>frmSetEventTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\GameProducer\frmGameProducer.resx">
       <DependentUpon>frmGameProducer.cs</DependentUpon>

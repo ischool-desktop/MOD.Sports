@@ -171,6 +171,26 @@ namespace ischool.Sports
             }
             #endregion
 
+            #region 管理競賽樣板
+            {
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽樣板"].Enable = true;//Permissions.設定時段權限;
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽樣板"].Click += delegate
+                {
+                    (new frmEventTemplates()).ShowDialog();
+
+                    //if (DAO.Actor.Instance().CheckAdmin())
+                    //{
+                    //    (new frmGroupTypes()).ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    //}
+
+                };
+            }
+            #endregion
+
             #region 管理報名記錄
             {
                 MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理報名記錄"].Enable = true;//Permissions.設定時段權限;
