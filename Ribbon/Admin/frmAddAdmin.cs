@@ -22,6 +22,8 @@ namespace ischool.Sports
 
         private void frmAddAdmin_Load(object sender, EventArgs e)
         {
+            this.MaximumSize = this.MinimumSize = this.Size;
+
             // 取得在校老師並且尚未指定管理員身分
             string sql = @"
 SELECT

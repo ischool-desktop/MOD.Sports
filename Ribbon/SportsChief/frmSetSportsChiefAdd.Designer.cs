@@ -30,14 +30,15 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnOk = new DevComponents.DotNetBar.ButtonX();
-            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.colGradeYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStudentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnOk = new DevComponents.DotNetBar.ButtonX();
+            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.lblSelectCount = new DevComponents.DotNetBar.LabelX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,34 +67,6 @@
             this.dgData.Size = new System.Drawing.Size(602, 308);
             this.dgData.TabIndex = 0;
             this.dgData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgData_MouseClick);
-            // 
-            // btnOk
-            // 
-            this.btnOk.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnOk.AutoSize = true;
-            this.btnOk.BackColor = System.Drawing.Color.Transparent;
-            this.btnOk.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnOk.Location = new System.Drawing.Point(437, 364);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 25);
-            this.btnOk.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "確定";
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExit.AutoSize = true;
-            this.btnExit.BackColor = System.Drawing.Color.Transparent;
-            this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(538, 364);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 25);
-            this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExit.TabIndex = 2;
-            this.btnExit.Text = "離開";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // colGradeYear
             // 
@@ -127,6 +100,34 @@
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
             // 
+            // btnOk
+            // 
+            this.btnOk.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnOk.AutoSize = true;
+            this.btnOk.BackColor = System.Drawing.Color.Transparent;
+            this.btnOk.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnOk.Location = new System.Drawing.Point(437, 364);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 25);
+            this.btnOk.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "確定";
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExit.AutoSize = true;
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExit.Location = new System.Drawing.Point(538, 364);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 25);
+            this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "離開";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // lblSelectCount
             // 
             this.lblSelectCount.BackColor = System.Drawing.Color.Transparent;
@@ -141,11 +142,26 @@
             this.lblSelectCount.TabIndex = 3;
             this.lblSelectCount.Text = "已選0位";
             // 
+            // labelX1
+            // 
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(23, 365);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(202, 23);
+            this.labelX1.TabIndex = 4;
+            this.labelX1.Text = "按鍵盤Ctrl+滑鼠左鍵 進行多選。";
+            // 
             // frmSetSportsChiefAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 401);
+            this.Controls.Add(this.labelX1);
             this.Controls.Add(this.lblSelectCount);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnOk);
@@ -171,5 +187,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStudentNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private DevComponents.DotNetBar.LabelX lblSelectCount;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

@@ -38,6 +38,7 @@
             this.btnOk = new DevComponents.DotNetBar.ButtonX();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,11 +148,26 @@
             this.lblCount.TabIndex = 10;
             this.lblCount.Text = "人數";
             // 
+            // labelX1
+            // 
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(27, 409);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(211, 23);
+            this.labelX1.TabIndex = 11;
+            this.labelX1.Text = "按鍵盤Ctrl+滑鼠左鍵進行多選。";
+            // 
             // frmRegRecordAddPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(517, 444);
+            this.Controls.Add(this.labelX1);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -178,5 +194,6 @@
         private DevComponents.DotNetBar.ButtonX btnOk;
         private DevComponents.DotNetBar.ButtonX btnCancel;
         private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

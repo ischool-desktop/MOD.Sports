@@ -174,6 +174,7 @@ namespace ischool.Sports
 
         private void frmRegRecordSetTeam_Load(object sender, EventArgs e)
         {
+            this.MaximumSize = this.MinimumSize = this.Size;
             lblEventItem.Text = this._eventItemName;
             if (_isAddMode)
             {

@@ -257,6 +257,12 @@
     <Compile Include="Ribbon\GameProducer\frmGameProducer.Designer.cs">
       <DependentUpon>frmGameProducer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\GameProducer\frmSetGameProducerItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\GameProducer\frmSetGameProducerItem.Designer.cs">
+      <DependentUpon>frmSetGameProducerItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\GameTypes\frmGameTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -442,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\GameProducer\frmGameProducer.resx">
       <DependentUpon>frmGameProducer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\GameProducer\frmSetGameProducerItem.resx">
+      <DependentUpon>frmSetGameProducerItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\GameTypes\frmGameTypes.resx">
       <DependentUpon>frmGameTypes.cs</DependentUpon>

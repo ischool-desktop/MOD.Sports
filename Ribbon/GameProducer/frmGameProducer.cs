@@ -355,22 +355,27 @@ namespace ischool.Sports
             foreach (UDT.Games data in _GameList)
             {
                 int rowIdx = dgData.Rows.Add();
+                dgData.Rows[rowIdx].Tag = data.UID;
                 dgData.Rows[rowIdx].Cells[colRoundNo.Index].Value = data.RoundNo;
                 dgData.Rows[rowIdx].Cells[colGameNo.Index].Value = data.GameNo;
 
                 if (data.LotNo1.HasValue)
                 {
-                    if (team.ContainsKey(data.LotNo1.Value))
+                    if (data.LotNo1.Value != -1)
                     {
-                        dgData.Rows[rowIdx].Cells[colTeam1.Index].Value = team[data.LotNo1.Value].Name;
+                        dgData.Rows[rowIdx].Cells[colLotNo1.Index].Value = data.LotNo1.Value;
+                        if (team.ContainsKey(data.LotNo1.Value))
+                            dgData.Rows[rowIdx].Cells[colTeam1.Index].Value = team[data.LotNo1.Value].Name;
                     }
                 }
 
                 if (data.LotNo2.HasValue)
                 {
-                    if (team.ContainsKey(data.LotNo2.Value))
+                    if (data.LotNo2.Value != -1)
                     {
-                        dgData.Rows[rowIdx].Cells[colTeam2.Index].Value = team[data.LotNo2.Value].Name;
+                        dgData.Rows[rowIdx].Cells[colLotNo2.Index].Value = data.LotNo2.Value;
+                        if (team.ContainsKey(data.LotNo2.Value))
+                            dgData.Rows[rowIdx].Cells[colTeam2.Index].Value = team[data.LotNo2.Value].Name;
                     }
                 }
             }
@@ -706,8 +711,12 @@ namespace ischool.Sports
             List<UDT.GameTypes> gtList = _access.Select<UDT.GameTypes>();
             foreach (UDT.GameTypes data in gtList)
             {
-                if (!_GameTypeDict.ContainsKey(data.Name))
-                    _GameTypeDict.Add(data.Name, int.Parse(data.UID));
+                // 目前只能一個
+                if (data.Name.Contains("單"))
+                {
+                    if (!_GameTypeDict.ContainsKey(data.Name))
+                        _GameTypeDict.Add(data.Name, int.Parse(data.UID));
+                }
             }
         }
         /// <summary>
@@ -783,6 +792,62 @@ namespace ischool.Sports
             value = _access.Select<UDT.Players>(" ref_event_id = " + uid);
             return value;
         }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (dgData.SelectedRows.Count == 1)
+            {
+                btnDel.Enabled = false;
+
+                if (FISCA.Presentation.Controls.MsgBox.Show("當選「是」將這筆賽程，請問是否刪除？", "刪除賽程", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    string delUid = dgData.SelectedRows[0].Tag.ToString();
+                    DeleteGameItem(delUid);
+                    _bgwLoadPlayer.RunWorkerAsync();
+
+                }
+                btnDel.Enabled = true;
+            }
+            else
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選擇1項資料。");
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 刪除賽程
+        /// </summary>
+        /// <param name="uid"></param>
+        private void DeleteGameItem(string uid)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(uid))
+                {
+                    string delQry1 = $"DELETE FROM $ischool.sports.games WHERE uid = {uid};";
+                    string delQry2 = $"DELETE FROM $ischool.sports.game_candidates WHERE ref_game_id = {uid};";
+                    UpdateHelper uh = new UpdateHelper();
+                    uh.Execute(delQry2);
+                    uh.Execute(delQry1);
+                }
+            }
+            catch (Exception ex)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show($"刪除賽程錯誤:{ex.Message}");
+                return;
+            }
+        }
+
 
         private Dictionary<int, UDT.Teams> GetTeamLotNoByUID(string uid)
         {
