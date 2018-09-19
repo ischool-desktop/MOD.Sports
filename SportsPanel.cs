@@ -16,7 +16,7 @@ namespace ischool.Sports
         {
             InitializeComponent();
             
-            Group = "體育競賽(開發中)";
+            Group = "體育競賽";
 
             //this._browser = new ChromiumWebBrowser("https://sites.google.com/ischool.com.tw/neat-competition/%E9%A6%96%E9%A0%81");
             //this._browser.Dock = DockStyle.Fill;

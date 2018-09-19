@@ -7,29 +7,36 @@ using FISCA.UDT;
 namespace ischool.Sports.UDT
 {
 
+    /// <summary>
+    /// 管理員()
+    /// </summary>
+    [TableName("ischool.sports.admin")]
+    public class Admin : ActiveRecord
+    {
         /// <summary>
-        /// 管理員()
+        /// 登入帳號
         /// </summary>
-        [TableName("ischool.sports.admin")]
-        public class Admin : ActiveRecord
-        {
-            /// <summary>
-            /// 登入帳號
-            /// </summary>
-            [Field(Field = "account", Indexed = false)]
-            public string Account { get; set; }
+        [Field(Field = "account", Indexed = false)]
+        public string Account { get; set; }
 
-            /// <summary>
-            /// 教師編號
-            /// </summary>
-            [Field(Field = "ref_teacher_id", Indexed = false)]
-            public int RefTeacherID { get; set; }
+        /// <summary>
+        /// 教師編號
+        /// </summary>
+        [Field(Field = "ref_teacher_id", Indexed = false)]
+        public int RefTeacherID { get; set; }
 
-            /// <summary>
-            /// 建立者帳號
-            /// </summary>
-            [Field(Field = "created_by", Indexed = false)]
-            public string CreatedBy { get; set; }
-        }
-    
+        /// <summary>
+        /// 建立者帳號
+        /// </summary>
+        [Field(Field = "created_by", Indexed = false)]
+        public string CreatedBy { get; set; }
+
+        /// <summary>
+        /// 建立日期
+        /// </summary>
+        [Field(Field = "create_time", Indexed = false)]
+        public DateTime CreateTime { get; set; }
+
+    }
+
 }
