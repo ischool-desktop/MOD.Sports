@@ -32,6 +32,19 @@ namespace ischool.Sports
 <Feature Code=""AE234B9C-FE8A-4540-97F2-B766DE817D1C"" Permission=""Execute""/>
 <Feature Code=""E8F13373-5C90-4ED8-9FBD-DE1DAC9B6E28"" Permission=""Execute""/>
 <Feature Code=""AC9170BD-E80E-4CDE-BAA5-D097BF019A0E"" Permission=""Execute""/>
+<Feature Code=""783839F5-161F-47E5-BD3C-4E558BD3E38E"" Permission=""Execute""/>
+<Feature Code=""FB8CC43D-7C13-4115-BA43-9F9E79F70B5D"" Permission=""Execute""/>
+<Feature Code=""E2448E87-B79E-4F45-9F71-185772BF14A2"" Permission=""Execute""/>
+<Feature Code=""7D8AD083-3A66-4116-BAE8-72C90E95AB67"" Permission=""Execute""/>
+<Feature Code=""66C5D1F8-C03C-4D9C-BD26-7C432461E34C"" Permission=""Execute""/>
+<Feature Code=""81FBBE8F-3767-4ACB-8720-35DC8F078097"" Permission=""Execute""/>
+<Feature Code=""FEBDF352-8CB4-41D4-906C-E1F444EDCEA8"" Permission=""Execute""/>
+<Feature Code=""AF62B6A2-69AE-48F4-910E-63586A2593D7"" Permission=""Execute""/>
+<Feature Code=""EDE14B67-0827-4E29-BB79-F383690474AD"" Permission=""Execute""/>
+<Feature Code=""9D6766B3-A27D-49EF-8AB8-BB5E9352819B"" Permission=""Execute""/>
+<Feature Code=""F227014D-F8C7-4DA5-AD89-5D492D8513DA"" Permission=""Execute""/>
+<Feature Code=""584E7615-D986-44E4-8ACD-B513889E4C18"" Permission=""Execute""/>
+<Feature Code=""BEF49287-7C2D-4702-ACE0-5515636C0048"" Permission=""Execute""/>
 </Permissions>";
 
         public static string _roleID;
@@ -150,7 +163,7 @@ namespace ischool.Sports
             {
                 MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定賽制"].Enable = Permissions.設定賽制權限;
                 MotherForm.RibbonBarItems[MODName, "基本設定"]["競賽設定"]["設定賽制"].Click += delegate
-                {                   
+                {
 
                     if (DAO.Actor.Instance().CheckAdmin())
                     {
@@ -164,12 +177,12 @@ namespace ischool.Sports
                 };
             }
             #endregion
-            
+
             #region 管理競賽樣板
             {
                 MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽樣板"].Enable = Permissions.管理競賽樣板權限;
                 MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理競賽樣板"].Click += delegate
-                {                   
+                {
 
                     if (DAO.Actor.Instance().CheckAdmin())
                     {
@@ -254,6 +267,23 @@ namespace ischool.Sports
             }
             #endregion
 
+            #region 管理歷年紀錄
+            {
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理歷年紀錄"].Enable = Permissions.管理歷年紀錄權限;
+                MotherForm.RibbonBarItems[MODName, "管理"]["管理"]["管理歷年紀錄"].Click += delegate
+                {
+                    if (DAO.Actor.Instance().CheckAdmin())
+                    {
+                        (new frmHistoricalRecords()).ShowDialog();
+                    }
+                    else
+                    {
+                        MsgBox.Show("此帳號沒有體育競賽管理權限!");
+                    }
+
+                };
+            }
+            #endregion
             #region 設定管理員
             {
                 MotherForm.RibbonBarItems[MODName, "基本設定"]["人員設定"]["設定管理員"].Enable = Permissions.設定管理員權限;
@@ -283,6 +313,7 @@ namespace ischool.Sports
             detail.Add(new RibbonFeature(Permissions.管理報名記錄, "管理報名記錄"));
             detail.Add(new RibbonFeature(Permissions.管理競賽, "管理競賽"));
             detail.Add(new RibbonFeature(Permissions.管理競賽樣板, "管理競賽樣板"));
+            detail.Add(new RibbonFeature(Permissions.管理歷年紀錄, "管理歷年紀錄"));
         }
 
     }

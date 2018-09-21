@@ -88,5 +88,13 @@ namespace ischool.Sports
                 return FISCA.Permission.UserAcl.Current[管理競賽樣板].Executable;
             }
         }
+        public static string 管理歷年紀錄 { get { return "783839F5-161F-47E5-BD3C-4E558BD3E38E"; } }
+        public static bool 管理歷年紀錄權限
+        {
+            get
+            {
+                return FISCA.Permission.UserAcl.Current[管理歷年紀錄].Executable;
+            }
+        }
     }
 }

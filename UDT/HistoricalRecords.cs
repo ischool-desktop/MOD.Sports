@@ -24,7 +24,7 @@ namespace ischool.Sports.UDT
         /// 名次
         /// </summary>
         [Field(Field = "rank", Indexed = false)]
-        public int Rank { get; set; }
+        public int? Rank { get; set; }
 
         /// <summary>
         /// 選手姓名

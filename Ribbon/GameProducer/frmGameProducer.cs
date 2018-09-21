@@ -446,6 +446,10 @@ namespace ischool.Sports
         private void frmGameProducer_Load(object sender, EventArgs e)
         {
             this.MaximumSize = this.MinimumSize = this.Size;
+
+            // 功能未開發完，先hide
+            btnAdd.Visible = btnEdit.Visible = btnDel.Visible = false;
+
             btnRun.Enabled = false;
             cbxEventItem.Enabled = false;
             lblPlayerCount.Text = "";
