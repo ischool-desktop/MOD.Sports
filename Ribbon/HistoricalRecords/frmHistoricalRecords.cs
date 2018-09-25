@@ -27,6 +27,7 @@ namespace ischool.Sports
         Dictionary<string, List<UDT.Players>> _teamPlayerDict = new Dictionary<string, List<UDT.Players>>();
         AccessHelper _accessHelper = new AccessHelper();
         BackgroundWorker _bgwLoadData = new BackgroundWorker();
+        bool _is_bgwLoadDataBusy = false;
         private string _userAccount = DAO.Actor.Instance().GetUserAccount();
 
         int _selectEventID = 0;
@@ -40,18 +41,17 @@ namespace ischool.Sports
         private void _bgwLoadData_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //            lblRowCount.Text = $"共{_HistoricalRecordsList.Count}筆";
-            btnSave.Enabled = true;
-            LoadEventItemName();
-        }
 
-        private void LoadDataToDataGridView()
-        {
-            dgData.Rows.Clear();
-            foreach (UDT.HistoricalRecords rec in _HistoricalRecordsList)
+            if (_is_bgwLoadDataBusy)
             {
-                int rowIdx = dgData.Rows.Add();
-                dgData.Rows[rowIdx].Cells[colSchoolYear.Index].Value = "";
+                _is_bgwLoadDataBusy = false;
+                _bgwLoadData.RunWorkerAsync();
+                return;
             }
+
+            btnSave.Enabled = iptSchoolYear.Enabled = true;
+            LoadEventItemName();
+            LoadDataToGridView(false);
         }
 
         private void _bgwLoadData_DoWork(object sender, DoWorkEventArgs e)
@@ -79,43 +79,47 @@ namespace ischool.Sports
                     _EventItemDict.Add(key, uid);
             }
 
-            // 取得歷史資料 
-            _HistoricalRecordsList = _accessHelper.Select<UDT.HistoricalRecords>($"ref_event_id in({string.Join(",", _EventsDict.Keys.ToArray())})");
-
-            List<UDT.Teams> teamsList = _accessHelper.Select<UDT.Teams>($"ref_event_id in({string.Join(",", _EventsDict.Keys.ToArray())})");
-
-            List<string> tempID = new List<string>();
-            foreach (UDT.Teams t in teamsList)
+            if (_EventsDict.Keys.Count > 0)
             {
-                if (!_teamDict.ContainsKey(t.RefEventId))
-                    _teamDict.Add(t.RefEventId, new List<UDT.Teams>());
+                // 取得歷史資料 
+                _HistoricalRecordsList = _accessHelper.Select<UDT.HistoricalRecords>($"ref_event_id in({string.Join(",", _EventsDict.Keys.ToArray())})");
 
-                tempID.Add(t.UID);
-                _teamDict[t.RefEventId].Add(t);
+                List<UDT.Teams> teamsList = _accessHelper.Select<UDT.Teams>($"ref_event_id in({string.Join(",", _EventsDict.Keys.ToArray())})");
+
+                List<string> tempID = new List<string>();
+                foreach (UDT.Teams t in teamsList)
+                {
+                    if (!_teamDict.ContainsKey(t.RefEventId))
+                        _teamDict.Add(t.RefEventId, new List<UDT.Teams>());
+
+                    tempID.Add(t.UID);
+                    _teamDict[t.RefEventId].Add(t);
+                }
+
+                List<UDT.Players> playerList = _accessHelper.Select<UDT.Players>($"ref_team_id is null AND ref_event_id in({string.Join(",", _EventsDict.Keys.ToArray())})");
+
+                foreach (UDT.Players p in playerList)
+                {
+                    if (!_playerDict.ContainsKey(p.RefEventId))
+                        _playerDict.Add(p.RefEventId, new List<UDT.Players>());
+
+                    _playerDict[p.RefEventId].Add(p);
+                }
+
+                _teamPlayerDict.Clear();
+
+                List<UDT.Players> playerListT = _accessHelper.Select<UDT.Players>($"ref_team_id in({string.Join(",", tempID.ToArray())})");
+
+                foreach (UDT.Players p in playerListT)
+                {
+                    string uid = p.RefTeamId.ToString();
+                    if (!_teamPlayerDict.ContainsKey(uid))
+                        _teamPlayerDict.Add(uid, new List<UDT.Players>());
+
+                    _teamPlayerDict[uid].Add(p);
+                }
             }
-
-            List<UDT.Players> playerList = _accessHelper.Select<UDT.Players>($"ref_team_id is null AND ref_event_id in({string.Join(",", _EventsDict.Keys.ToArray())})");
-
-            foreach (UDT.Players p in playerList)
-            {
-                if (!_playerDict.ContainsKey(p.RefEventId))
-                    _playerDict.Add(p.RefEventId, new List<UDT.Players>());
-
-                _playerDict[p.RefEventId].Add(p);
-            }
-
-            _teamPlayerDict.Clear();
-
-            List<UDT.Players> playerListT = _accessHelper.Select<UDT.Players>($"ref_team_id in({string.Join(",", tempID.ToArray())})");
-
-            foreach (UDT.Players p in playerListT)
-            {
-                string uid = p.RefTeamId.ToString();
-                if (!_teamPlayerDict.ContainsKey(uid))
-                    _teamPlayerDict.Add(uid, new List<UDT.Players>());
-
-                _teamPlayerDict[uid].Add(p);
-            }
+            
         }
 
         private void LoadEventItemName()
@@ -142,7 +146,17 @@ namespace ischool.Sports
         {
             iptSchoolYear.Enabled = btnSave.Enabled = false;
             LoadGroupType();
-            _bgwLoadData.RunWorkerAsync();
+
+            if (_bgwLoadData.IsBusy)
+            {
+                _is_bgwLoadDataBusy = true;
+            }
+            else
+            {
+                _bgwLoadData.RunWorkerAsync();
+            }
+
+
         }
 
         /// <summary>
@@ -164,6 +178,10 @@ namespace ischool.Sports
         {
             if (!iptSchoolYear.IsEmpty)
                 _SelectSchoolYear = iptSchoolYear.Value;
+
+            cbxEventItem.Text = "";
+
+            LoadData();
         }
 
         private void cbxEventItem_SelectedIndexChanged(object sender, EventArgs e)
@@ -208,7 +226,7 @@ namespace ischool.Sports
                         gpName = _GroupTypesDict[ev.RefGroupTypeId].Name;
 
                     // 列隊
-                    if (_teamDict.ContainsKey(_selectEventID))
+                    if (_teamDict.ContainsKey(_selectEventID) && ev.IsTeam)
                     {
 
                         foreach (UDT.Teams t in _teamDict[_selectEventID])
@@ -245,7 +263,7 @@ namespace ischool.Sports
                             {
                                 dgData.Rows[rowIdx].Cells[colRank.Index].Value = hr.Rank.Value;
                             }
-                            
+
                             if (_teamPlayerDict.ContainsKey(t.UID))
                             {
                                 List<string> name = new List<string>();
@@ -260,7 +278,7 @@ namespace ischool.Sports
 
                                 if (jSON.Count > 0)
                                 {
-                                    hr.Players = "[" + string.Join(",", jSON.ToArray()) + "]";
+                                    hr.Players = $"[{string.Join(",", jSON.ToArray())}]";
                                 }
                             }
 
@@ -271,7 +289,7 @@ namespace ischool.Sports
                     }
 
                     // 列選手
-                    if (_playerDict.ContainsKey(_selectEventID))
+                    if (_playerDict.ContainsKey(_selectEventID) && ev.IsTeam == false)
                     {
 
                         foreach (UDT.Players p in _playerDict[_selectEventID])
@@ -284,6 +302,36 @@ namespace ischool.Sports
                             dgData.Rows[rowIdx].Cells[colIsTeam.Index].Value = ev.IsTeam ? "是" : "否";
                             dgData.Rows[rowIdx].Cells[colTeamName.Index].Value = "";
                             dgData.Rows[rowIdx].Cells[colPlayer.Index].Value = p.Name;
+
+
+                            UDT.HistoricalRecords hr = null;
+
+                            foreach (UDT.HistoricalRecords rec in _HistoricalRecordsList)
+                            {
+                                // 比對學生系統編號
+
+                                string key = $"\"ref_student_id\":{p.RefStudentId}";
+
+                                if (rec.RefEventId == _selectEventID && rec.Players.Contains(key))
+                                {
+                                    hr = rec;
+                                }
+                            }
+
+                            if (hr == null)
+                            {
+                                hr = new UDT.HistoricalRecords();
+                                hr.RefEventId = _selectEventID;
+                                hr.Players = $"[{parsePlayerToJSonString(p)}]";
+                            }
+
+                            if (hr.Rank.HasValue)
+                            {
+                                dgData.Rows[rowIdx].Cells[colRank.Index].Value = hr.Rank.Value;
+                            }
+
+                            dgData.Rows[rowIdx].Tag = hr;
+
                             rowCount++;
                         }
                     }
@@ -297,7 +345,7 @@ namespace ischool.Sports
         {
             char cc = '"';
             string c1 = "'";
-            string value = "[{'ref_student_id':" + p.RefStudentId + "},{'name':'" + p.Name + "'},{'class_name':'" + p.ClassName + "'},{'seat_no':" + p.SeatNo + "}]";
+            string value = "[{'ref_student_id':" + p.RefStudentId + "},{'name':'" + p.Name + "'},{'class_name':'" + p.ClassName + "'},{'seat_no':" + p.SeatNo + "},{'is_team_leader':" + p.IsTeamLeader.ToString().ToLower() + "}]";
             value = value.Replace(Char.Parse(c1), cc);
             return value;
         }
@@ -312,11 +360,12 @@ namespace ischool.Sports
         {
             try
             {
+                btnSave.Enabled = false;
                 List<UDT.HistoricalRecords> ssData = new List<UDT.HistoricalRecords>();
                 foreach (DataGridViewRow drv in dgData.Rows)
                 {
                     UDT.HistoricalRecords hr = drv.Tag as UDT.HistoricalRecords;
-                    
+
                     if (hr != null)
                     {
                         hr.Rank = null;
@@ -336,13 +385,19 @@ namespace ischool.Sports
                     ssData.SaveAll();
                 }
                 FISCA.Presentation.Controls.MsgBox.Show("儲存完成");
+                LoadData();
             }
             catch (Exception ex)
             {
-                FISCA.Presentation.Controls.MsgBox.Show("儲存失敗,"+ex.Message);
+                FISCA.Presentation.Controls.MsgBox.Show("儲存失敗," + ex.Message);
+                btnSave.Enabled = true;
                 return;
             }
-           
+            finally
+            {
+
+            }
+
         }
     }
 }
