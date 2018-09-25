@@ -84,6 +84,78 @@ namespace ischool.Sports
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // 檢查畫面日期是否合理
+            // 活動開始日期與活動結束日期必填
+            if (dtEventStartDate.IsEmpty || dtEventEndDate.IsEmpty)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("活動開始日期與活動結束日期 必填");
+                return;
+            }
+            // 活動開始日期必須在活動結束日期之前
+            if (dtEventStartDate.Value > dtEventEndDate.Value)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("活動開始日期必須在活動結束日期之前");
+                return;
+            }
+
+            //當報名開始日期與報名結束日期當其中有填，需要填完整。
+            if (dtRegStartDate.IsEmpty == false || dtRegEndDate.IsEmpty == false)
+            {
+                if (dtRegStartDate.IsEmpty == false && dtRegEndDate.IsEmpty == false)
+                {
+
+                }
+                else
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("當報名開始日期與報名結束日期其中有填，需要填寫完整。");
+                    return;
+                }
+            }
+            // 當報名開始日期與報名結束日期都有填寫。
+            if (dtRegStartDate.IsEmpty == false && dtRegEndDate.IsEmpty == false)
+            {
+                if (dtRegStartDate.Value > dtRegEndDate.Value)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("報名開始日期必須在報名結束日期之前");
+                    return;
+                }
+            }
+
+            //當抽籤開始日期與抽籤結束日期當其中有填，需要填完整。
+            if (dtDrawLotsStartDate.IsEmpty == false || dtDrawLotsEndDate.IsEmpty == false)
+            {
+                if (dtDrawLotsStartDate.IsEmpty == false && dtDrawLotsEndDate.IsEmpty == false)
+                {
+
+                }
+                else
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("當抽籤開始日期與抽籤結束日期其中有填，需要填寫完整。");
+                    return;
+                }
+            }
+            // 當抽籤開始日期與抽籤結束日期都有填寫。
+            if (dtDrawLotsStartDate.IsEmpty == false && dtDrawLotsEndDate.IsEmpty == false)
+            {
+                if (dtRegEndDate.IsEmpty)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("需要填寫報名日期。");
+                    return;
+                }
+
+                if (dtDrawLotsStartDate.Value > dtDrawLotsEndDate.Value)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("抽籤開始日期必須在抽籤結束日期之前");
+                    return;
+                }
+
+                if (dtDrawLotsStartDate.Value < dtRegEndDate.Value)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("抽籤開始日期必須在報名結束日期之後");
+                    return;
+                }
+
+            }
             parseItems();
 
             // 檢查資料新增是否有重複
@@ -106,7 +178,7 @@ namespace ischool.Sports
         {
             bool value = false;
             AccessHelper acc = new AccessHelper();
-            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='"+_EventData.Name+"'";
+            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='" + _EventData.Name + "'";
             List<UDT.Events> dd = acc.Select<UDT.Events>(strQry);
             if (dd.Count > 0)
                 value = true;
@@ -140,6 +212,8 @@ namespace ischool.Sports
         {
             this.MaximumSize = this.MinimumSize = this.Size;
             this.btnSave.Enabled = false;
+            cbxGameType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxGroupType.DropDownStyle = ComboBoxStyle.DropDownList;
             if (_IsAddMode)
             {
                 this.Text = "新增競賽項目";
@@ -195,6 +269,7 @@ namespace ischool.Sports
                 }
             }
         }
+
 
         private void Save()
         {
@@ -269,7 +344,8 @@ namespace ischool.Sports
             if (dtAnnouncementDate.IsEmpty)
             {
                 _EventData.AnnouncementDate = null;
-            }else
+            }
+            else
             {
                 _EventData.AnnouncementDate = dtAnnouncementDate.Value;
             }

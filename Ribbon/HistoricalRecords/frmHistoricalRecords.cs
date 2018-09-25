@@ -119,7 +119,7 @@ namespace ischool.Sports
                     _teamPlayerDict[uid].Add(p);
                 }
             }
-            
+
         }
 
         private void LoadEventItemName()
@@ -139,6 +139,7 @@ namespace ischool.Sports
         {
             _SelectSchoolYear = _DefaultSchoolYear = int.Parse(K12.Data.School.DefaultSchoolYear);
             iptSchoolYear.Value = _DefaultSchoolYear;
+            cbxEventItem.DropDownStyle = ComboBoxStyle.DropDownList;
             LoadData();
         }
 
@@ -173,16 +174,6 @@ namespace ischool.Sports
             }
         }
 
-
-        private void iptSchoolYear_ValueChanged(object sender, EventArgs e)
-        {
-            if (!iptSchoolYear.IsEmpty)
-                _SelectSchoolYear = iptSchoolYear.Value;
-
-            cbxEventItem.Text = "";
-
-            LoadData();
-        }
 
         private void cbxEventItem_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -338,8 +329,24 @@ namespace ischool.Sports
                 }
             }
 
+            SetDataGridViewCellsReadOnlyColor();
+
             lblRowCount.Text = $"共{rowCount}筆";
         }
+
+        private void SetDataGridViewCellsReadOnlyColor()
+        {
+            foreach (DataGridViewRow drv in dgData.Rows)
+            {
+                foreach (DataGridViewCell cel in drv.Cells)
+                {
+                    if (cel.ColumnIndex == colRank.Index)
+                        continue;
+                    cel.Style.BackColor = Color.LightGray;
+                }
+            }
+        }
+
 
         private string parsePlayerToJSonString(UDT.Players p)
         {
@@ -350,11 +357,6 @@ namespace ischool.Sports
             return value;
         }
 
-
-        private void dgData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -398,6 +400,16 @@ namespace ischool.Sports
 
             }
 
+        }
+
+        private void iptSchoolYear_ValueChanged(object sender, EventArgs e)
+        {
+            if (!iptSchoolYear.IsEmpty)
+                _SelectSchoolYear = iptSchoolYear.Value;
+
+            cbxEventItem.Text = "";
+
+            LoadData();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace ischool.Sports
 
         private void frmSetEventTemplate_Load(object sender, EventArgs e)
         {
+            cbxScoreType.DropDownStyle = ComboBoxStyle.DropDownList;
             LoadScoreType();
 
             if (_isAdd)

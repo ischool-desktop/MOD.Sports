@@ -86,7 +86,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 25);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 17;
+            this.btnSave.TabIndex = 23;
             this.btnSave.Text = "儲存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -101,7 +101,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 25);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExit.TabIndex = 18;
+            this.btnExit.TabIndex = 24;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -594,7 +594,7 @@
             this.chkIsDrawLots.Name = "chkIsDrawLots";
             this.chkIsDrawLots.Size = new System.Drawing.Size(54, 21);
             this.chkIsDrawLots.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkIsDrawLots.TabIndex = 14;
+            this.chkIsDrawLots.TabIndex = 16;
             this.chkIsDrawLots.Text = "抽籤";
             // 
             // dtDrawLotsEndDate
@@ -647,7 +647,7 @@
             this.dtDrawLotsEndDate.Name = "dtDrawLotsEndDate";
             this.dtDrawLotsEndDate.Size = new System.Drawing.Size(157, 25);
             this.dtDrawLotsEndDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtDrawLotsEndDate.TabIndex = 15;
+            this.dtDrawLotsEndDate.TabIndex = 18;
             // 
             // txtEventDescription
             // 
@@ -660,7 +660,7 @@
             this.txtEventDescription.Multiline = true;
             this.txtEventDescription.Name = "txtEventDescription";
             this.txtEventDescription.Size = new System.Drawing.Size(607, 25);
-            this.txtEventDescription.TabIndex = 16;
+            this.txtEventDescription.TabIndex = 21;
             // 
             // chkIsTeam
             // 
@@ -674,7 +674,7 @@
             this.chkIsTeam.Name = "chkIsTeam";
             this.chkIsTeam.Size = new System.Drawing.Size(67, 21);
             this.chkIsTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkIsTeam.TabIndex = 12;
+            this.chkIsTeam.TabIndex = 19;
             this.chkIsTeam.Text = "團體賽";
             // 
             // chkAthleticOnly
@@ -689,7 +689,7 @@
             this.chkAthleticOnly.Name = "chkAthleticOnly";
             this.chkAthleticOnly.Size = new System.Drawing.Size(100, 23);
             this.chkAthleticOnly.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAthleticOnly.TabIndex = 13;
+            this.chkAthleticOnly.TabIndex = 20;
             this.chkAthleticOnly.Text = "僅體育股長報名";
             // 
             // labelX10
@@ -770,7 +770,7 @@
             this.dtDrawLotsStartDate.Name = "dtDrawLotsStartDate";
             this.dtDrawLotsStartDate.Size = new System.Drawing.Size(157, 25);
             this.dtDrawLotsStartDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtDrawLotsStartDate.TabIndex = 20;
+            this.dtDrawLotsStartDate.TabIndex = 17;
             // 
             // labelX3
             // 

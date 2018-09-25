@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.iptSchoolYear = new DevComponents.Editors.IntegerInput();
             this.dgData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnExit = new DevComponents.DotNetBar.ButtonX();
-            this.lblRowCount = new DevComponents.DotNetBar.LabelX();
             this.colSchoolYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,12 +39,15 @@
             this.colRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPlayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExit = new DevComponents.DotNetBar.ButtonX();
+            this.lblRowCount = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.cbxEventItem = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
+            this.iptSchoolYear = new DevComponents.Editors.IntegerInput();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             this.SuspendLayout();
             // 
             // labelX1
@@ -64,25 +64,6 @@
             this.labelX1.Size = new System.Drawing.Size(47, 21);
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "學年度";
-            // 
-            // iptSchoolYear
-            // 
-            this.iptSchoolYear.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.iptSchoolYear.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.iptSchoolYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.iptSchoolYear.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.iptSchoolYear.Location = new System.Drawing.Point(81, 25);
-            this.iptSchoolYear.MaxValue = 9999;
-            this.iptSchoolYear.MinValue = 1;
-            this.iptSchoolYear.Name = "iptSchoolYear";
-            this.iptSchoolYear.ShowUpDown = true;
-            this.iptSchoolYear.Size = new System.Drawing.Size(80, 25);
-            this.iptSchoolYear.TabIndex = 1;
-            this.iptSchoolYear.Value = 1;
-            this.iptSchoolYear.ValueChanged += new System.EventHandler(this.iptSchoolYear_ValueChanged);
             // 
             // dgData
             // 
@@ -102,14 +83,14 @@
             this.colRank,
             this.colTeamName,
             this.colPlayer});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgData.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgData.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgData.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.dgData.Location = new System.Drawing.Point(23, 67);
@@ -117,36 +98,6 @@
             this.dgData.RowTemplate.Height = 24;
             this.dgData.Size = new System.Drawing.Size(921, 271);
             this.dgData.TabIndex = 2;
-            this.dgData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellContentClick);
-            // 
-            // btnExit
-            // 
-            this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.AutoSize = true;
-            this.btnExit.BackColor = System.Drawing.Color.Transparent;
-            this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(869, 357);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 25);
-            this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "離開";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // lblRowCount
-            // 
-            this.lblRowCount.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.lblRowCount.BackgroundStyle.Class = "";
-            this.lblRowCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblRowCount.Location = new System.Drawing.Point(803, 38);
-            this.lblRowCount.Name = "lblRowCount";
-            this.lblRowCount.Size = new System.Drawing.Size(141, 23);
-            this.lblRowCount.TabIndex = 7;
-            this.lblRowCount.Text = "共0筆";
             // 
             // colSchoolYear
             // 
@@ -200,6 +151,35 @@
             this.colPlayer.ReadOnly = true;
             this.colPlayer.Width = 200;
             // 
+            // btnExit
+            // 
+            this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.AutoSize = true;
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExit.Location = new System.Drawing.Point(869, 357);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 25);
+            this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "離開";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // lblRowCount
+            // 
+            this.lblRowCount.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblRowCount.BackgroundStyle.Class = "";
+            this.lblRowCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblRowCount.Location = new System.Drawing.Point(803, 38);
+            this.lblRowCount.Name = "lblRowCount";
+            this.lblRowCount.Size = new System.Drawing.Size(141, 23);
+            this.lblRowCount.TabIndex = 7;
+            this.lblRowCount.Text = "共0筆";
+            // 
             // labelX2
             // 
             this.labelX2.BackColor = System.Drawing.Color.Transparent;
@@ -225,7 +205,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 25);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 9;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "儲存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -254,14 +234,34 @@
             this.cbxEventItem.Name = "cbxEventItem";
             this.cbxEventItem.Size = new System.Drawing.Size(420, 25);
             this.cbxEventItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbxEventItem.TabIndex = 11;
+            this.cbxEventItem.TabIndex = 1;
             this.cbxEventItem.SelectedIndexChanged += new System.EventHandler(this.cbxEventItem_SelectedIndexChanged);
+            // 
+            // iptSchoolYear
+            // 
+            this.iptSchoolYear.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.iptSchoolYear.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.iptSchoolYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.iptSchoolYear.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.iptSchoolYear.Location = new System.Drawing.Point(77, 25);
+            this.iptSchoolYear.MaxValue = 9999;
+            this.iptSchoolYear.MinValue = 1;
+            this.iptSchoolYear.Name = "iptSchoolYear";
+            this.iptSchoolYear.ShowUpDown = true;
+            this.iptSchoolYear.Size = new System.Drawing.Size(80, 25);
+            this.iptSchoolYear.TabIndex = 0;
+            this.iptSchoolYear.Value = 1;
+            this.iptSchoolYear.ValueChanged += new System.EventHandler(this.iptSchoolYear_ValueChanged);
             // 
             // frmHistoricalRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 401);
+            this.Controls.Add(this.iptSchoolYear);
             this.Controls.Add(this.cbxEventItem);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.btnSave);
@@ -269,14 +269,13 @@
             this.Controls.Add(this.lblRowCount);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.dgData);
-            this.Controls.Add(this.iptSchoolYear);
             this.Controls.Add(this.labelX1);
             this.DoubleBuffered = true;
             this.Name = "frmHistoricalRecords";
             this.Text = "管理歷年紀錄";
             this.Load += new System.EventHandler(this.frmHistoricalRecords_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,7 +284,6 @@
         #endregion
 
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.Editors.IntegerInput iptSchoolYear;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgData;
         private DevComponents.DotNetBar.ButtonX btnExit;
         private DevComponents.DotNetBar.LabelX lblRowCount;
@@ -301,5 +299,6 @@
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxEventItem;
+        private DevComponents.Editors.IntegerInput iptSchoolYear;
     }
 }
