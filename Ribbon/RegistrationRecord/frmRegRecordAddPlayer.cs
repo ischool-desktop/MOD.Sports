@@ -53,6 +53,7 @@ namespace ischool.Sports
                 FISCA.Presentation.Controls.MsgBox.Show("");
 
             }
+            this.DialogResult = DialogResult.Yes;
         }
 
         private void _bgLoadData_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -168,7 +169,7 @@ namespace ischool.Sports
                 return;
             }
 
-            this.DialogResult = DialogResult.Yes;
+           
         }
 
         private void Save()

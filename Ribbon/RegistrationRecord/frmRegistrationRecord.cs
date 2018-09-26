@@ -30,6 +30,9 @@ namespace ischool.Sports
         // 畫面上畫面上所選競賽項目
         UDT.Events _selectedEvent = null;
 
+        // 畫面上所選 team_id
+        string _selectedTeamUID = "";
+
         Dictionary<string, string> _classNameIdDict = new Dictionary<string, string>();
         Dictionary<string, string> _eventItemDict = new Dictionary<string, string>();
         Dictionary<string, UDT.Events> _eventItemEventDict = new Dictionary<string, UDT.Events>();
@@ -58,8 +61,30 @@ namespace ischool.Sports
 
         private void _bgSearch_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (_bgSearch.IsBusy)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("Busy");
+                
+            }
+
             SetControlEnabled(true);
             LoadDataToGridView();
+
+            // 檢查已選 team，再選到 team
+            if (!string.IsNullOrWhiteSpace(_selectedTeamUID))
+            {
+                // 選到該隊
+                foreach(DataGridViewRow drv in dgTeamData.Rows)
+                {
+                    string tuid = drv.Tag.ToString();
+                    if (tuid == _selectedTeamUID)
+                    {
+                        drv.Selected = true;
+                    }
+                }
+
+                LoadDGPlayerDataGridView(_selectedTeamUID);
+            }
             // 檢查個人賽
             if (_playerDict.ContainsKey(_PersionalTeam))
             {
@@ -76,7 +101,7 @@ namespace ischool.Sports
         {
             SetControlEnabled(true);
             LoadEventDataToCombo();
-            LoadClassDataToCombo();
+            LoadClassDataToCombo();            
 
         }
 
@@ -114,25 +139,29 @@ namespace ischool.Sports
         {
             dgTeamData.Rows.Clear();
             dgPlayerData.Rows.Clear();
-            foreach (DataRow dr in _teamList)
-            {
-                int rowIdx = dgTeamData.Rows.Add();
-                // team uid 
-                dgTeamData.Rows[rowIdx].Tag = dr["t_uid"].ToString();
-                dgTeamData.Rows[rowIdx].Cells[colCategory.Index].Value = dr["category"].ToString();
-                dgTeamData.Rows[rowIdx].Cells[colEventItem.Index].Value = dr["event_name"].ToString();
-                dgTeamData.Rows[rowIdx].Cells[colGroupType.Index].Value = dr["group_types_name"].ToString();
-                dgTeamData.Rows[rowIdx].Cells[colTeamName.Index].Value = dr["team_name"].ToString();
-                dgTeamData.Rows[rowIdx].Cells[colTeamLotNo.Index].Value = dr["t_lot_no"].ToString();
-            }
 
-            SetLblTeamCount(_teamList.Count);
-
-            if (dgTeamData.SelectedRows.Count == 1)
+            if (_selectedEvent != null && _selectedEvent.IsTeam)
             {
-                string t_uid = dgTeamData.SelectedRows[0].Tag.ToString();
-                LoadDGPlayerDataGridView(t_uid);
-            }
+                foreach (DataRow dr in _teamList)
+                {
+                    int rowIdx = dgTeamData.Rows.Add();
+                    // team uid 
+                    dgTeamData.Rows[rowIdx].Tag = dr["t_uid"].ToString();
+                    dgTeamData.Rows[rowIdx].Cells[colCategory.Index].Value = dr["category"].ToString();
+                    dgTeamData.Rows[rowIdx].Cells[colEventItem.Index].Value = dr["event_name"].ToString();
+                    dgTeamData.Rows[rowIdx].Cells[colGroupType.Index].Value = dr["group_types_name"].ToString();
+                    dgTeamData.Rows[rowIdx].Cells[colTeamName.Index].Value = dr["team_name"].ToString();
+                    dgTeamData.Rows[rowIdx].Cells[colTeamLotNo.Index].Value = dr["t_lot_no"].ToString();
+                }
+
+                SetLblTeamCount(_teamList.Count);
+
+                if (dgTeamData.SelectedRows.Count == 1)
+                {
+                    string t_uid = dgTeamData.SelectedRows[0].Tag.ToString();
+                    LoadDGPlayerDataGridView(t_uid);
+                }
+            }           
         }
 
         private void LoadEventData()
@@ -365,8 +394,8 @@ namespace ischool.Sports
 
             if (dgTeamData.SelectedRows.Count == 1)
             {
-                string t_uid = dgTeamData.SelectedRows[0].Tag.ToString();
-                LoadDGPlayerDataGridView(t_uid);
+                _selectedTeamUID = dgTeamData.SelectedRows[0].Tag.ToString();
+                LoadDGPlayerDataGridView(_selectedTeamUID);
             }
         }
 
@@ -378,6 +407,7 @@ namespace ischool.Sports
             if (_playerDict.ContainsKey(uid))
             {
                 int count = 0;
+                int cotTeamLeader = 0;
                 foreach (DataRow dr in _playerDict[uid])
                 {
                     string puid = dr["p_uid"].ToString();
@@ -392,13 +422,20 @@ namespace ischool.Sports
                         string strLeader = "否";
                         if (dr["is_team_leader"].ToString() == "true" || dr["is_team_leader"].ToString() == "t")
                         {
+
                             strLeader = "是";
+                            cotTeamLeader++;
                         }
                         dgPlayerData.Rows[rowIdx].Cells[colLeader.Index].Value = strLeader;
                         dgPlayerData.Rows[rowIdx].Cells[colPlayerLotNo.Index].Value = dr["p_lot_no"].ToString();
                         dgPlayerData.Rows[rowIdx].Cells[colRegDate.Index].Value = dr["player_last_update"].ToString();
                         dgPlayerData.Rows[rowIdx].Cells[colRegAccount.Index].Value = dr["created_by"].ToString();
+
                     }
+                }
+                if (count > 0 && cotTeamLeader == 0)
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("請設定隊長。");
                 }
 
                 // 統計數
@@ -497,6 +534,8 @@ namespace ischool.Sports
             lblTeamType.Text = "";
             // 檢查所選的是團體或個人賽
             _selectedEvent = null;
+            SetLblPlayerCount(0);
+            SetLblTeamCount(0);
 
             if (_eventItemEventDict.ContainsKey(cbxEventItem.Text))
             {
@@ -506,12 +545,14 @@ namespace ischool.Sports
             bool isTeamEnable = true;
             if (_selectedEvent != null)
             {
+                _selectedTeamUID = "";
                 if (_selectedEvent.IsTeam)
                 {
                     lblTeamType.Text = "團體賽";
                 }
                 else
                 {
+                    
                     lblTeamType.Text = "個人賽";
                     isTeamEnable = false;
                 }
@@ -574,9 +615,12 @@ namespace ischool.Sports
         {
             if (dgPlayerData.SelectedRows.Count == 1)
             {
+
                 string uid = dgPlayerData.SelectedRows[0].Tag.ToString();
                 frmRegRecordUpdatePlayer frup = new frmRegRecordUpdatePlayer();
                 frup.SetPlayerUID(uid);
+                if (_selectedEvent != null)
+                    frup.SetIsTeam(_selectedEvent.IsTeam);
                 if (frup.ShowDialog() == DialogResult.Yes)
                 {
                     _bgSearch.RunWorkerAsync();

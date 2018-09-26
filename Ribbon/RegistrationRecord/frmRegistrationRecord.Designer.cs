@@ -32,10 +32,22 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.dgTeamData = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeamLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.iptSchoolYear = new DevComponents.Editors.IntegerInput();
             this.lblTeamCount = new DevComponents.DotNetBar.LabelX();
             this.dgPlayerData = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPlayerLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblPlayerCount = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.cbxEventItem = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -48,18 +60,6 @@
             this.btnEditPlayer = new DevComponents.DotNetBar.ButtonX();
             this.btnDelPlayer = new DevComponents.DotNetBar.ButtonX();
             this.lblTeamType = new DevComponents.DotNetBar.LabelX();
-            this.colEventItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroupType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTeamLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPlayerLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRegAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgTeamData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPlayerData)).BeginInit();
@@ -102,12 +102,44 @@
             this.dgTeamData.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgTeamData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgTeamData.Location = new System.Drawing.Point(22, 100);
+            this.dgTeamData.MultiSelect = false;
             this.dgTeamData.Name = "dgTeamData";
             this.dgTeamData.RowTemplate.Height = 24;
             this.dgTeamData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTeamData.Size = new System.Drawing.Size(500, 401);
             this.dgTeamData.TabIndex = 1;
             this.dgTeamData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgTeamData_MouseClick);
+            // 
+            // colEventItem
+            // 
+            this.colEventItem.HeaderText = "競賽項目";
+            this.colEventItem.Name = "colEventItem";
+            this.colEventItem.ReadOnly = true;
+            // 
+            // colGroupType
+            // 
+            this.colGroupType.HeaderText = "參賽組別";
+            this.colGroupType.Name = "colGroupType";
+            this.colGroupType.ReadOnly = true;
+            // 
+            // colTeamName
+            // 
+            this.colTeamName.HeaderText = "隊名";
+            this.colTeamName.Name = "colTeamName";
+            this.colTeamName.ReadOnly = true;
+            this.colTeamName.Width = 150;
+            // 
+            // colTeamLotNo
+            // 
+            this.colTeamLotNo.HeaderText = "抽籤號";
+            this.colTeamLotNo.Name = "colTeamLotNo";
+            this.colTeamLotNo.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "競賽類別";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
             // 
             // btnExit
             // 
@@ -181,12 +213,57 @@
             this.dgPlayerData.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgPlayerData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgPlayerData.Location = new System.Drawing.Point(550, 103);
+            this.dgPlayerData.MultiSelect = false;
             this.dgPlayerData.Name = "dgPlayerData";
             this.dgPlayerData.RowTemplate.Height = 24;
             this.dgPlayerData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgPlayerData.Size = new System.Drawing.Size(613, 398);
             this.dgPlayerData.TabIndex = 11;
             this.dgPlayerData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgPlayerData_MouseClick);
+            // 
+            // colClassName
+            // 
+            this.colClassName.HeaderText = "班級";
+            this.colClassName.Name = "colClassName";
+            this.colClassName.ReadOnly = true;
+            // 
+            // colSeatNo
+            // 
+            this.colSeatNo.HeaderText = "座號";
+            this.colSeatNo.Name = "colSeatNo";
+            this.colSeatNo.ReadOnly = true;
+            this.colSeatNo.Width = 70;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "姓名";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPlayerLotNo
+            // 
+            this.colPlayerLotNo.HeaderText = "抽籤號";
+            this.colPlayerLotNo.Name = "colPlayerLotNo";
+            this.colPlayerLotNo.ReadOnly = true;
+            // 
+            // colLeader
+            // 
+            this.colLeader.HeaderText = "隊長";
+            this.colLeader.Name = "colLeader";
+            this.colLeader.ReadOnly = true;
+            // 
+            // colRegDate
+            // 
+            this.colRegDate.HeaderText = "報名時間";
+            this.colRegDate.Name = "colRegDate";
+            this.colRegDate.ReadOnly = true;
+            // 
+            // colRegAccount
+            // 
+            this.colRegAccount.HeaderText = "報名者帳號";
+            this.colRegAccount.Name = "colRegAccount";
+            this.colRegAccount.ReadOnly = true;
+            this.colRegAccount.Width = 200;
             // 
             // lblPlayerCount
             // 
@@ -359,81 +436,6 @@
             this.lblTeamType.Size = new System.Drawing.Size(47, 21);
             this.lblTeamType.TabIndex = 25;
             this.lblTeamType.Text = "團體賽";
-            // 
-            // colEventItem
-            // 
-            this.colEventItem.HeaderText = "競賽項目";
-            this.colEventItem.Name = "colEventItem";
-            this.colEventItem.ReadOnly = true;
-            // 
-            // colGroupType
-            // 
-            this.colGroupType.HeaderText = "參賽組別";
-            this.colGroupType.Name = "colGroupType";
-            this.colGroupType.ReadOnly = true;
-            // 
-            // colTeamName
-            // 
-            this.colTeamName.HeaderText = "隊名";
-            this.colTeamName.Name = "colTeamName";
-            this.colTeamName.ReadOnly = true;
-            this.colTeamName.Width = 150;
-            // 
-            // colTeamLotNo
-            // 
-            this.colTeamLotNo.HeaderText = "抽籤號";
-            this.colTeamLotNo.Name = "colTeamLotNo";
-            this.colTeamLotNo.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "競賽類別";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colClassName
-            // 
-            this.colClassName.HeaderText = "班級";
-            this.colClassName.Name = "colClassName";
-            this.colClassName.ReadOnly = true;
-            // 
-            // colSeatNo
-            // 
-            this.colSeatNo.HeaderText = "座號";
-            this.colSeatNo.Name = "colSeatNo";
-            this.colSeatNo.ReadOnly = true;
-            this.colSeatNo.Width = 70;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "姓名";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colPlayerLotNo
-            // 
-            this.colPlayerLotNo.HeaderText = "抽籤號";
-            this.colPlayerLotNo.Name = "colPlayerLotNo";
-            this.colPlayerLotNo.ReadOnly = true;
-            // 
-            // colLeader
-            // 
-            this.colLeader.HeaderText = "隊長";
-            this.colLeader.Name = "colLeader";
-            this.colLeader.ReadOnly = true;
-            // 
-            // colRegDate
-            // 
-            this.colRegDate.HeaderText = "報名時間";
-            this.colRegDate.Name = "colRegDate";
-            this.colRegDate.ReadOnly = true;
-            // 
-            // colRegAccount
-            // 
-            this.colRegAccount.HeaderText = "報名者帳號";
-            this.colRegAccount.Name = "colRegAccount";
-            this.colRegAccount.ReadOnly = true;
-            this.colRegAccount.Width = 200;
             // 
             // frmRegistrationRecord
             // 

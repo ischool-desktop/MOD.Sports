@@ -18,7 +18,10 @@ namespace ischool.Sports
     {
         UDT.Players _player = null;
         private string _uid = "";
+        // 團體 t,個人f
+        private bool _isTeam = false;
         List<UDT.Players> _temp = new List<UDT.Players>();
+        List<UDT.Players> _teamP = new List<UDT.Players>();
         BackgroundWorker _bgLoadData = new BackgroundWorker();
         public frmRegRecordUpdatePlayer()
         {
@@ -30,12 +33,6 @@ namespace ischool.Sports
 
         private void _bgLoadData_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            _player = null;
-            if (_temp != null && _temp.Count > 0)
-            {
-                _player = _temp[0];
-            }
-
             if (_player != null)
             {
                 lblStudentText.Text = _player.ClassName + " 班 " + _player.SeatNo + " 號 " + _player.Name;
@@ -51,12 +48,29 @@ namespace ischool.Sports
         {
             AccessHelper ah = new AccessHelper();
             _temp = ah.Select<UDT.Players>(" uid = " + _uid);
+            _player = null;
+            if (_temp != null && _temp.Count > 0)
+            {
+                _player = _temp[0];
+            }
 
+            if (_isTeam)
+            {
+                if (_player.RefTeamId.HasValue)
+                {
+                    _teamP = ah.Select<UDT.Players>("ref_team_id = " + _player.RefTeamId.Value);
+                }
+            }
         }
 
         public void SetPlayerUID(string uid)
         {
             _uid = uid;
+        }
+
+        public void SetIsTeam(bool bo)
+        {
+            _isTeam = bo;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -67,6 +81,10 @@ namespace ischool.Sports
         private void frmRegRecordUpdatePlayer_Load(object sender, EventArgs e)
         {
             this.MaximumSize = this.MinimumSize = this.Size;
+            // 當個人一定是隊長
+            if (_isTeam == false)
+                chkIsLeader.Checked = true;
+
             _bgLoadData.RunWorkerAsync();
         }
 
@@ -76,6 +94,50 @@ namespace ischool.Sports
             {
                 try
                 {
+                    // 檢查是團體或個人，團體先將其他隊員isLeader設成 false
+                    if (_isTeam)
+                    {
+                        // 當設定隊長
+                        if (chkIsLeader.Checked)
+                        {
+                            if (_teamP.Count > 0)
+                            {
+                                foreach (UDT.Players p in _teamP)
+                                {
+                                    p.IsTeamLeader = false;
+                                }
+                                _teamP.SaveAll();
+                            }
+                        }
+                        else
+                        {
+                            // 取消隊長，需要檢查是否有其他人當隊長，如果沒有不能取消
+                            bool hasTeamLeader = false;
+                            if (_teamP.Count > 0)
+                            {
+                                foreach (UDT.Players p in _teamP)
+                                {
+                                    // 自己不算
+                                    if (p.UID == _uid)
+                                        continue;
+
+                                    hasTeamLeader = p.IsTeamLeader;
+                                }
+                            }
+
+                            if (hasTeamLeader == false)
+                            {
+                                FISCA.Presentation.Controls.MsgBox.Show("沒有其他隊員是隊長無法取消。");
+                                return;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 個人賽自己一定是隊長
+                        chkIsLeader.Checked = true;
+                    }
+
                     if (iptLotNo.IsEmpty)
                     {
                         _player.LotNo = null;
