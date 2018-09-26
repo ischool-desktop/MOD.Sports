@@ -46,6 +46,7 @@ namespace ischool.Sports
                 dgData.Rows[rowIdx].Cells[colName.Index].Value = st.Name;
                 dgData.Rows[rowIdx].Cells[colKey.Index].Value = st.Key;
                 dgData.Rows[rowIdx].Cells[colCreated_by.Index].Value = st.CreatedBy;
+                dgData.Rows[rowIdx].Cells[colCreated_by.Index].Style.BackColor = Color.LightGray;
             }
             btnSave.Enabled = true;
         }
@@ -53,9 +54,10 @@ namespace ischool.Sports
         private bool CheckData()
         {
             // 檢查 key ,key+name 不重複
-            List<string> check1 = new List<string>();
-            bool nullErr = false;
-            bool sameErr = false;
+            List<string> check_kn = new List<string>();
+            List<string> check_key = new List<string>();
+            List<string> check_name = new List<string>();
+            bool nullErr = false, knErr = false, keyErr = false, nameErr = false;
             foreach (DataGridViewRow drv in dgData.Rows)
             {
                 if (drv.IsNewRow)
@@ -82,23 +84,32 @@ namespace ischool.Sports
                         key = drv.Cells[colKey.Index].Value.ToString();
                     }
 
-                    if (!check1.Contains(key))
+                    if (!check_key.Contains(key))
                     {
-                        check1.Add(key);
+                        check_key.Add(key);
                     }
                     else
                     {
-                        sameErr = true;
+                        keyErr = true;
+                    }
+
+                    if (!check_name.Contains(name))
+                    {
+                        check_name.Add(name);
+                    }
+                    else
+                    {
+                        nameErr = true;
                     }
 
                     string kn = key + name;
-                    if (!check1.Contains(kn))
+                    if (!check_kn.Contains(kn))
                     {
-                        check1.Add(kn);
+                        check_kn.Add(kn);
                     }
                     else
                     {
-                        sameErr = true;
+                        knErr = true;
                     }
                 }
             }
@@ -109,9 +120,21 @@ namespace ischool.Sports
                 return false;
             }
 
-            if (sameErr)
+            if (knErr)
             {
-                FISCA.Presentation.Controls.MsgBox.Show("名稱與代號有重複無法新增。");
+                FISCA.Presentation.Controls.MsgBox.Show("名稱與代號有重複無法儲存。");
+                return false;
+            }
+
+            if (keyErr)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("代號有重複無法儲存。");
+                return false;
+            }
+
+            if (nameErr)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("名稱有重複無法儲存。");
                 return false;
             }
 
@@ -124,7 +147,9 @@ namespace ischool.Sports
             {
                 try
                 {
+                    List<string> hasDataUID = new List<string>();
                     List<UDT.ScoreTypes> ScoreTypesList = new List<UDT.ScoreTypes>();
+                    List<UDT.ScoreTypes> delDataList = new List<UDT.ScoreTypes>();
                     foreach (DataGridViewRow drv in dgData.Rows)
                     {
                         if (drv.IsNewRow)
@@ -136,10 +161,30 @@ namespace ischool.Sports
                             st = new UDT.ScoreTypes();
                             st.CreatedBy = _userAccount;
                         }
+                        else
+                        {
+                            hasDataUID.Add(st.UID);
+                        }
                         st.Name = drv.Cells[colName.Index].Value.ToString();
                         st.Key = drv.Cells[colKey.Index].Value.ToString();
                         st.CreatedBy = drv.Cells[colCreated_by.Index].Value.ToString();
                         ScoreTypesList.Add(st);
+                    }
+
+                    // 比對來源元件沒有 uid 需要刪除
+                    foreach (var sdata in _ScoreTypesList)
+                    {
+                        if (!hasDataUID.Contains(sdata.UID))
+                            delDataList.Add(sdata);
+                    }
+
+                    if (delDataList.Count > 0)
+                    {
+                        foreach (var data in delDataList)
+                        {
+                            data.Deleted = true;
+                            ScoreTypesList.Add(data);
+                        }
                     }
 
                     ScoreTypesList.SaveAll();

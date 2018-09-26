@@ -56,6 +56,7 @@ namespace ischool.Sports
                 }
 
                 dgData.Rows[rowIdx].Cells[colCreatedBy.Index].Value = data.CreatedBy;
+                dgData.Rows[rowIdx].Cells[colCreatedBy.Index].Style.BackColor = Color.LightGray;
             }
 
         }
@@ -100,6 +101,9 @@ namespace ischool.Sports
             List<UDT.GroupTypes> delDataList = new List<UDT.GroupTypes>();
             List<string> hasDataUID = new List<string>();
 
+            List<string> check_name = new List<string>();
+            bool nameErr = false;
+
             // 比對取得資料與畫面資料，進行新增修改刪除動作
             foreach (DataGridViewRow drv in dgData.Rows)
             {
@@ -120,7 +124,15 @@ namespace ischool.Sports
                     hasDataUID.Add(data.UID);
                 }
 
-                data.Name = drv.Cells[colName.Index].Value.ToString();                
+                data.Name = drv.Cells[colName.Index].Value.ToString();
+                if (!check_name.Contains(data.Name))
+                {
+                    check_name.Add(data.Name);
+                }
+                else
+                {
+                    nameErr = true;
+                }
                 data.Grade = parseGrade(drv.Cells[colGrade.Index]);
 
                 if (drv.Cells[colGender.Index].Value == null)
@@ -144,6 +156,13 @@ namespace ischool.Sports
                 }
 
                 saveDataList.Add(data);
+            }
+
+            // 檢查名稱是否重複
+            if (nameErr)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("名稱有重複無法儲存。");
+                return;
             }
 
             // 比對來源元件沒有 uid 需要刪除
