@@ -89,23 +89,52 @@ WHERE
                     MsgBox.Show(string.Format("{0}教師沒有登入帳號，無法指定為體育競賽管理員!", teacherName));
                     return;
                 }
-                DialogResult result = MsgBox.Show(string.Format("確定將{0}教師指定為體育競賽管理員?", teacherName), "提醒", MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
+                // 先檢查account 是否存在 _login table
+                if (CheckAccountInLogin(account))
                 {
-                    try
+                    DialogResult result = MsgBox.Show(string.Format("確定將{0}教師指定為體育競賽管理員?", teacherName), "提醒", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
                     {
-                        DAO.Admin.InsertAdminData(account, teacherID, DateTime.Now.ToString("yyyy/MM/dd"), userAccount, roleID, loginID);
-                        MsgBox.Show("資料儲存成功!");
-                        this.DialogResult = DialogResult.Yes;
-                        this.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MsgBox.Show(ex.Message);
+                        try
+                        {
+
+                            DAO.Admin.InsertAdminData(account, teacherID, DateTime.Now.ToString("yyyy/MM/dd"), userAccount, roleID, loginID);
+                            MsgBox.Show("資料儲存成功!");
+                            this.DialogResult = DialogResult.Yes;
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MsgBox.Show(ex.Message);
+                        }
                     }
                 }
+                else
+                {
+                    MsgBox.Show("指定帳號：" + account + " 不存在，請先在「使用者管理」新增後再指定。");
+                    return;
+                }
+
             }
+        }
+
+        /// <summary>
+        /// 檢查account存在_login table
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        private bool CheckAccountInLogin(string account)
+        {
+            bool value = false;
+            QueryHelper qh = new QueryHelper();
+            string qry = $"select login_name from _login where login_name ='{account}'";
+            DataTable dt = qh.Select(qry);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                value = true;
+            }
+            return value;
         }
 
         private void tbxSearch_TextChanged(object sender, EventArgs e)
