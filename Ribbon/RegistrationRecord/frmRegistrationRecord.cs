@@ -64,7 +64,7 @@ namespace ischool.Sports
             if (_bgSearch.IsBusy)
             {
                 FISCA.Presentation.Controls.MsgBox.Show("Busy");
-                
+
             }
 
             SetControlEnabled(true);
@@ -74,7 +74,7 @@ namespace ischool.Sports
             if (!string.IsNullOrWhiteSpace(_selectedTeamUID))
             {
                 // 選到該隊
-                foreach(DataGridViewRow drv in dgTeamData.Rows)
+                foreach (DataGridViewRow drv in dgTeamData.Rows)
                 {
                     string tuid = drv.Tag.ToString();
                     if (tuid == _selectedTeamUID)
@@ -101,7 +101,7 @@ namespace ischool.Sports
         {
             SetControlEnabled(true);
             LoadEventDataToCombo();
-            LoadClassDataToCombo();            
+            LoadClassDataToCombo();
 
         }
 
@@ -161,7 +161,7 @@ namespace ischool.Sports
                     string t_uid = dgTeamData.SelectedRows[0].Tag.ToString();
                     LoadDGPlayerDataGridView(t_uid);
                 }
-            }           
+            }
         }
 
         private void LoadEventData()
@@ -217,7 +217,7 @@ namespace ischool.Sports
         private void LoadEventDataToCombo()
         {
             cbxEventItem.Items.Clear();
-           // cbxEventItem.Items.Add("全部");
+            // cbxEventItem.Items.Add("全部");
             foreach (string key in _eventItemDict.Keys)
             {
                 cbxEventItem.Items.Add(key);
@@ -340,7 +340,7 @@ namespace ischool.Sports
                     string strSQL = "delete from $ischool.sports.players where uid = " + uid;
                     UpdateHelper uh = new UpdateHelper();
                     int n = uh.Execute(strSQL);
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -552,12 +552,12 @@ namespace ischool.Sports
                 }
                 else
                 {
-                    
+
                     lblTeamType.Text = "個人賽";
                     isTeamEnable = false;
                 }
             }
-            
+
             SetTeamFuncEnable(isTeamEnable);
 
             LoadSearch();
@@ -654,6 +654,26 @@ namespace ischool.Sports
                 curEvent = _eventDict[refEventID];
             }
 
+            // 檢查活動報名日期與結束日期
+            if (_selectedEvent.RegStartDate.HasValue && _selectedEvent.RegEndDate.HasValue)
+            {
+                DateTime dt = System.DateTime.Now;
+                if (dt >= _selectedEvent.RegStartDate.Value && dt <= _selectedEvent.RegEndDate.Value)
+                {
+                    // 可報名
+                }
+                else
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("非報名期間內無法報名。");
+                    return;
+                }
+            }
+            else
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("沒有設定報名開始日期或報名結束日期無法報名。");
+                return;
+            }
+
             int maxCount = 0;
 
             if (curEvent != null)
@@ -698,11 +718,12 @@ namespace ischool.Sports
                     int tid = int.Parse(dgTeamData.SelectedRows[0].Tag.ToString());
                     frrap.SetTeamID(tid);
                     frrap.SetTeamName(dgTeamData.SelectedRows[0].Cells[colTeamName.Index].Value.ToString());
-                }else
+                }
+                else
                 {
                     FISCA.Presentation.Controls.MsgBox.Show("請選擇隊伍");
                     return;
-                }                
+                }
             }
             else
             {

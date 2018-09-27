@@ -118,7 +118,7 @@ namespace ischool.Sports
             }
 
             QueryHelper qh = new QueryHelper();
-            string strSQL = "SELECT student.id as sid,class.class_name,student.seat_no,student.name,sa_login_name FROM student LEFT JOIN class ON student.ref_class_id = class.id WHERE student.status in(1,2) " + _sbText.ToString() + " ORDER By class.class_name,seat_no";
+            string strSQL = "SELECT student.id as sid,class.class_name,student.seat_no,student.name,sa_login_name FROM student INNER JOIN class ON student.ref_class_id = class.id WHERE student.status in(1,2) " + _sbText.ToString() + " ORDER By  class.grade_year,class.class_name,seat_no";
             _dtStudent = qh.Select(strSQL);
         }
 
@@ -213,15 +213,11 @@ namespace ischool.Sports
         private List<string> GetDBData()
         {
             List<string> value = new List<string>();
-            string strSQL = "SELECT ref_student_id FROM $ischool.sports.players WHERE  ref_event_id = " + _refEventID;
-            //if (_team_id.HasValue)
-            //{
-            //    strSQL += " AND  ref_team_id = " + _team_id.Value;
-            //}
-            //else
-            //{
-            //    strSQL += " AND  ref_team_id IS NULL";
-            //}
+            //string strSQL = "SELECT ref_student_id FROM $ischool.sports.players WHERE  ref_event_id = " + _refEventID;
+
+            // 找出相同競賽類別學生，需要過濾無法重複報名。
+            string strSQL = $"SELECT ref_student_id FROM $ischool.sports.players WHERE ref_event_id IN(SELECT uid FROM $ischool.sports.events WHERE category = (SELECT category FROM $ischool.sports.events WHERE uid = {_refEventID}))";
+            
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(strSQL);
             foreach(DataRow dr in dt.Rows)
