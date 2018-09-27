@@ -35,7 +35,7 @@ namespace ischool.Sports
 
         private void _bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = true;
+            SetEditButtonEnable(true);
             LoadEventsToDataGridView();
         }
 
@@ -64,6 +64,7 @@ namespace ischool.Sports
             }
             else
             {
+                SetEditButtonEnable(false);
                 UDT.Events selectEvent = dgData.SelectedRows[0].Tag as UDT.Events;
 
                 if (FISCA.Presentation.Controls.MsgBox.Show("當選「是」將刪除競賽項目與相關聯成績，請問是否刪除？", "刪除競賽項目", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
@@ -84,9 +85,8 @@ namespace ischool.Sports
             }
             else
             {
+                SetEditButtonEnable(false);
                 UDT.Events selectEvent = dgData.SelectedRows[0].Tag as UDT.Events;
-
-
                 frmSubEvents editFrom = new frmSubEvents();
                 editFrom.SetEvents(selectEvent);
                 editFrom.SetIsAddMode(false);
@@ -98,13 +98,18 @@ namespace ischool.Sports
                     // 資料重整
                     _bgw.RunWorkerAsync();
                 }
+                else
+                {
+                    SetEditButtonEnable(true);
+                }
+
             }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             UDT.Events addEvents = null;
-
+            SetEditButtonEnable(false);
             frmEventsTemplateAdd1 feta = new frmEventsTemplateAdd1();
             if (feta.ShowDialog() == DialogResult.OK)
             {
@@ -122,14 +127,23 @@ namespace ischool.Sports
                 // 資料重整
                 _bgw.RunWorkerAsync();
             }
+            else
+            {
+                SetEditButtonEnable(true);
+            }
         }
 
         private void frmEvents_Load(object sender, EventArgs e)
         {
             this.MaximumSize = this.MinimumSize = this.Size;
-            this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = false;
+            SetEditButtonEnable(false);
             _bgw.RunWorkerAsync();
 
+        }
+
+        private void SetEditButtonEnable(bool bo)
+        {
+            this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
         }
 
         private void LoadEventsToDataGridView()

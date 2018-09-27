@@ -188,9 +188,10 @@ namespace ischool.Sports
             _eventItemEventDict.Clear();
             foreach (DataRow dr in _dtEventData.Rows)
             {
+                string category = dr["category"].ToString();
                 string gp_name = dr["event_name"].ToString();
                 string uid = dr["uid"].ToString();
-                string key = gp_name + "-" + dr["group_types_name"].ToString();
+                string key = category+"-"+ gp_name + "-" + dr["group_types_name"].ToString();
                 if (!_eventItemDict.ContainsKey(key))
                 {
                     _eventItemDict.Add(key, uid);
