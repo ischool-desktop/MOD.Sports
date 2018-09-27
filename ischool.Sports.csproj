@@ -221,6 +221,12 @@
     <Compile Include="Ribbon\Admin\frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\Events\frmCopyEventItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\Events\frmCopyEventItem.Designer.cs">
+      <DependentUpon>frmCopyEventItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\Events\frmEvents.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -436,6 +442,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\Admin\frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\Events\frmCopyEventItem.resx">
+      <DependentUpon>frmCopyEventItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\Events\frmEvents.resx">
       <DependentUpon>frmEvents.cs</DependentUpon>

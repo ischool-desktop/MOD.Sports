@@ -136,6 +136,7 @@ namespace ischool.Sports
         private void frmEvents_Load(object sender, EventArgs e)
         {
             this.MaximumSize = this.MinimumSize = this.Size;
+            this.btnCopyItem.Visible = false;
             SetEditButtonEnable(false);
             _bgw.RunWorkerAsync();
 
@@ -143,7 +144,7 @@ namespace ischool.Sports
 
         private void SetEditButtonEnable(bool bo)
         {
-            this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
+            this.btnCopyItem.Enabled = this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
         }
 
         private void LoadEventsToDataGridView()
@@ -230,6 +231,27 @@ namespace ischool.Sports
                 if (!_GameTypesDict.ContainsKey(data.Name))
                     _GameTypesDict.Add(data.Name, data);
 
+            }
+        }
+
+        private void btnCopyItem_Click(object sender, EventArgs e)
+        {
+            if (dgData.SelectedRows.Count == 0)
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("請選擇項目");
+            }
+            else
+            {
+                SetEditButtonEnable(false);
+                frmCopyEventItem fcei = new frmCopyEventItem();
+                if (fcei.ShowDialog() == DialogResult.Yes)
+                {
+                    _bgw.RunWorkerAsync();
+                }
+                else
+                {
+                    SetEditButtonEnable(true);
+                }
             }
         }
     }

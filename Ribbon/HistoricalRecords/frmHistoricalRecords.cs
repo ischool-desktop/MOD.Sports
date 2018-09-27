@@ -124,10 +124,14 @@ namespace ischool.Sports
 
         private void LoadEventItemName()
         {
+            string Temp = cbxEventItem.Text;
             cbxEventItem.Items.Clear();
             // cbxEventItem.Items.Add("全部");
             foreach (string name in _EventItemDict.Keys)
                 cbxEventItem.Items.Add(name);
+
+            if (_EventItemDict.ContainsKey(Temp))
+                cbxEventItem.Text = Temp;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -269,7 +273,7 @@ namespace ischool.Sports
 
                                 if (jSON.Count > 0)
                                 {
-                                    hr.Players = $"[{string.Join(",", jSON.ToArray())}]";
+                                    hr.Players = $"{string.Join(",", jSON.ToArray())}";
                                 }
                             }
 
@@ -313,7 +317,7 @@ namespace ischool.Sports
                             {
                                 hr = new UDT.HistoricalRecords();
                                 hr.RefEventId = _selectEventID;
-                                hr.Players = $"[{parsePlayerToJSonString(p)}]";
+                                hr.Players = $"{parsePlayerToJSonString(p)}";
                             }
 
                             if (hr.Rank.HasValue)
@@ -352,7 +356,7 @@ namespace ischool.Sports
         {
             char cc = '"';
             string c1 = "'";
-            string value = "[{'ref_student_id':" + p.RefStudentId + "},{'name':'" + p.Name + "'},{'class_name':'" + p.ClassName + "'},{'seat_no':" + p.SeatNo + "},{'is_team_leader':" + p.IsTeamLeader.ToString().ToLower() + "}]";
+            string value = "[{'ref_student_id':" + p.RefStudentId + ",'name':'" + p.Name + "','class_name':'" + p.ClassName + "','seat_no':" + p.SeatNo + ",'is_team_leader':" + p.IsTeamLeader.ToString().ToLower() + "}]";
             value = value.Replace(Char.Parse(c1), cc);
             return value;
         }
@@ -406,9 +410,7 @@ namespace ischool.Sports
         {
             if (!iptSchoolYear.IsEmpty)
                 _SelectSchoolYear = iptSchoolYear.Value;
-
-            cbxEventItem.Text = "";
-
+            
             LoadData();
         }
     }
