@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgData = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnCopy = new DevComponents.DotNetBar.ButtonX();
-            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             this.colEventName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEventGroup = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.btnCopy = new DevComponents.DotNetBar.ButtonX();
+            this.btnExit = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,20 +47,33 @@
             this.dgData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colEventName,
             this.colEventGroup});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgData.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgData.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgData.Location = new System.Drawing.Point(25, 21);
             this.dgData.Name = "dgData";
             this.dgData.RowTemplate.Height = 24;
             this.dgData.Size = new System.Drawing.Size(488, 165);
             this.dgData.TabIndex = 0;
+            this.dgData.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgData_RowsAdded);
+            // 
+            // colEventName
+            // 
+            this.colEventName.HeaderText = "競賽名稱";
+            this.colEventName.Name = "colEventName";
+            this.colEventName.Width = 200;
+            // 
+            // colEventGroup
+            // 
+            this.colEventGroup.HeaderText = "競賽組別";
+            this.colEventGroup.Name = "colEventGroup";
+            this.colEventGroup.Width = 200;
             // 
             // btnCopy
             // 
@@ -91,18 +104,6 @@
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // colEventName
-            // 
-            this.colEventName.HeaderText = "競賽名稱";
-            this.colEventName.Name = "colEventName";
-            this.colEventName.Width = 200;
-            // 
-            // colEventGroup
-            // 
-            this.colEventGroup.HeaderText = "競賽組別";
-            this.colEventGroup.Name = "colEventGroup";
-            this.colEventGroup.Width = 200;
             // 
             // frmCopyEventItem
             // 

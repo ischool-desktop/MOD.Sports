@@ -136,7 +136,7 @@ namespace ischool.Sports
         private void frmEvents_Load(object sender, EventArgs e)
         {
             this.MaximumSize = this.MinimumSize = this.Size;
-            this.btnCopyItem.Visible = false;
+  
             SetEditButtonEnable(false);
             _bgw.RunWorkerAsync();
 
