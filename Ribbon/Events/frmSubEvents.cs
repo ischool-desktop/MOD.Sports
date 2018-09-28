@@ -165,7 +165,7 @@ namespace ischool.Sports
                 // 已有資料無法新增
                 if (CheckHasEvent())
                 {
-                    FISCA.Presentation.Controls.MsgBox.Show("資料庫內已有相同學年度+競賽名稱+組別，無法新增。");
+                    FISCA.Presentation.Controls.MsgBox.Show("資料庫內已有相同學年度+競賽類別+競賽名稱+參賽組別，無法新增。");
                     return;
                 }
             }
@@ -178,7 +178,7 @@ namespace ischool.Sports
         {
             bool value = false;
             AccessHelper acc = new AccessHelper();
-            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='" + _EventData.Name + "'";
+            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='" + _EventData.Name + "' AND category = '"+_EventData.Category+"'";
             List<UDT.Events> dd = acc.Select<UDT.Events>(strQry);
             if (dd.Count > 0)
                 value = true;
@@ -225,6 +225,7 @@ namespace ischool.Sports
                 iptSchoolYear.Enabled = false;
                 txtName.Enabled = false;
                 cbxGroupType.Enabled = false;
+                txtCategory.Enabled = false;
             }
             BindCanSelectItems();
             _bgw.RunWorkerAsync();

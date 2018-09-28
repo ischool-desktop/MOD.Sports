@@ -110,11 +110,12 @@ namespace ischool.Sports
         {
             UDT.Events addEvents = null;
             SetEditButtonEnable(false);
-            frmEventsTemplateAdd1 feta = new frmEventsTemplateAdd1();
-            if (feta.ShowDialog() == DialogResult.OK)
-            {
-                addEvents = feta.GetEvents();
-            }
+            // 因為之後使用複製功能，樣板先不用
+            //frmEventsTemplateAdd1 feta = new frmEventsTemplateAdd1();
+            //if (feta.ShowDialog() == DialogResult.OK)
+            //{
+            //    addEvents = feta.GetEvents();
+            //}
 
             frmSubEvents addFrom = new frmSubEvents();
             addFrom.SetEvents(addEvents);
@@ -144,7 +145,7 @@ namespace ischool.Sports
 
         private void SetEditButtonEnable(bool bo)
         {
-            this.btnCopyItem.Enabled = this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
+           this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
         }
 
         private void LoadEventsToDataGridView()

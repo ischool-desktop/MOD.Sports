@@ -343,6 +343,7 @@
     <Compile Include="UDT\Players.cs" />
     <Compile Include="UDT\ScoreTypes.cs" />
     <Compile Include="UDT\SportsChief.cs" />
+    <Compile Include="UDT\SportsRegistration.cs" />
     <Compile Include="UDT\Teams.cs" />
   </ItemGroup>
   <ItemGroup>

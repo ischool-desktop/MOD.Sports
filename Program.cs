@@ -62,7 +62,8 @@ namespace ischool.Sports
                 bool checkUDT = false;
                 string name = "體育競賽UDT是否已載入";
 
-                //cd[name] = "false";
+                // 開發過程先開啟
+                cd[name] = "false";
 
                 //如果尚無設定值,預設為
                 if (string.IsNullOrEmpty(cd[name]))
@@ -88,7 +89,7 @@ namespace ischool.Sports
                     access.Select<UDT.Teams>("UID = '00000'");
                     access.Select<UDT.GameCandidates>("UID = '00000'");
                     access.Select<UDT.SportsChief>("UID = '00000'");
-
+                    access.Select<UDT.SportsRegistration>("UID = '00000'");
                     cd[name] = "true";
                     cd.Save();
                 }

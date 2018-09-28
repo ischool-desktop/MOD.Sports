@@ -141,6 +141,23 @@ namespace ischool.Sports.UDT
         [Field(Field = "announcement_date", Indexed = false)]
         public DateTime? AnnouncementDate { get; set; }
 
+        /// <summary>
+        /// 是否運動會
+        /// </summary>
+        [Field(Field = "is_sport_meet", Indexed = false)]
+        public bool IsSportMeet { get; set; }
+
+        /// <summary>
+        /// 是否全校報名
+        /// </summary>
+        [Field(Field = "is_reg_all", Indexed = false)]
+        public bool IsRegAll { get; set; }
+
+        /// <summary>
+        /// 是否僅限制人員
+        /// </summary>
+        [Field(Field = "is_reg_limit", Indexed = false)]
+        public bool IsRegLimit { get; set; }
 
     }
 }
