@@ -55,14 +55,24 @@
             this.chkIsDrawLots = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.dtDrawLotsEndDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.txtEventDescription = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.chkIsTeam = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.chkAthleticOnly = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.rbTeam = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.txtCategory = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dtDrawLotsStartDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.dtAnnouncementDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbxScoreType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX16 = new DevComponents.DotNetBar.LabelX();
+            this.cbxSportMeet = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.groupPanel2 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnRegLimit = new DevComponents.DotNetBar.ButtonX();
+            this.rbLimit = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.rbAthleticOnly = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.rbAllStud = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.groupPanel3 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.rbPersonal = new DevComponents.DotNetBar.Controls.CheckBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.iptSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptMaxMemberCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iptMinMemberCount)).BeginInit();
@@ -73,6 +83,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtDrawLotsEndDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDrawLotsStartDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtAnnouncementDate)).BeginInit();
+            this.groupPanel1.SuspendLayout();
+            this.groupPanel2.SuspendLayout();
+            this.groupPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -82,11 +95,11 @@
             this.btnSave.AutoSize = true;
             this.btnSave.BackColor = System.Drawing.Color.Transparent;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(737, 262);
+            this.btnSave.Location = new System.Drawing.Point(668, 463);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 25);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 23;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "儲存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -97,11 +110,11 @@
             this.btnExit.AutoSize = true;
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(824, 262);
+            this.btnExit.Location = new System.Drawing.Point(755, 463);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 25);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExit.TabIndex = 24;
+            this.btnExit.TabIndex = 7;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -129,7 +142,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(582, 26);
+            this.labelX2.Location = new System.Drawing.Point(537, 26);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(60, 21);
             this.labelX2.TabIndex = 3;
@@ -144,7 +157,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(26, 74);
+            this.labelX5.Location = new System.Drawing.Point(30, 90);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(87, 21);
             this.labelX5.TabIndex = 5;
@@ -159,7 +172,7 @@
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(293, 74);
+            this.labelX6.Location = new System.Drawing.Point(317, 90);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(87, 21);
             this.labelX6.TabIndex = 6;
@@ -174,7 +187,7 @@
             // 
             this.labelX7.BackgroundStyle.Class = "";
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(26, 121);
+            this.labelX7.Location = new System.Drawing.Point(30, 50);
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(87, 21);
             this.labelX7.TabIndex = 7;
@@ -189,7 +202,7 @@
             // 
             this.labelX8.BackgroundStyle.Class = "";
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(293, 121);
+            this.labelX8.Location = new System.Drawing.Point(317, 50);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(87, 21);
             this.labelX8.TabIndex = 8;
@@ -204,7 +217,7 @@
             // 
             this.labelX9.BackgroundStyle.Class = "";
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX9.Location = new System.Drawing.Point(28, 163);
+            this.labelX9.Location = new System.Drawing.Point(119, 70);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(60, 21);
             this.labelX9.TabIndex = 9;
@@ -219,7 +232,7 @@
             // 
             this.labelX11.BackgroundStyle.Class = "";
             this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(555, 121);
+            this.labelX11.Location = new System.Drawing.Point(204, 15);
             this.labelX11.Name = "labelX11";
             this.labelX11.Size = new System.Drawing.Size(87, 21);
             this.labelX11.TabIndex = 11;
@@ -234,7 +247,7 @@
             // 
             this.labelX12.BackgroundStyle.Class = "";
             this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(735, 121);
+            this.labelX12.Location = new System.Drawing.Point(384, 15);
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(87, 21);
             this.labelX12.TabIndex = 12;
@@ -249,7 +262,7 @@
             // 
             this.labelX13.BackgroundStyle.Class = "";
             this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX13.Location = new System.Drawing.Point(608, 74);
+            this.labelX13.Location = new System.Drawing.Point(403, 70);
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(34, 21);
             this.labelX13.TabIndex = 13;
@@ -264,7 +277,7 @@
             // 
             this.labelX14.BackgroundStyle.Class = "";
             this.labelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX14.Location = new System.Drawing.Point(647, 163);
+            this.labelX14.Location = new System.Drawing.Point(317, 161);
             this.labelX14.Name = "labelX14";
             this.labelX14.Size = new System.Drawing.Size(87, 21);
             this.labelX14.TabIndex = 14;
@@ -279,7 +292,7 @@
             // 
             this.labelX15.BackgroundStyle.Class = "";
             this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX15.Location = new System.Drawing.Point(223, 210);
+            this.labelX15.Location = new System.Drawing.Point(26, 467);
             this.labelX15.Name = "labelX15";
             this.labelX15.Size = new System.Drawing.Size(60, 21);
             this.labelX15.TabIndex = 15;
@@ -309,13 +322,13 @@
             this.iptMaxMemberCount.BackgroundStyle.Class = "DateTimeInputBackground";
             this.iptMaxMemberCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.iptMaxMemberCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.iptMaxMemberCount.Location = new System.Drawing.Point(648, 119);
+            this.iptMaxMemberCount.Location = new System.Drawing.Point(297, 13);
             this.iptMaxMemberCount.MaxValue = 999;
             this.iptMaxMemberCount.MinValue = 1;
             this.iptMaxMemberCount.Name = "iptMaxMemberCount";
             this.iptMaxMemberCount.ShowUpDown = true;
             this.iptMaxMemberCount.Size = new System.Drawing.Size(78, 25);
-            this.iptMaxMemberCount.TabIndex = 8;
+            this.iptMaxMemberCount.TabIndex = 1;
             this.iptMaxMemberCount.Value = 1;
             // 
             // iptMinMemberCount
@@ -327,13 +340,13 @@
             this.iptMinMemberCount.BackgroundStyle.Class = "DateTimeInputBackground";
             this.iptMinMemberCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.iptMinMemberCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.iptMinMemberCount.Location = new System.Drawing.Point(820, 119);
+            this.iptMinMemberCount.Location = new System.Drawing.Point(477, 13);
             this.iptMinMemberCount.MaxValue = 999;
             this.iptMinMemberCount.MinValue = 1;
             this.iptMinMemberCount.Name = "iptMinMemberCount";
             this.iptMinMemberCount.ShowUpDown = true;
             this.iptMinMemberCount.Size = new System.Drawing.Size(80, 25);
-            this.iptMinMemberCount.TabIndex = 9;
+            this.iptMinMemberCount.TabIndex = 2;
             this.iptMinMemberCount.Value = 1;
             // 
             // txtName
@@ -343,7 +356,7 @@
             // 
             this.txtName.Border.Class = "TextBoxBorder";
             this.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtName.Location = new System.Drawing.Point(648, 24);
+            this.txtName.Location = new System.Drawing.Point(603, 24);
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(252, 25);
@@ -360,7 +373,7 @@
             this.dtEventStartDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtEventStartDate.ButtonDropDown.Visible = true;
             this.dtEventStartDate.IsPopupCalendarOpen = false;
-            this.dtEventStartDate.Location = new System.Drawing.Point(120, 72);
+            this.dtEventStartDate.Location = new System.Drawing.Point(124, 88);
             // 
             // 
             // 
@@ -397,7 +410,7 @@
             this.dtEventStartDate.MonthCalendar.TodayButtonVisible = true;
             this.dtEventStartDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtEventStartDate.Name = "dtEventStartDate";
-            this.dtEventStartDate.Size = new System.Drawing.Size(153, 25);
+            this.dtEventStartDate.Size = new System.Drawing.Size(157, 25);
             this.dtEventStartDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtEventStartDate.TabIndex = 3;
             // 
@@ -412,7 +425,7 @@
             this.dtEventEndDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtEventEndDate.ButtonDropDown.Visible = true;
             this.dtEventEndDate.IsPopupCalendarOpen = false;
-            this.dtEventEndDate.Location = new System.Drawing.Point(387, 72);
+            this.dtEventEndDate.Location = new System.Drawing.Point(410, 88);
             // 
             // 
             // 
@@ -464,7 +477,7 @@
             this.dtRegStartDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtRegStartDate.ButtonDropDown.Visible = true;
             this.dtRegStartDate.IsPopupCalendarOpen = false;
-            this.dtRegStartDate.Location = new System.Drawing.Point(121, 119);
+            this.dtRegStartDate.Location = new System.Drawing.Point(125, 48);
             // 
             // 
             // 
@@ -501,9 +514,9 @@
             this.dtRegStartDate.MonthCalendar.TodayButtonVisible = true;
             this.dtRegStartDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtRegStartDate.Name = "dtRegStartDate";
-            this.dtRegStartDate.Size = new System.Drawing.Size(152, 25);
+            this.dtRegStartDate.Size = new System.Drawing.Size(157, 25);
             this.dtRegStartDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtRegStartDate.TabIndex = 6;
+            this.dtRegStartDate.TabIndex = 1;
             // 
             // dtRegEndDate
             // 
@@ -516,7 +529,7 @@
             this.dtRegEndDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtRegEndDate.ButtonDropDown.Visible = true;
             this.dtRegEndDate.IsPopupCalendarOpen = false;
-            this.dtRegEndDate.Location = new System.Drawing.Point(386, 119);
+            this.dtRegEndDate.Location = new System.Drawing.Point(410, 48);
             // 
             // 
             // 
@@ -555,7 +568,7 @@
             this.dtRegEndDate.Name = "dtRegEndDate";
             this.dtRegEndDate.Size = new System.Drawing.Size(153, 25);
             this.dtRegEndDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtRegEndDate.TabIndex = 7;
+            this.dtRegEndDate.TabIndex = 2;
             // 
             // cbxGroupType
             // 
@@ -563,11 +576,11 @@
             this.cbxGroupType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxGroupType.FormattingEnabled = true;
             this.cbxGroupType.ItemHeight = 19;
-            this.cbxGroupType.Location = new System.Drawing.Point(93, 161);
+            this.cbxGroupType.Location = new System.Drawing.Point(184, 68);
             this.cbxGroupType.Name = "cbxGroupType";
-            this.cbxGroupType.Size = new System.Drawing.Size(180, 25);
+            this.cbxGroupType.Size = new System.Drawing.Size(187, 25);
             this.cbxGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbxGroupType.TabIndex = 10;
+            this.cbxGroupType.TabIndex = 4;
             // 
             // cbxGameType
             // 
@@ -575,9 +588,9 @@
             this.cbxGameType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbxGameType.FormattingEnabled = true;
             this.cbxGameType.ItemHeight = 19;
-            this.cbxGameType.Location = new System.Drawing.Point(648, 72);
+            this.cbxGameType.Location = new System.Drawing.Point(443, 68);
             this.cbxGameType.Name = "cbxGameType";
-            this.cbxGameType.Size = new System.Drawing.Size(252, 25);
+            this.cbxGameType.Size = new System.Drawing.Size(153, 25);
             this.cbxGameType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbxGameType.TabIndex = 5;
             // 
@@ -590,12 +603,13 @@
             // 
             this.chkIsDrawLots.BackgroundStyle.Class = "";
             this.chkIsDrawLots.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsDrawLots.Location = new System.Drawing.Point(293, 163);
+            this.chkIsDrawLots.Location = new System.Drawing.Point(63, 134);
             this.chkIsDrawLots.Name = "chkIsDrawLots";
             this.chkIsDrawLots.Size = new System.Drawing.Size(54, 21);
             this.chkIsDrawLots.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkIsDrawLots.TabIndex = 16;
+            this.chkIsDrawLots.TabIndex = 5;
             this.chkIsDrawLots.Text = "抽籤";
+            this.chkIsDrawLots.CheckedChanged += new System.EventHandler(this.chkIsDrawLots_CheckedChanged);
             // 
             // dtDrawLotsEndDate
             // 
@@ -608,7 +622,7 @@
             this.dtDrawLotsEndDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtDrawLotsEndDate.ButtonDropDown.Visible = true;
             this.dtDrawLotsEndDate.IsPopupCalendarOpen = false;
-            this.dtDrawLotsEndDate.Location = new System.Drawing.Point(743, 161);
+            this.dtDrawLotsEndDate.Location = new System.Drawing.Point(410, 159);
             // 
             // 
             // 
@@ -645,9 +659,9 @@
             this.dtDrawLotsEndDate.MonthCalendar.TodayButtonVisible = true;
             this.dtDrawLotsEndDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dtDrawLotsEndDate.Name = "dtDrawLotsEndDate";
-            this.dtDrawLotsEndDate.Size = new System.Drawing.Size(157, 25);
+            this.dtDrawLotsEndDate.Size = new System.Drawing.Size(153, 25);
             this.dtDrawLotsEndDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtDrawLotsEndDate.TabIndex = 18;
+            this.dtDrawLotsEndDate.TabIndex = 7;
             // 
             // txtEventDescription
             // 
@@ -656,41 +670,29 @@
             // 
             this.txtEventDescription.Border.Class = "TextBoxBorder";
             this.txtEventDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtEventDescription.Location = new System.Drawing.Point(293, 208);
+            this.txtEventDescription.Location = new System.Drawing.Point(96, 465);
             this.txtEventDescription.Multiline = true;
             this.txtEventDescription.Name = "txtEventDescription";
-            this.txtEventDescription.Size = new System.Drawing.Size(607, 25);
-            this.txtEventDescription.TabIndex = 21;
+            this.txtEventDescription.Size = new System.Drawing.Size(527, 25);
+            this.txtEventDescription.TabIndex = 8;
+            this.txtEventDescription.WatermarkText = "請輸入競賽說明網址";
             // 
-            // chkIsTeam
+            // rbTeam
             // 
-            this.chkIsTeam.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.chkIsTeam.BackgroundStyle.Class = "";
-            this.chkIsTeam.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsTeam.Location = new System.Drawing.Point(28, 209);
-            this.chkIsTeam.Name = "chkIsTeam";
-            this.chkIsTeam.Size = new System.Drawing.Size(67, 21);
-            this.chkIsTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkIsTeam.TabIndex = 19;
-            this.chkIsTeam.Text = "團體賽";
-            // 
-            // chkAthleticOnly
-            // 
-            this.chkAthleticOnly.BackColor = System.Drawing.Color.Transparent;
+            this.rbTeam.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.chkAthleticOnly.BackgroundStyle.Class = "";
-            this.chkAthleticOnly.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAthleticOnly.Location = new System.Drawing.Point(107, 208);
-            this.chkAthleticOnly.Name = "chkAthleticOnly";
-            this.chkAthleticOnly.Size = new System.Drawing.Size(100, 23);
-            this.chkAthleticOnly.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAthleticOnly.TabIndex = 20;
-            this.chkAthleticOnly.Text = "僅體育股長報名";
+            this.rbTeam.BackgroundStyle.Class = "";
+            this.rbTeam.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.rbTeam.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbTeam.Location = new System.Drawing.Point(120, 15);
+            this.rbTeam.Name = "rbTeam";
+            this.rbTeam.Size = new System.Drawing.Size(67, 21);
+            this.rbTeam.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.rbTeam.TabIndex = 19;
+            this.rbTeam.Text = "團體賽";
+            this.rbTeam.CheckedChanged += new System.EventHandler(this.rbTeam_CheckedChanged);
             // 
             // labelX10
             // 
@@ -717,7 +719,7 @@
             this.txtCategory.Location = new System.Drawing.Point(261, 24);
             this.txtCategory.Multiline = true;
             this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(279, 25);
+            this.txtCategory.Size = new System.Drawing.Size(206, 25);
             this.txtCategory.TabIndex = 1;
             // 
             // dtDrawLotsStartDate
@@ -731,7 +733,7 @@
             this.dtDrawLotsStartDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtDrawLotsStartDate.ButtonDropDown.Visible = true;
             this.dtDrawLotsStartDate.IsPopupCalendarOpen = false;
-            this.dtDrawLotsStartDate.Location = new System.Drawing.Point(454, 161);
+            this.dtDrawLotsStartDate.Location = new System.Drawing.Point(124, 159);
             // 
             // 
             // 
@@ -770,7 +772,7 @@
             this.dtDrawLotsStartDate.Name = "dtDrawLotsStartDate";
             this.dtDrawLotsStartDate.Size = new System.Drawing.Size(157, 25);
             this.dtDrawLotsStartDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtDrawLotsStartDate.TabIndex = 17;
+            this.dtDrawLotsStartDate.TabIndex = 6;
             // 
             // labelX3
             // 
@@ -781,7 +783,7 @@
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(360, 163);
+            this.labelX3.Location = new System.Drawing.Point(30, 161);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(87, 21);
             this.labelX3.TabIndex = 19;
@@ -798,7 +800,7 @@
             this.dtAnnouncementDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dtAnnouncementDate.ButtonDropDown.Visible = true;
             this.dtAnnouncementDate.IsPopupCalendarOpen = false;
-            this.dtAnnouncementDate.Location = new System.Drawing.Point(94, 244);
+            this.dtAnnouncementDate.Location = new System.Drawing.Point(125, 10);
             // 
             // 
             // 
@@ -837,7 +839,7 @@
             this.dtAnnouncementDate.Name = "dtAnnouncementDate";
             this.dtAnnouncementDate.Size = new System.Drawing.Size(157, 25);
             this.dtAnnouncementDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtAnnouncementDate.TabIndex = 22;
+            this.dtAnnouncementDate.TabIndex = 1;
             // 
             // labelX4
             // 
@@ -848,48 +850,301 @@
             // 
             this.labelX4.BackgroundStyle.Class = "";
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(28, 246);
+            this.labelX4.Location = new System.Drawing.Point(57, 12);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(60, 21);
             this.labelX4.TabIndex = 21;
             this.labelX4.Text = "公告日期";
             // 
+            // groupPanel1
+            // 
+            this.groupPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel1.Controls.Add(this.labelX4);
+            this.groupPanel1.Controls.Add(this.dtDrawLotsStartDate);
+            this.groupPanel1.Controls.Add(this.dtAnnouncementDate);
+            this.groupPanel1.Controls.Add(this.labelX3);
+            this.groupPanel1.Controls.Add(this.labelX7);
+            this.groupPanel1.Controls.Add(this.labelX8);
+            this.groupPanel1.Controls.Add(this.dtRegStartDate);
+            this.groupPanel1.Controls.Add(this.dtRegEndDate);
+            this.groupPanel1.Controls.Add(this.dtDrawLotsEndDate);
+            this.groupPanel1.Controls.Add(this.chkIsDrawLots);
+            this.groupPanel1.Controls.Add(this.labelX5);
+            this.groupPanel1.Controls.Add(this.labelX6);
+            this.groupPanel1.Controls.Add(this.dtEventStartDate);
+            this.groupPanel1.Controls.Add(this.dtEventEndDate);
+            this.groupPanel1.Controls.Add(this.labelX14);
+            this.groupPanel1.Location = new System.Drawing.Point(26, 114);
+            this.groupPanel1.Name = "groupPanel1";
+            this.groupPanel1.Size = new System.Drawing.Size(597, 231);
+            // 
+            // 
+            // 
+            this.groupPanel1.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanel1.Style.BackColorGradientAngle = 90;
+            this.groupPanel1.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanel1.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderBottomWidth = 1;
+            this.groupPanel1.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanel1.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderLeftWidth = 1;
+            this.groupPanel1.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderRightWidth = 1;
+            this.groupPanel1.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderTopWidth = 1;
+            this.groupPanel1.Style.Class = "";
+            this.groupPanel1.Style.CornerDiameter = 4;
+            this.groupPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanel1.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanel1.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanel1.StyleMouseDown.Class = "";
+            this.groupPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.groupPanel1.StyleMouseOver.Class = "";
+            this.groupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.groupPanel1.TabIndex = 25;
+            this.groupPanel1.Text = "設定日期";
+            // 
+            // cbxScoreType
+            // 
+            this.cbxScoreType.DisplayMember = "Text";
+            this.cbxScoreType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxScoreType.FormattingEnabled = true;
+            this.cbxScoreType.ItemHeight = 19;
+            this.cbxScoreType.Location = new System.Drawing.Point(703, 68);
+            this.cbxScoreType.Name = "cbxScoreType";
+            this.cbxScoreType.Size = new System.Drawing.Size(153, 25);
+            this.cbxScoreType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxScoreType.TabIndex = 6;
+            // 
+            // labelX16
+            // 
+            this.labelX16.AutoSize = true;
+            this.labelX16.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX16.BackgroundStyle.Class = "";
+            this.labelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX16.Location = new System.Drawing.Point(637, 70);
+            this.labelX16.Name = "labelX16";
+            this.labelX16.Size = new System.Drawing.Size(60, 21);
+            this.labelX16.TabIndex = 40;
+            this.labelX16.Text = "計分方式";
+            // 
+            // cbxSportMeet
+            // 
+            this.cbxSportMeet.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbxSportMeet.BackgroundStyle.Class = "";
+            this.cbxSportMeet.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cbxSportMeet.Location = new System.Drawing.Point(26, 70);
+            this.cbxSportMeet.Name = "cbxSportMeet";
+            this.cbxSportMeet.Size = new System.Drawing.Size(67, 21);
+            this.cbxSportMeet.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxSportMeet.TabIndex = 3;
+            this.cbxSportMeet.Text = "運動會";
+            // 
+            // groupPanel2
+            // 
+            this.groupPanel2.BackColor = System.Drawing.Color.Transparent;
+            this.groupPanel2.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel2.Controls.Add(this.btnRegLimit);
+            this.groupPanel2.Controls.Add(this.rbLimit);
+            this.groupPanel2.Controls.Add(this.rbAthleticOnly);
+            this.groupPanel2.Controls.Add(this.rbAllStud);
+            this.groupPanel2.Location = new System.Drawing.Point(648, 114);
+            this.groupPanel2.Name = "groupPanel2";
+            this.groupPanel2.Size = new System.Drawing.Size(200, 204);
+            // 
+            // 
+            // 
+            this.groupPanel2.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanel2.Style.BackColorGradientAngle = 90;
+            this.groupPanel2.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanel2.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderBottomWidth = 1;
+            this.groupPanel2.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanel2.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderLeftWidth = 1;
+            this.groupPanel2.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderRightWidth = 1;
+            this.groupPanel2.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderTopWidth = 1;
+            this.groupPanel2.Style.Class = "";
+            this.groupPanel2.Style.CornerDiameter = 4;
+            this.groupPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanel2.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanel2.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanel2.StyleMouseDown.Class = "";
+            this.groupPanel2.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.groupPanel2.StyleMouseOver.Class = "";
+            this.groupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.groupPanel2.TabIndex = 42;
+            this.groupPanel2.Text = "報名限制";
+            // 
+            // btnRegLimit
+            // 
+            this.btnRegLimit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRegLimit.AutoSize = true;
+            this.btnRegLimit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRegLimit.Location = new System.Drawing.Point(66, 134);
+            this.btnRegLimit.Name = "btnRegLimit";
+            this.btnRegLimit.Size = new System.Drawing.Size(105, 25);
+            this.btnRegLimit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRegLimit.TabIndex = 3;
+            this.btnRegLimit.Text = "僅限制人員名單";
+            this.btnRegLimit.Click += new System.EventHandler(this.btnRegLimit_Click);
+            // 
+            // rbLimit
+            // 
+            // 
+            // 
+            // 
+            this.rbLimit.BackgroundStyle.Class = "";
+            this.rbLimit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.rbLimit.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbLimit.Location = new System.Drawing.Point(20, 88);
+            this.rbLimit.Name = "rbLimit";
+            this.rbLimit.Size = new System.Drawing.Size(100, 23);
+            this.rbLimit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.rbLimit.TabIndex = 2;
+            this.rbLimit.Text = "僅限制人員";
+            this.rbLimit.CheckedChanged += new System.EventHandler(this.cbLimit_CheckedChanged);
+            // 
+            // rbAthleticOnly
+            // 
+            // 
+            // 
+            // 
+            this.rbAthleticOnly.BackgroundStyle.Class = "";
+            this.rbAthleticOnly.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.rbAthleticOnly.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbAthleticOnly.Location = new System.Drawing.Point(20, 50);
+            this.rbAthleticOnly.Name = "rbAthleticOnly";
+            this.rbAthleticOnly.Size = new System.Drawing.Size(100, 23);
+            this.rbAthleticOnly.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.rbAthleticOnly.TabIndex = 1;
+            this.rbAthleticOnly.Text = "僅體育股長報名";
+            this.rbAthleticOnly.CheckedChanged += new System.EventHandler(this.rbAthleticOnly_CheckedChanged);
+            // 
+            // rbAllStud
+            // 
+            // 
+            // 
+            // 
+            this.rbAllStud.BackgroundStyle.Class = "";
+            this.rbAllStud.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.rbAllStud.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbAllStud.Location = new System.Drawing.Point(20, 12);
+            this.rbAllStud.Name = "rbAllStud";
+            this.rbAllStud.Size = new System.Drawing.Size(100, 23);
+            this.rbAllStud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.rbAllStud.TabIndex = 0;
+            this.rbAllStud.Text = "全校學生";
+            this.rbAllStud.CheckedChanged += new System.EventHandler(this.rbAllStud_CheckedChanged);
+            // 
+            // groupPanel3
+            // 
+            this.groupPanel3.BackColor = System.Drawing.Color.Transparent;
+            this.groupPanel3.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel3.Controls.Add(this.rbPersonal);
+            this.groupPanel3.Controls.Add(this.rbTeam);
+            this.groupPanel3.Controls.Add(this.labelX11);
+            this.groupPanel3.Controls.Add(this.labelX12);
+            this.groupPanel3.Controls.Add(this.iptMaxMemberCount);
+            this.groupPanel3.Controls.Add(this.iptMinMemberCount);
+            this.groupPanel3.Location = new System.Drawing.Point(26, 366);
+            this.groupPanel3.Name = "groupPanel3";
+            this.groupPanel3.Size = new System.Drawing.Size(597, 82);
+            // 
+            // 
+            // 
+            this.groupPanel3.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanel3.Style.BackColorGradientAngle = 90;
+            this.groupPanel3.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanel3.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel3.Style.BorderBottomWidth = 1;
+            this.groupPanel3.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanel3.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel3.Style.BorderLeftWidth = 1;
+            this.groupPanel3.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel3.Style.BorderRightWidth = 1;
+            this.groupPanel3.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel3.Style.BorderTopWidth = 1;
+            this.groupPanel3.Style.Class = "";
+            this.groupPanel3.Style.CornerDiameter = 4;
+            this.groupPanel3.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanel3.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanel3.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanel3.StyleMouseDown.Class = "";
+            this.groupPanel3.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.groupPanel3.StyleMouseOver.Class = "";
+            this.groupPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.groupPanel3.TabIndex = 7;
+            this.groupPanel3.Text = "報名類型";
+            // 
+            // rbPersonal
+            // 
+            this.rbPersonal.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.rbPersonal.BackgroundStyle.Class = "";
+            this.rbPersonal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.rbPersonal.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbPersonal.Location = new System.Drawing.Point(30, 15);
+            this.rbPersonal.Name = "rbPersonal";
+            this.rbPersonal.Size = new System.Drawing.Size(67, 21);
+            this.rbPersonal.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.rbPersonal.TabIndex = 0;
+            this.rbPersonal.Text = "個人賽";
+            this.rbPersonal.CheckedChanged += new System.EventHandler(this.rbPersonal_CheckedChanged);
+            // 
             // frmSubEvents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 303);
-            this.Controls.Add(this.dtAnnouncementDate);
-            this.Controls.Add(this.labelX4);
-            this.Controls.Add(this.dtDrawLotsStartDate);
-            this.Controls.Add(this.labelX3);
+            this.ClientSize = new System.Drawing.Size(880, 518);
+            this.Controls.Add(this.groupPanel3);
+            this.Controls.Add(this.groupPanel2);
+            this.Controls.Add(this.cbxSportMeet);
+            this.Controls.Add(this.cbxScoreType);
+            this.Controls.Add(this.labelX16);
+            this.Controls.Add(this.groupPanel1);
             this.Controls.Add(this.txtCategory);
-            this.Controls.Add(this.chkAthleticOnly);
-            this.Controls.Add(this.chkIsTeam);
             this.Controls.Add(this.txtEventDescription);
-            this.Controls.Add(this.dtDrawLotsEndDate);
-            this.Controls.Add(this.chkIsDrawLots);
             this.Controls.Add(this.cbxGameType);
             this.Controls.Add(this.cbxGroupType);
-            this.Controls.Add(this.dtRegEndDate);
-            this.Controls.Add(this.dtRegStartDate);
-            this.Controls.Add(this.dtEventEndDate);
-            this.Controls.Add(this.dtEventStartDate);
             this.Controls.Add(this.txtName);
-            this.Controls.Add(this.iptMinMemberCount);
-            this.Controls.Add(this.iptMaxMemberCount);
             this.Controls.Add(this.iptSchoolYear);
             this.Controls.Add(this.labelX15);
-            this.Controls.Add(this.labelX14);
             this.Controls.Add(this.labelX13);
-            this.Controls.Add(this.labelX12);
-            this.Controls.Add(this.labelX11);
             this.Controls.Add(this.labelX10);
             this.Controls.Add(this.labelX9);
-            this.Controls.Add(this.labelX8);
-            this.Controls.Add(this.labelX7);
-            this.Controls.Add(this.labelX6);
-            this.Controls.Add(this.labelX5);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.btnExit);
@@ -908,6 +1163,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtDrawLotsEndDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDrawLotsStartDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtAnnouncementDate)).EndInit();
+            this.groupPanel1.ResumeLayout(false);
+            this.groupPanel1.PerformLayout();
+            this.groupPanel2.ResumeLayout(false);
+            this.groupPanel2.PerformLayout();
+            this.groupPanel3.ResumeLayout(false);
+            this.groupPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -942,13 +1203,23 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX chkIsDrawLots;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dtDrawLotsEndDate;
         private DevComponents.DotNetBar.Controls.TextBoxX txtEventDescription;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkIsTeam;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkAthleticOnly;
+        private DevComponents.DotNetBar.Controls.CheckBoxX rbTeam;
         private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.Controls.TextBoxX txtCategory;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dtDrawLotsStartDate;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dtAnnouncementDate;
         private DevComponents.DotNetBar.LabelX labelX4;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanel1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxScoreType;
+        private DevComponents.DotNetBar.LabelX labelX16;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbxSportMeet;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanel2;
+        private DevComponents.DotNetBar.ButtonX btnRegLimit;
+        private DevComponents.DotNetBar.Controls.CheckBoxX rbLimit;
+        private DevComponents.DotNetBar.Controls.CheckBoxX rbAthleticOnly;
+        private DevComponents.DotNetBar.Controls.CheckBoxX rbAllStud;
+        private DevComponents.DotNetBar.Controls.CheckBoxX rbPersonal;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanel3;
     }
 }

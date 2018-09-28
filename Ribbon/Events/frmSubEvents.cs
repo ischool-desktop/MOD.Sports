@@ -25,7 +25,7 @@ namespace ischool.Sports
         // 對照表
         Dictionary<string, UDT.GroupTypes> _GroupTypesDict = new Dictionary<string, UDT.GroupTypes>();
         Dictionary<string, UDT.GameTypes> _GameTypesDict = new Dictionary<string, UDT.GameTypes>();
-
+        Dictionary<string, UDT.ScoreTypes> _ScoreTypesDict = new Dictionary<string, UDT.ScoreTypes>();
         public frmSubEvents()
         {
             InitializeComponent();
@@ -75,6 +75,11 @@ namespace ischool.Sports
         public void SetGameTypesDict(Dictionary<string, UDT.GameTypes> dict)
         {
             _GameTypesDict = dict;
+        }
+
+        public void SetGameTypesDict(Dictionary<string, UDT.ScoreTypes> dict)
+        {
+            _ScoreTypesDict = dict;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -178,7 +183,7 @@ namespace ischool.Sports
         {
             bool value = false;
             AccessHelper acc = new AccessHelper();
-            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='" + _EventData.Name + "' AND category = '"+_EventData.Category+"'";
+            string strQry = " school_year = " + _EventData.SchoolYear + " AND ref_group_type_id = " + _EventData.RefGroupTypeId + " AND name ='" + _EventData.Name + "' AND category = '" + _EventData.Category + "'";
             List<UDT.Events> dd = acc.Select<UDT.Events>(strQry);
             if (dd.Count > 0)
                 value = true;
@@ -245,6 +250,13 @@ namespace ischool.Sports
             {
                 if (!cbxGroupType.Items.Contains(data.Name))
                     cbxGroupType.Items.Add(data.Name);
+            }
+
+            cbxScoreType.Items.Clear();
+            foreach (var data in _ScoreTypesDict.Values)
+            {
+                if (!cbxScoreType.Items.Contains(data.Name))
+                    cbxScoreType.Items.Add(data.Name);
             }
         }
 
@@ -319,9 +331,12 @@ namespace ischool.Sports
             _EventData.MaxMemberCount = iptMaxMemberCount.Value;
             _EventData.MinMemberCount = iptMinMemberCount.Value;
 
-            _EventData.IsTeam = chkIsTeam.Checked;
-            _EventData.AthleticOnly = chkAthleticOnly.Checked;
+            _EventData.IsTeam = rbTeam.Checked;
+            _EventData.AthleticOnly = rbAthleticOnly.Checked;
             _EventData.IsDrawLots = chkIsDrawLots.Checked;
+            _EventData.IsRegLimit = rbLimit.Checked;
+            _EventData.IsSportMeet = cbxSportMeet.Checked;
+            _EventData.IsRegAll = rbAllStud.Checked;
 
             if (dtDrawLotsStartDate.IsEmpty)
             {
@@ -383,9 +398,22 @@ namespace ischool.Sports
 
             if (_GroupTypesDict.ContainsKey(RefGroupTypeId))
                 cbxGroupType.Text = _GroupTypesDict[RefGroupTypeId].Name;
-            chkIsTeam.Checked = _EventData.IsTeam;
-            chkAthleticOnly.Checked = _EventData.AthleticOnly;
+            if (_EventData.IsTeam)
+            {
+                rbTeam.Checked = true;
+                rbPersonal.Checked = false;
+            }
+            else
+            {
+                rbTeam.Checked = false;
+                rbPersonal.Checked = true;
+            }
+
+            cbxSportMeet.Checked = _EventData.IsSportMeet;
+            rbAthleticOnly.Checked = _EventData.AthleticOnly;
             chkIsDrawLots.Checked = _EventData.IsDrawLots;
+            rbAllStud.Checked = _EventData.IsRegAll;
+            rbLimit.Checked = _EventData.IsRegLimit;
 
             if (_EventData.AnnouncementDate.HasValue)
                 dtAnnouncementDate.Value = _EventData.AnnouncementDate.Value;
@@ -403,6 +431,41 @@ namespace ischool.Sports
             {
                 iptSchoolYear.Value = int.Parse(K12.Data.School.DefaultSchoolYear);
             }
+        }
+
+        private void rbAllStud_CheckedChanged(object sender, EventArgs e)
+        {
+            btnRegLimit.Enabled = false;
+        }
+
+        private void btnRegLimit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbAthleticOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            btnRegLimit.Enabled = false;
+        }
+
+        private void cbLimit_CheckedChanged(object sender, EventArgs e)
+        {
+            btnRegLimit.Enabled = true;
+        }
+
+        private void rbPersonal_CheckedChanged(object sender, EventArgs e)
+        {
+            iptMaxMemberCount.Enabled = iptMinMemberCount.Enabled = false;
+        }
+
+        private void rbTeam_CheckedChanged(object sender, EventArgs e)
+        {
+            iptMaxMemberCount.Enabled = iptMinMemberCount.Enabled = true;
+        }
+
+        private void chkIsDrawLots_CheckedChanged(object sender, EventArgs e)
+        {
+            dtDrawLotsStartDate.Enabled = dtEventEndDate.Enabled = chkIsDrawLots.Checked;
         }
     }
 }
