@@ -65,7 +65,7 @@
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.cbxScoreType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX16 = new DevComponents.DotNetBar.LabelX();
-            this.cbxSportMeet = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.chkSportMeet = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.groupPanel2 = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnRegLimit = new DevComponents.DotNetBar.ButtonX();
             this.rbLimit = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -939,20 +939,20 @@
             this.labelX16.TabIndex = 40;
             this.labelX16.Text = "計分方式";
             // 
-            // cbxSportMeet
+            // chkSportMeet
             // 
-            this.cbxSportMeet.BackColor = System.Drawing.Color.Transparent;
+            this.chkSportMeet.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.cbxSportMeet.BackgroundStyle.Class = "";
-            this.cbxSportMeet.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbxSportMeet.Location = new System.Drawing.Point(26, 70);
-            this.cbxSportMeet.Name = "cbxSportMeet";
-            this.cbxSportMeet.Size = new System.Drawing.Size(67, 21);
-            this.cbxSportMeet.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbxSportMeet.TabIndex = 3;
-            this.cbxSportMeet.Text = "運動會";
+            this.chkSportMeet.BackgroundStyle.Class = "";
+            this.chkSportMeet.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkSportMeet.Location = new System.Drawing.Point(26, 70);
+            this.chkSportMeet.Name = "chkSportMeet";
+            this.chkSportMeet.Size = new System.Drawing.Size(67, 21);
+            this.chkSportMeet.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkSportMeet.TabIndex = 3;
+            this.chkSportMeet.Text = "運動會";
             // 
             // groupPanel2
             // 
@@ -1052,6 +1052,9 @@
             this.rbAllStud.BackgroundStyle.Class = "";
             this.rbAllStud.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.rbAllStud.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbAllStud.Checked = true;
+            this.rbAllStud.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rbAllStud.CheckValue = "Y";
             this.rbAllStud.Location = new System.Drawing.Point(20, 12);
             this.rbAllStud.Name = "rbAllStud";
             this.rbAllStud.Size = new System.Drawing.Size(100, 23);
@@ -1116,6 +1119,9 @@
             this.rbPersonal.BackgroundStyle.Class = "";
             this.rbPersonal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.rbPersonal.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton;
+            this.rbPersonal.Checked = true;
+            this.rbPersonal.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rbPersonal.CheckValue = "Y";
             this.rbPersonal.Location = new System.Drawing.Point(30, 15);
             this.rbPersonal.Name = "rbPersonal";
             this.rbPersonal.Size = new System.Drawing.Size(67, 21);
@@ -1131,7 +1137,7 @@
             this.ClientSize = new System.Drawing.Size(880, 518);
             this.Controls.Add(this.groupPanel3);
             this.Controls.Add(this.groupPanel2);
-            this.Controls.Add(this.cbxSportMeet);
+            this.Controls.Add(this.chkSportMeet);
             this.Controls.Add(this.cbxScoreType);
             this.Controls.Add(this.labelX16);
             this.Controls.Add(this.groupPanel1);
@@ -1213,7 +1219,7 @@
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanel1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxScoreType;
         private DevComponents.DotNetBar.LabelX labelX16;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbxSportMeet;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkSportMeet;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanel2;
         private DevComponents.DotNetBar.ButtonX btnRegLimit;
         private DevComponents.DotNetBar.Controls.CheckBoxX rbLimit;

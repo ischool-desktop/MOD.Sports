@@ -20,8 +20,10 @@ namespace ischool.Sports
         List<UDT.Events> _EventsList = new List<UDT.Events>();
         List<UDT.GroupTypes> _GroupTypesList = new List<UDT.GroupTypes>();
         List<UDT.GameTypes> _GameTypesList = new List<UDT.GameTypes>();
+        List<UDT.ScoreTypes> _ScoreTypesList = new List<UDT.ScoreTypes>();
         Dictionary<string, UDT.GroupTypes> _GroupTypesDict = new Dictionary<string, UDT.GroupTypes>();
         Dictionary<string, UDT.GameTypes> _GameTypesDict = new Dictionary<string, UDT.GameTypes>();
+        Dictionary<string, UDT.ScoreTypes> _ScoreTypesDict = new Dictionary<string, UDT.ScoreTypes>();
 
         BackgroundWorker _bgw = new BackgroundWorker();
 
@@ -49,6 +51,9 @@ namespace ischool.Sports
 
             // 讀取組別
             LoadGroupTypesList();
+
+            // 讀取計算方式
+            LoadScoreTypesList();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -87,12 +92,14 @@ namespace ischool.Sports
             {
                 SetEditButtonEnable(false);
                 UDT.Events selectEvent = dgData.SelectedRows[0].Tag as UDT.Events;
-                frmSubEvents editFrom = new frmSubEvents();
-                editFrom.SetEvents(selectEvent);
-                editFrom.SetIsAddMode(false);
-                editFrom.SetGameTypesDict(_GameTypesDict);
-                editFrom.SetGroupTypesDict(_GroupTypesDict);
-                if (editFrom.ShowDialog() == DialogResult.OK)
+                frmSubEvents editForm = new frmSubEvents();
+                editForm.SetEvents(selectEvent);
+                editForm.SetIsAddMode(false);
+                editForm.SetGameTypesDict(_GameTypesDict);
+                editForm.SetGroupTypesDict(_GroupTypesDict);
+                editForm.SetScoreTypesDict(_ScoreTypesDict);
+
+                if (editForm.ShowDialog() == DialogResult.OK)
                 {
 
                     // 資料重整
@@ -117,14 +124,15 @@ namespace ischool.Sports
             //    addEvents = feta.GetEvents();
             //}
 
-            frmSubEvents addFrom = new frmSubEvents();
-            addFrom.SetEvents(addEvents);
-            addFrom.SetIsAddMode(true);
-            addFrom.SetGameTypesDict(_GameTypesDict);
-            addFrom.SetGroupTypesDict(_GroupTypesDict);
-            if (addFrom.ShowDialog() == DialogResult.OK)
+            frmSubEvents addForm = new frmSubEvents();
+            addForm.SetEvents(addEvents);
+            addForm.SetIsAddMode(true);
+            addForm.SetGameTypesDict(_GameTypesDict);
+            addForm.SetGroupTypesDict(_GroupTypesDict);
+            addForm.SetScoreTypesDict(_ScoreTypesDict);
+            if (addForm.ShowDialog() == DialogResult.OK)
             {
-                addEvents = addFrom.GetEventData();
+                addEvents = addForm.GetEventData();
                 // 資料重整
                 _bgw.RunWorkerAsync();
             }
@@ -231,6 +239,21 @@ namespace ischool.Sports
 
                 if (!_GameTypesDict.ContainsKey(data.Name))
                     _GameTypesDict.Add(data.Name, data);
+
+            }
+        }
+
+        private void LoadScoreTypesList()
+        {
+            _ScoreTypesList = _access.Select<UDT.ScoreTypes>();
+            _ScoreTypesDict.Clear();
+            foreach (var data in _ScoreTypesList)
+            {
+                if (!_ScoreTypesDict.ContainsKey(data.UID))
+                    _ScoreTypesDict.Add(data.UID, data);
+
+                if (!_ScoreTypesDict.ContainsKey(data.Name))
+                    _ScoreTypesDict.Add(data.Name, data);
 
             }
         }
