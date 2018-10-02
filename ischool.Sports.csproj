@@ -227,6 +227,12 @@
     <Compile Include="Ribbon\Events\frmCopyEventItem.Designer.cs">
       <DependentUpon>frmCopyEventItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\Events\frmEventLimitStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\Events\frmEventLimitStudent.Designer.cs">
+      <DependentUpon>frmEventLimitStudent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\Events\frmEvents.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -446,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\Events\frmCopyEventItem.resx">
       <DependentUpon>frmCopyEventItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\Events\frmEventLimitStudent.resx">
+      <DependentUpon>frmEventLimitStudent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\Events\frmEvents.resx">
       <DependentUpon>frmEvents.cs</DependentUpon>

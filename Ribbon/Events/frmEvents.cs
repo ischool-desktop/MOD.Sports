@@ -161,6 +161,12 @@ namespace ischool.Sports
             dgData.Rows.Clear();
             foreach (var data in _EventsList)
             {
+                // 2018/10/2 討論目前只使用運動會
+                data.IsSportMeet = true;
+                data.IsRegAll = false;
+                data.IsDrawLots = false;
+                
+
                 int rowIdx = dgData.Rows.Add();
                 dgData.Rows[rowIdx].Tag = data;
                 dgData.Rows[rowIdx].Cells[colSchoolYear.Index].Value = data.SchoolYear;

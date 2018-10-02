@@ -173,7 +173,44 @@ namespace ischool.Sports
                     return;
                 }
             }
+            SaveData();
+
+        }
+
+        private void SaveData()
+        {
             btnSave.Enabled = false;
+            // 處理畫面資料
+            // 參賽組別
+            if (_GroupTypesDict.ContainsKey(cbxGroupType.Text))
+            {
+                int uid;
+                if (int.TryParse(_GroupTypesDict[cbxGroupType.Text].UID, out uid))
+                {
+                    _EventData.RefGroupTypeId = uid;
+                }
+            }
+
+            // 賽制
+            if (_GameTypesDict.ContainsKey(cbxGameType.Text))
+            {
+                int uid;
+                if (int.TryParse(_GameTypesDict[cbxGameType.Text].UID, out uid))
+                {
+                    _EventData.RefGameTypeId = uid;
+                }
+            }
+
+            // 計分方式
+            if (_ScoreTypesDict.ContainsKey(cbxScoreType.Text))
+            {
+                int uid;
+                if (int.TryParse(_ScoreTypesDict[cbxScoreType.Text].UID, out uid))
+                {
+                    _EventData.RefScoreTypeId = uid;
+                }
+            }
+
             _bgwSave.RunWorkerAsync();
 
         }
@@ -216,6 +253,14 @@ namespace ischool.Sports
         {
             this.MaximumSize = this.MinimumSize = this.Size;
             this.btnSave.Enabled = false;
+
+            // 2018/10/2 決定先使用用動會
+            chkSportMeet.Checked = true;
+            chkSportMeet.Enabled = false;
+            rbAllStud.Enabled = false;
+            dtDrawLotsStartDate.Enabled = dtDrawLotsEndDate.Enabled = chkIsDrawLots.Checked = chkIsDrawLots.Enabled = false;
+
+
             cbxGameType.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxGroupType.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxScoreType.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -240,11 +285,11 @@ namespace ischool.Sports
         private void AddDefaultSet()
         {
             this.Text = "新增競賽項目";
-            chkSportMeet.Checked = false;
+
             cbxScoreType.Text = "";
             dtDrawLotsStartDate.Enabled = dtDrawLotsEndDate.Enabled = chkIsDrawLots.Checked = false;
             rbPersonal.Checked = true;
-            rbAllStud.Checked = true;
+            btnRegLimit.Enabled = false;
 
         }
 
@@ -289,35 +334,6 @@ namespace ischool.Sports
             // 運動會
             _EventData.IsSportMeet = chkSportMeet.Checked;
 
-            // 參賽組別
-            if (_GroupTypesDict.ContainsKey(cbxGroupType.Text))
-            {
-                int uid;
-                if (int.TryParse(_GroupTypesDict[cbxGroupType.Text].UID, out uid))
-                {
-                    _EventData.RefGroupTypeId = uid;
-                }
-            }
-
-            // 賽制
-            if (_GameTypesDict.ContainsKey(cbxGameType.Text))
-            {
-                int uid;
-                if (int.TryParse(_GameTypesDict[cbxGameType.Text].UID, out uid))
-                {
-                    _EventData.RefGameTypeId = uid;
-                }
-            }
-
-            // 計分方式
-            if (_ScoreTypesDict.ContainsKey(cbxScoreType.Text))
-            {
-                int uid;
-                if (int.TryParse(_ScoreTypesDict[cbxScoreType.Text].UID, out uid))
-                {
-                    _EventData.RefScoreTypeId = uid;
-                }
-            }
 
             // 公告日期
             if (dtAnnouncementDate.IsEmpty)
@@ -357,7 +373,7 @@ namespace ischool.Sports
             {
                 _EventData.EventStartDate = dtEventStartDate.Value;
             }
-            
+
             // 活動結束日期
             if (dtEventEndDate.IsEmpty)
             {
@@ -411,7 +427,7 @@ namespace ischool.Sports
 
             // 競賽說明
             _EventData.EventDescription = txtEventDescription.Text;
-                        
+
             _EventData.CreatedBy = _userAccount;
             _EventData.Save();
         }
@@ -429,7 +445,8 @@ namespace ischool.Sports
             txtName.Text = _EventData.Name;
 
             // 運動會
-            chkSportMeet.Checked = _EventData.IsSportMeet;
+            chkSportMeet.Checked = true;// 目前只用運動會功能 _EventData.IsSportMeet;
+            chkSportMeet.Enabled = false;
 
             // 參賽組別
             string RefGroupTypeId = _EventData.RefGroupTypeId.ToString();
@@ -444,7 +461,7 @@ namespace ischool.Sports
             string RefScoreTypeId = _EventData.RefScoreTypeId.ToString();
             if (_ScoreTypesDict.ContainsKey(RefScoreTypeId))
                 cbxScoreType.Text = _ScoreTypesDict[RefScoreTypeId].Name;
-            
+
             // 公告日期
             if (_EventData.AnnouncementDate.HasValue)
                 dtAnnouncementDate.Value = _EventData.AnnouncementDate.Value;
@@ -489,7 +506,7 @@ namespace ischool.Sports
             if (_EventData.IsTeam)
             {
                 rbTeam.Checked = true;
-                rbPersonal.Checked = false;               
+                rbPersonal.Checked = false;
             }
             else
             {
@@ -505,7 +522,7 @@ namespace ischool.Sports
 
             // 競賽說明
             txtEventDescription.Text = _EventData.EventDescription;
-                      
+
             // 當畫面上學年度0，使用預設學年度學期
             if (iptSchoolYear.Value == 0)
             {
@@ -515,13 +532,14 @@ namespace ischool.Sports
             // 畫面合理處理
             // 當抽籤沒勾，日期無法使用
             dtDrawLotsStartDate.Enabled = dtDrawLotsEndDate.Enabled = _EventData.IsDrawLots;
+
             // 人數上下限用在團體賽
             iptMaxMemberCount.Enabled = iptMinMemberCount.Enabled = _EventData.IsTeam;
 
-            // 限制條件都沒選，選全校
+            // 限制條件都沒選，選僅體育股長
             if (_EventData.IsRegAll == _EventData.IsRegLimit == _EventData.AthleticOnly == false)
             {
-                rbAllStud.Checked = true;
+                rbAthleticOnly.Checked = true;
             }
         }
 
@@ -532,10 +550,27 @@ namespace ischool.Sports
 
         private void btnRegLimit_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(_EventData.UID))
+            {
+                FISCA.Presentation.Controls.MsgBox.Show("需要新增競賽項目後才能設定。");
+                return;
+            }
 
+            frmEventLimitStudent frls = new frmEventLimitStudent();            
+            int evID = int.Parse(_EventData.UID);
+            UDT.GroupTypes gt = null;
+
+            if (_GroupTypesDict.ContainsKey(cbxGroupType.Text))
+            {
+                gt = _GroupTypesDict[cbxGroupType.Text];
+            }
+
+            frls.SetDefaultData(evID, _EventData.SchoolYear, txtCategory.Text, txtName.Text, gt);
+            if (frls.ShowDialog() == DialogResult.Yes)
+            {
+
+            }
         }
-
-
 
         private void rbAthleticOnly_CheckedChanged(object sender, EventArgs e)
         {
@@ -559,7 +594,7 @@ namespace ischool.Sports
 
         private void chkIsDrawLots_CheckedChanged(object sender, EventArgs e)
         {
-            dtDrawLotsStartDate.Enabled = dtEventEndDate.Enabled = chkIsDrawLots.Checked;
+            dtDrawLotsStartDate.Enabled = dtDrawLotsEndDate.Enabled = chkIsDrawLots.Checked;
         }
     }
 }
