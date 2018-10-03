@@ -53,6 +53,7 @@
             this.btnEdit = new DevComponents.DotNetBar.ButtonX();
             this.btnDel = new DevComponents.DotNetBar.ButtonX();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
+            this.btnCopy = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -224,7 +225,7 @@
             this.btnAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnAdd.Location = new System.Drawing.Point(695, 356);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(75, 25);
             this.btnAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "新增";
@@ -238,7 +239,7 @@
             this.btnEdit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnEdit.Location = new System.Drawing.Point(797, 356);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.Size = new System.Drawing.Size(75, 25);
             this.btnEdit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "修改";
@@ -252,7 +253,7 @@
             this.btnDel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnDel.Location = new System.Drawing.Point(895, 356);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 23);
+            this.btnDel.Size = new System.Drawing.Size(75, 25);
             this.btnDel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDel.TabIndex = 3;
             this.btnDel.Text = "刪除";
@@ -266,17 +267,32 @@
             this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnExit.Location = new System.Drawing.Point(999, 356);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(75, 25);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCopy.AutoSize = true;
+            this.btnCopy.BackColor = System.Drawing.Color.Transparent;
+            this.btnCopy.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCopy.Location = new System.Drawing.Point(597, 356);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(75, 25);
+            this.btnCopy.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCopy.TabIndex = 5;
+            this.btnCopy.Text = "複製";
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // frmEvents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1090, 400);
+            this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnEdit);
@@ -288,6 +304,7 @@
             this.Load += new System.EventHandler(this.frmEvents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -317,5 +334,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAlthleticOnly;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreatedBy;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAnnouncementDate;
+        private DevComponents.DotNetBar.ButtonX btnCopy;
     }
 }

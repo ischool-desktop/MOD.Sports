@@ -153,7 +153,7 @@ namespace ischool.Sports
 
         private void SetEditButtonEnable(bool bo)
         {
-           this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
+           this.btnCopy.Enabled = this.btnAdd.Enabled = this.btnEdit.Enabled = this.btnDel.Enabled = bo;
         }
 
         private void LoadEventsToDataGridView()
@@ -282,6 +282,15 @@ namespace ischool.Sports
                 {
                     SetEditButtonEnable(true);
                 }
+            }
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            frmCopyEventItem fcei = new frmCopyEventItem();
+            if (fcei.ShowDialog() == DialogResult.Yes)
+            {
+                _bgw.RunWorkerAsync();
             }
         }
     }
